@@ -13,7 +13,7 @@ function getMetric(yLabel){
         case "rain":            return "mm";
         case "input_voltage":   return "Vdc";
         case "solar_radiation": return "W/m^2";
-        case "temperature":     return "degC";
+        case "temperature":     return "°C";
         case "humidity":        return "%";
         case "bar_pressure":    return "mbar";
         default:                return yLabel;
@@ -35,11 +35,13 @@ function createLineChart(chartType, canvasElement, xDataArray, yDataArray, mainL
             datasets: [{
                 borderWidth: 1.4, // and not lineWidth
                 data: yDataArray,       // y axis data
-                label: yLabel,
+                label: yLabel,  
                 borderColor: lineColor,
                 fill: false
             },]},
             options: {
+                responsive: true,
+                
                 legend: {
                     position: 'right',
                     fullWidth:true
@@ -53,34 +55,42 @@ function createLineChart(chartType, canvasElement, xDataArray, yDataArray, mainL
                     xAxes: [{
                         ticks: {
                             autoSkip: true,
-                            maxTicksLimit: 6,
-                            maxRotation: 20,
+                            maxTicksLimit: 3,
+                            maxRotation: 0,
                             minRotation: 0                         
                         },
                         gridLines: {
                             display: false
                         },
                         scaleLabel: {
-                            display: true,
-                            labelString: xLabel
+                            display: false,
+                            labelString: xLabel,
+                            fontSize: 14,
+                            fontColor: "black",                            
+                            fontStyle: "bold"
                         }
                     }],
                     yAxes: [{
                          ticks: {
                             //autoSkip: true,
                             //stepSize: 1
-                             //min: Math.ceil(Math.min.apply(Math, yDataArray)),
-                             //max: Math.floor(Math.max.apply(Math, yDataArray))
+                             min: Math.ceil(Math.min.apply(Math, yDataArray)-1),
+                             max: Math.floor(Math.max.apply(Math, yDataArray)+1)
                          },
                         scaleLabel: {
                             display: true,
-                            labelString: getMetric(yLabel)                   
+                            labelString: getMetric(yLabel),
+                            fontSize: 14,
+                            fontColor: "black",                            
+                            fontStyle: "bold"                   
                         }
                     }]
                 },
                 title: {
                     display: true,
-                    text: mainLabel
+                    text: mainLabel,
+                    fontSize: 15,
+                    fontColor: "black"
                 }
             }
     };

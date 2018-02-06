@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <?php
-	include 'dbconfig.php';
+include "dbconfig.php";
+
 ?>
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -10,18 +10,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"/></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
         <script src="../lib/plugins/jquery/jquery.min.js"></script>
         <script src="javascript.js"></script>
         <script src="js/moment.js"></script>
 
-        <script>
+        <script  type="text/javascript">
             function SubmitFormData() {
                 var myfield = $("#myfield").val();
                 var yesterday = $("#yesterday").val();
                 var now = $("#now").val();
                 $.post("combined.php", { myfield: myfield, yesterday: yesterday, now: now})
             }
+
+        function getActualData() {
+            //$("#show").load("dbconfig.php");
+        }
+
+        $(document).ready(function() {
+            setInterval(getActualData, 3000); // 3 sekundes aiz
+        });
+
+
         </script>
 
     <title>Sākums</title>
@@ -34,6 +44,7 @@
 <![endif]-->
 </head>
 <body class="fix-header fix-sidebar card-no-border">
+
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
           <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
@@ -89,20 +100,22 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                        <div id="test"></div>
+                        <div id="show">
+                        </div>
                             <div class="card-block"  id="card-block">
 								<form action="combined.php" method="POST">
                                     <input type="datetime-local" name="yesterday" id="yesterday"/>
                                     <input type="datetime-local" name="now" id="now"/>
-                                    <input type="submit" value="Submit">
-                                    <input type="submit" name="lastHour" value="Pēdējā stunda">
-                                    <input type="submit" name="last12hours" value="Pēdējās 12 stundas">
-                                    <input type="submit" name="lastDay" value="Pēdējā diennakts">
-                                    <input type="submit" name="lastWeek" value="Pēdējā nedēļa">
+                                    <input type="submit" value="Parādīt" class="submit-button">
+                                    <input type="submit" name="lastHour" value="Pēdējā stunda" class="range-button">
+                                    <input type="submit" name="last12hours" value="Pēdējās 12 stundas" class="range-button">
+                                    <input type="submit" name="lastDay" value="Pēdējā diennakts" class="range-button">
+                                    <input type="submit" name="lastWeek" value="Pēdējā nedēļa" class="range-button">
                                     <br/><br/>
-								</form>
+                                </form>
+                                
                               <?php
-                                $time = array();
+                                    $time = array();
                                 $rain = array();
                                 $inputVoltage = array();
                                 $temperature = array();
@@ -112,7 +125,7 @@
                                     $yesterdayDate = "";
                                     $todayDate = "";
                                     $date = date('Y-m-d H:i:s');
-                                    $todayDate = date('Y-m-d H:i:s', strtotime($date . ' -2 hour'));
+                                    $todayDate = date('Y-m-d H:i:s', strtotime($date . ' -1 hour')); // TODO verify if this or -2 hours
                                     
                                     if (isset($_POST['lastHour'])) {                                        
                                         $yesterdayDate = date('Y-m-d H:i:s', strtotime($todayDate . ' -1 hour'));
@@ -134,6 +147,10 @@
                                     $yesterdayDateSQL = date ("Y-m-d H:i:s", strtotime($yesterdayDate));
                                     $todayDateSQL = date ("Y-m-d H:i:s", strtotime($todayDate));
 
+                                    //echo($yesterdayDateSQL);
+                                    //echo("<br/>");
+                                    //echo($todayDateSQL);
+                                    
                                     $querry = "SELECT measurement_time, rain, input_voltage, temperature, humidity, bar_pressure
                                                         FROM meteo
                                                             WHERE measurement_time >= '{$yesterdayDateSQL}' AND measurement_time <= '{$todayDateSQL}'
@@ -148,45 +165,88 @@
                                         $humidity[] = $row['humidity'];
                                         $bar_pressure[] = $row["bar_pressure"];
                                     }
-                                }
+
+                                    //header('content-type:application/json');
+                                    //exit(json_encode($time)); // send the json serialized response to jquery ajax
+                                
                                ?>
-                                <div id="chartsParent">
-                                    <div id="left" style="width: 50%; float:left; overflow:hidden;">
-                                        <div id="object1" style="width:700px">
-                                            <canvas id="chart1"></canvas>
-                                        </div>
-                                        <div id="object3" style="width:700px">
-                                            <canvas id="chart3"></canvas>
-                                        </div>
-                                        <div id="object5" style="width:700px">
-                                            <canvas id="chart5"></canvas>
-                                        </div>
-                                    </div>
 
-                                    <div id="right" style="width: 50%; float:right; overflow:hidden;">
-
-                                        <div id="object2" style="width:700px" >
-                                            <canvas id="chart2"></canvas>
-                                        </div>
-                                        <div id="object4" style="width:700px">
-                                            <canvas id="chart4"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-									<script>
+                                <script>
                                         var time = [].concat(<?php echo json_encode($time);?>).reverse();
                                         var rainValues = [].concat(<?php echo json_encode($rain);?>).reverse();
                                         var inputVoltageValues = [].concat( <?php echo json_encode($inputVoltage);?>).reverse();
                                         var temperatureValues = [].concat(<?php echo json_encode($temperature);?>).reverse();
                                         var humidityValues = [].concat(<?php echo json_encode($humidity);?>).reverse();
                                         var pressureValues = [].concat(<?php echo json_encode($bar_pressure);?>).reverse();
+                                </script>
 
+                                
+                                <div id="current-values-box">
+                                    <h3>Aktuālie dati</h3>
+                                    <p>Pēdēja mērījuma laiks - 
+                                        <script type="text/javascript">
+                                            document.write(time[time.length - 1]);
+                                        </script>
+                                    </p>
+                                    <p>Nokrišņi - 
+                                        <script type="text/javascript">
+                                            document.write(rainValues[rainValues.length - 1]);
+                                        </script>
+                                    </p>
+                                    <p>Ieejas strāva - 
+                                        <script type="text/javascript">
+                                            document.write(inputVoltageValues[inputVoltageValues.length - 1]);
+                                        </script>
+                                    </p>
+                                    <p>Temperatūra - 
+                                        <script type="text/javascript">
+                                            document.write(temperatureValues[temperatureValues.length - 1]);
+                                        </script>
+                                    </p>
+                                    <p>Gaisa mitrums -
+                                        <script type="text/javascript">
+                                            document.write(humidityValues[humidityValues.length - 1]);
+                                        </script>
+                                    </p>
+                                    <p>Atmosfēras -
+                                        <script type="text/javascript">
+                                            document.write(pressureValues[pressureValues.length - 1]);
+                                        </script>
+                                    </p>
+
+                                </div>
+
+                                <div id="chartsParent">
+                                    <div id="left" style="width: 50%; float:left; overflow:hidden;">
+                                        <div id="object1" style="width:90%">
+                                            <canvas id="chart1"></canvas><br/>
+                                        </div>
+                                        <div id="object3" style="width:90%">
+                                            <canvas id="chart3"></canvas><br/>
+                                        </div>
+                                        <div id="object5" style="width:90%">
+                                            <canvas id="chart5"></canvas><br/>
+                                        </div>
+                                    </div>
+
+                                    <div id="right" style="width: 50%; float:right; overflow:hidden;">
+
+                                        <div id="object2" style="width:90%" >
+                                            <canvas id="chart2"></canvas><br/>
+                                        </div>
+                                        <div id="object4" style="width:90%">
+                                            <canvas id="chart4"></canvas><br/>
+                                        </div>
+                                    </div>
+                                </div>
+									<script>
                                         createLineChart("line","chart1", time, rainValues, "Nokrišņi", "#0000FF", "Laiks", "rain" );
                                         createLineChart("line","chart2", time, inputVoltageValues, "Ieejas strāva", "#CC0000", "Laiks", "input_voltage");
                                         createLineChart("line","chart3", time, temperatureValues, "Temperatūra", "#008000", "Laiks", "temperature");
-                                        createLineChart("line","chart4", time, humidityValues, "Gaisa mitrums", "#8e5ea2", "Laiks", "humidity");
-                                        createLineChart("line","chart5", time, pressureValues, "Atmosfēras spiediens", "#8e5ea2", "Laiks", "bar_pressure");
+                                        createLineChart("line","chart4", time, humidityValues, "Gaisa mitrums", "#191970", "Laiks", "humidity");
+                                        createLineChart("line","chart5", time, pressureValues, "Atmosfēras spiediens", "#2F4F4F", "Laiks", "bar_pressure");
                                     </script>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

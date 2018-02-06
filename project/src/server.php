@@ -32,4 +32,6 @@
 		$result=mysqli_query($d,$sql_vaicajums);
 		echo("Record added.");
 	}
+
+	
 ?>

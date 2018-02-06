@@ -110,10 +110,6 @@
 										<option value="bar_pressure">Atmosfēras spiediens</option>
                                         
 									</select>
-                                    <input type="submit" name="lastHour" value="Pēdējā stunda">
-                                    <input type="submit" name="last12hours" value="Pēdējās 12 stundas">
-                                    <input type="submit" name="lastDay" value="Pēdējā diennakts">
-                                    <input type="submit" name="lastWeek" value="Pēdējā nedēļa">
 								</form>
                                 <?php
                                 $time = array();

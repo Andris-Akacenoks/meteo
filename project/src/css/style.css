@@ -912,6 +912,36 @@ Buttons
   padding: .25rem .5rem;
   font-size: 10px; }
 
+.range-button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+#current-values-box{
+  width: 25%;
+  float: right; 
+  overflow: hidden;
+}
+
+.submit-button {
+  background-color: #f44336; /* red */
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+} 
+
 .button-list button, .button-list a {
   margin: 5px 12px 5px 0; }
 
