@@ -1,5 +1,12 @@
 <?php
-	include 'dbconfig.php';
+
+
+$myServer = '127.0.0.1';
+$myDB = 'irbene';
+$myUser = 'root';
+$myPass = '';
+$d = mysqli_connect($myServer,$myUser,$myPass,$myDB) or die('Nevaru pievienoties datubāzei');
+	$chs=mysqli_set_charset($d, "utf8");
 
 	if($_SERVER["REQUEST_METHOD"] == "POST" && $_SERVER["CONTENT_TYPE"] == "application/json")
 	{
@@ -33,5 +40,5 @@
 		echo("Record added.");
 	}
 
-	
+
 ?>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-	include 'dbconfig.php';
+	//include 'dbconfig.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"/></script>
     <script src="../lib/plugins/jquery/jquery.min.js"></script>
     <script src="js/moment.js"></script>
-    <script src="javascript.js"></script>
+		<script src="js/charts.js"></script>
 
 
     <script>
@@ -108,7 +108,7 @@
 										<option value="temperature">Temperatūra</option>
 										<option value="humidity">Gaisa mitrums</option>
 										<option value="bar_pressure">Atmosfēras spiediens</option>
-                                        
+
 									</select>
 								</form>
                                 <?php
