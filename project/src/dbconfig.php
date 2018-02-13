@@ -8,8 +8,8 @@
 
 	//database
 	define('DB_HOST', '127.0.0.1');
-	define('DB_USERNAME', 'root');
-	define('DB_PASSWORD', '');
+	define('DB_USERNAME', 'oper');
+	define('DB_PASSWORD', 'parole');
 	define('DB_NAME', 'irbene');
 
 	//get connection
@@ -20,22 +20,22 @@
 	}
 
 	if(isset($_GET['interval'])){
-
-		if($_GET['interval'] === 'lasthour'){
-			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-2 hour'));
-			$todayDateSQL = date('Y-m-d H:i:s', strtotime('-1 hour'));
+	
+		if(($_GET['interval'] === 'lasthour') || ($_GET['interval'] === 'undefined') ){
+			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-1 hour'));
+			$todayDateSQL = date('Y-m-d H:i:s', strtotime('+1 hour'));
 		}
 		elseif($_GET['interval'] === 'last12h'){
-			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-13 hour'));
-			$todayDateSQL = date('Y-m-d H:i:s', strtotime('-1 hour'));
+			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-12 hour'));
+			$todayDateSQL = date('Y-m-d H:i:s', strtotime('+1 hour'));
 		}
 		elseif($_GET['interval'] === 'yesterday'){
 			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-1 day'));
-			$todayDateSQL = date('Y-m-d H:i:s', strtotime('-1 hour'));
+			$todayDateSQL = date('Y-m-d H:i:s', strtotime('+1 hour'));
 		}
 		elseif($_GET['interval'] === 'lastweek'){
 			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-7 day'));
-			$todayDateSQL = date('Y-m-d H:i:s', strtotime('-1 hour'));
+			$todayDateSQL = date('Y-m-d H:i:s', strtotime('+1 hour'));
 		}
 		else{
 			$interval = $_GET['interval'];
@@ -51,8 +51,8 @@
 		}
 	}
 	else{
-		$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-2 hour')); // default pedeja stunda
-		$todayDateSQL = date('Y-m-d H:i:s', strtotime('-1 hour'));
+		$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-1 hour')); // default pedeja stunda
+		$todayDateSQL = date('Y-m-d H:i:s', strtotime('+1 hour'));
 	}
 
 	

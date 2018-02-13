@@ -192,7 +192,7 @@
                 var yesterday = $("#yesterday").val();
                 var now = $("#now").val();
                 var currentInterval = yesterday+"+"+now;
-                alert(currentInterval);
+                //alert(currentInterval);
                 changeInterval(currentInterval);
 
                 // $.ajax({

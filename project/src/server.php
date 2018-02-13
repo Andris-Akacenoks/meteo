@@ -3,8 +3,8 @@
 
 $myServer = '127.0.0.1';
 $myDB = 'irbene';
-$myUser = 'root';
-$myPass = '';
+$myUser = 'oper';
+$myPass = 'parole';
 $d = mysqli_connect($myServer,$myUser,$myPass,$myDB) or die('Nevaru pievienoties datubāzei');
 	$chs=mysqli_set_charset($d, "utf8");
 

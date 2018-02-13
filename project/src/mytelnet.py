@@ -47,7 +47,7 @@ while 1:
                 "barPressure"       : first_line.split(',')[20]
             }
 
-            url = 'http://localhost/project/src/server.php'
+            url = 'http://35.187.40.70/project/src/server.php'
             headers = {'content-type': 'application/json'}
 
             r = requests.post(url, data=json.dumps(data_json),  headers=headers)
