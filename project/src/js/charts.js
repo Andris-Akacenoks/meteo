@@ -49,15 +49,20 @@ function updateCharts(parsedInterval) {
       var humidity = [];
       var rain = [];
       var input_voltage = [];
+	var dataCount = data.length;
+	var step = Math.floor((dataCount / 720));
+	
+	for(var j = 0; j<data.length; j++){
+	        measurementTime.push((data[j].measurement_time).substr(0, 16)); // nonemtas sekundes
+        	bar_pressure.push(data[j].bar_pressure);
+       		temperature.push(data[j].temperature);
+        	humidity.push(data[j].humidity);
+        	rain.push(data[j].rain);
+        	input_voltage.push(data[j].input_voltage);
+	}
 
-      for (var j in data) {
-        measurementTime.push((data[j].measurement_time).substr(0, 16)); // nonemtas sekundes
-        bar_pressure.push(data[j].bar_pressure);
-        temperature.push(data[j].temperature);
-        humidity.push(data[j].humidity);
-        rain.push(data[j].rain);
-        input_voltage.push(data[j].input_voltage);
-      }
+      
+	console.log(i);
       myCharts[0].data.datasets[0].data = bar_pressure;
       myCharts[1].data.datasets[0].data = temperature;
       myCharts[2].data.datasets[0].data = humidity;
