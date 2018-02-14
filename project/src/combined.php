@@ -106,25 +106,25 @@
 
 
                                 ?>
-                                    <div id="chartsParent">
-                                        <div id="left" class="line-chart-container" style="width: 50%; float:left; overflow:hidden;">
-                                            <div id="object1" style="width:100%">
+                                   <div id="chartsParent">
+                                        <div id="left" class="left-line-chart-container">
+                                            <div id="object1" class="chart-canvas">
                                                 <canvas id="chart1"></canvas><br/>
                                             </div>
-                                            <div id="object3" style="width:100%">
+                                            <div id="object3" class="chart-canvas">
                                                 <canvas id="chart3"></canvas><br/>
                                             </div>
-                                            <div id="object5" style="width:100%">
+                                            <div id="object5" class="chart-canvas">
                                                 <canvas id="chart5"></canvas><br/>
                                             </div>
                                         </div>
 
-                                        <div id="right" class="line-chart-container" style="width: 50%; float:right; overflow:hidden;">
+                                        <div id="right" class="right-line-chart-container">
 
-                                            <div id="object2" style="width:100%" >
+                                            <div id="object2" class="chart-canvas">
                                                 <canvas id="chart2"></canvas><br/>
                                             </div>
-                                            <div id="object4" style="width:100%">
+                                            <div id="object4" class="chart-canvas">
                                                 <canvas id="chart4"></canvas><br/>
                                             </div>
 
@@ -192,7 +192,6 @@
                 var yesterday = $("#yesterday").val();
                 var now = $("#now").val();
                 var currentInterval = yesterday+"+"+now;
-                //alert(currentInterval);
                 changeInterval(currentInterval);
 
                 // $.ajax({

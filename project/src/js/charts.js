@@ -1,4 +1,4 @@
-var index = 0;
+﻿var index = 0;
 var myCharts = [];
 var interval;
 
@@ -49,20 +49,30 @@ function updateCharts(parsedInterval) {
       var humidity = [];
       var rain = [];
       var input_voltage = [];
-	var dataCount = data.length;
-	var step = Math.floor((dataCount / 720));
-	
-	for(var j = 0; j<data.length; j++){
-	        measurementTime.push((data[j].measurement_time).substr(0, 16)); // nonemtas sekundes
-        	bar_pressure.push(data[j].bar_pressure);
-       		temperature.push(data[j].temperature);
-        	humidity.push(data[j].humidity);
-        	rain.push(data[j].rain);
-        	input_voltage.push(data[j].input_voltage);
-	}
+
+      var step = 1;
+      var pointsDrawn = 0;
+      var count = data.length;
+      console.log("Point count: " + count);
+
+
+      if(count > 720){
+        step = Math.ceil(count / 720);
+        console.log("Step: "+step);
+      }
 
       
-	console.log(i);
+
+      for (var j=0; j<count; j+=step) {
+        measurementTime.push((data[j].measurement_time).substr(0, 16)); // nonemtas sekundes
+        bar_pressure.push(data[j].bar_pressure);
+        temperature.push(data[j].temperature);
+        humidity.push(data[j].humidity);
+        rain.push(data[j].rain);
+        input_voltage.push(data[j].input_voltage);
+
+        pointsDrawn++;
+      }
       myCharts[0].data.datasets[0].data = bar_pressure;
       myCharts[1].data.datasets[0].data = temperature;
       myCharts[2].data.datasets[0].data = humidity;
@@ -73,7 +83,8 @@ function updateCharts(parsedInterval) {
         myCharts[i].data.labels = measurementTime;
         myCharts[i].update();
       }
-      console.log("All charts updated.");      
+      console.log("All charts updated.");   
+      console.log("Points drawn: "+ pointsDrawn);   
     },
     error: function (data) {
       console.log("GET failed. Failed to retrieve data therefore graphs not shown..");
@@ -131,16 +142,17 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
     }
   }
 
-  var ctx = $("#" + element);
+  var canvas = document.getElementById(element);
+  var ctx = canvas.getContext('2d');
 
   var chartdata = {
     labels: measurementTime,
     datasets: [{
+      radius: 0, // radius is 0 for only this dataset
       label: mainLabel,
       borderColor: lineColor,
-      //borderWidth: 1.4, // and not lineWidth
-      fill: false,
-      //lineTension: 0.1,
+      borderWidth: 1.5, // and not lineWidth
+      fill: true,
       data: metric
     }]
   };
@@ -154,16 +166,16 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
       },
       responsive: true,
       legend: {
-        position: 'right',
+        position: 'none',
         fullWidth: true
       },
-      // elements: {
-      //   point: {
-      //   pointRadius: 0.2,
-      //   pointHoverRadius: 1
-      //   radius: 0 // punkta lielums
-      //   }
-      // },
+      elements: {
+        
+        point: {
+            hitRadius: 10, 
+            hoverRadius: 10         
+          }
+      },
       scales: {
         xAxes: [{
           ticks: {
