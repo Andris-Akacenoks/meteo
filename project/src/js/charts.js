@@ -1,11 +1,31 @@
 ﻿var index = 0;
 var myCharts = [];
 var interval;
+var pointBackgroundColors = [];
+var refreshAllowed = true; // default view is last 1 hour so chart updating will be enabled when page is first openend
 
-function changeInterval(value){
+function changeInterval(value, isRefreshAllowed){
   interval = value;
-  updateCharts(interval);
+  refreshAllowed = isRefreshAllowed;
+  updateCharts(interval, refreshAllowed);
+  if(isRefreshAllowed){
+    console.log("refreshAllowed set to TRUE");
+  }
+  else{
+    console.log("refreshAllowed set to FALSE");
+
+  }
 }
+
+function setLatestValues(data){
+  document.getElementById("lastTime").innerHTML = "<strong>Last measurement taken on: </strong>" + data[data.length-1].measurement_time;
+  document.getElementById("lastRain").innerHTML = "<strong>Rain: </strong>" + data[data.length-1].rain+ " " + getMetric("rain");
+  document.getElementById("lastTemperature").innerHTML = "<strong>Temperature: </strong>" + data[data.length-1].temperature+ " " + getMetric("temperature");
+  document.getElementById("lastHumidity").innerHTML = "<strong>Humidity: </strong>" + data[data.length-1].humidity+ " " + getMetric("humidity");
+  document.getElementById("lastPressure").innerHTML = "<strong>Atmospheric pressure: </strong>" + data[data.length-1].bar_pressure + " " + getMetric("bar_pressure");
+  document.getElementById("lastVoltage").innerHTML = "<strong>Voltage: </strong>" + data[data.length-1].input_voltage + " " + getMetric("input_voltage");
+}
+
 
 function createCharts() {
   var data = {};
@@ -16,12 +36,19 @@ function createCharts() {
     success: function (data) {
       console.log("GET success. Data retrieved and charts ready to be created.");
       console.log(data);
+      setLatestValues(data);
 
-      createLineChart("Atmosfēras spiediens", 'chart1', data, "bar_pressure", "#0000FF"); index++;
-      createLineChart("Temperatūra", "chart2", data, "temperature", "#CC0000");           index++;
-      createLineChart("Gaisa mitrums", "chart3", data, "humidity", "#008000");            index++;
-      createLineChart("Nokrišņi", "chart4", data, "rain", "#191970");                     index++;
-      createLineChart("Ieejas strāva", "chart5", data, "input_voltage", "#2F4F4F");
+      createLineChart("Atmospheric pressure", 'chart1', data, "bar_pressure", "#0000FF"); index++;
+      createLineChart("Temperature", "chart2", data, "temperature", "#CC0000");           index++;
+      createLineChart("Humidity", "chart3", data, "humidity", "#008000");                 index++;
+      //createLineChart("Rain", "chart9", data, "rain", "#191970");                         index++;
+      createLineChart("Voltage", "chart5", data, "input_voltage", "#2F4F4F");             index++;
+      //createLineChart("Wind speed", "chart6", data, "wind_speed", "#2F4F4F");             index++; // waiting for non-zero values 
+      //createLineChart("Wind gust", "chart7", data, "wind_gust", "#2F4F4F");               index++;
+      //createLineChart("Wind speed count", "chart8", data, "wind_speed_count", "#2F4F4F"); index++;
+      createLineChart("Wind direction", "chart4", data, "wind_direction", "#2F4F4F");     
+
+
       index = 0;
       console.log("All charts are created.");
     },
@@ -32,7 +59,8 @@ function createCharts() {
   });
 }
 
-function updateCharts(parsedInterval) {
+function updateCharts(parsedInterval, isRefreshAllowed) {
+  refreshAllowed = isRefreshAllowed;
   interval = parsedInterval;
   var data = {};
   $.ajax({
@@ -42,6 +70,7 @@ function updateCharts(parsedInterval) {
     success: function (data) {
       console.log("GET success. Data retrieved charts will be updated.");
       console.log(data);
+      setLatestValues(data);
 
       var measurementTime = [];
       var bar_pressure = [];
@@ -49,21 +78,16 @@ function updateCharts(parsedInterval) {
       var humidity = [];
       var rain = [];
       var input_voltage = [];
+      var wind_gust = [];
+      var wind_speed = [];
+      var wind_speed_count = [];
+      var wind_direction = [];
 
-      var step = 1;
       var pointsDrawn = 0;
-      var count = data.length;
-      console.log("Point count: " + count);
+      console.log("Point count: " + data.length);
 
 
-      if(count > 720){
-        step = Math.ceil(count / 720);
-        console.log("Step: "+step);
-      }
-
-      
-
-      for (var j=0; j<count; j+=step) {
+      for (var j=0; j<data.length; j++) {
         measurementTime.push((data[j].measurement_time).substr(0, 16)); // nonemtas sekundes
         bar_pressure.push(data[j].bar_pressure);
         temperature.push(data[j].temperature);
@@ -71,13 +95,19 @@ function updateCharts(parsedInterval) {
         rain.push(data[j].rain);
         input_voltage.push(data[j].input_voltage);
 
+
         pointsDrawn++;
       }
       myCharts[0].data.datasets[0].data = bar_pressure;
       myCharts[1].data.datasets[0].data = temperature;
       myCharts[2].data.datasets[0].data = humidity;
-      myCharts[3].data.datasets[0].data = rain;
-      myCharts[4].data.datasets[0].data = input_voltage;
+      //myCharts[3].data.datasets[0].data = rain;
+      myCharts[3].data.datasets[0].data = input_voltage;
+      //myCharts[5].data.datasets[0].data = wind_speed;
+      //myCharts[6].data.datasets[0].data = wind_gust;
+      //myCharts[7].data.datasets[0].data = wind_speed_count;
+      myCharts[4].data.datasets[0].data = wind_direction;
+
 
       for(var i=0; i<5; i++){
         myCharts[i].data.labels = measurementTime;
@@ -137,6 +167,18 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
       case "rain":
         metric.push(data[i].rain);
         break;
+      case "wind_speed":
+        metric.push(data[i].wind_speed);
+        break;
+      case "wind_gust":
+        metric.push(data[i].wind_gust);
+        break;
+      case "wind_speed_count":
+        metric.push(data[i].wind_speed_count);
+        break;
+      case "wind_direction":
+        metric.push(data[i].wind_direction);
+        break;
       default:
         metric.push(data[i].input_voltage);
     }
@@ -181,6 +223,7 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
           ticks: {
             autoSkip: true,
             maxTicksLimit: 3,
+            'text-anchor': 'middle',
             maxRotation: 0,
             minRotation: 0
           },
@@ -230,6 +273,12 @@ $(document).ready(function () {
   createCharts();
 
   setInterval(function () {
-    updateCharts(interval);
-  }, 1000 * 60); //60 sekundes
+    if(refreshAllowed){ // if refresh is not allowed (custom interval is set) then charts will not be updated (requests not sent)
+      updateCharts(interval, true);
+    }
+    else{
+      console.log("Refresh not allowed. Press on any preset interval to enable chart refresh.")
+    }
+  }, 1000 * 60); //60 seconds
+
 });

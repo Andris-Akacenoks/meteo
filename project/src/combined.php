@@ -3,6 +3,7 @@
 //include("dbconfig.php");
 
 ?>
+<?php header('Access-Control-Allow-Origin: *'); ?>
 
 <!DOCTYPE html>
 <html>
@@ -18,6 +19,7 @@
         <link href="../lib/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
         <link href="css/colors/blue.css" id="theme" rel="stylesheet">
+
         <title>Sākums</title>
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -40,9 +42,6 @@
                     <div class="navbar-collapse">
                         <ul class="navbar-nav mr-auto mt-md-0">
                             <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                            <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                                <form class="app-search">
-                                    <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
                             </li>
                         </ul>
                         <ul class="navbar-nav my-lg-0">
@@ -56,9 +55,9 @@
                 <div class="scroll-sidebar">
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
-                            <li> <a class="waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Meteo stacijas dati</span></a>
+                            <li> <a class="waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home</span></a>
                             </li>
-                            <li> <a class="waves-effect waves-dark" href="combined.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Apvienotie dati</span></a>
+                            <li> <a class="waves-effect waves-dark" href="combined.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Meteo station data</span></a>
                             </li>
                         </ul>
                     </nav>
@@ -72,10 +71,10 @@
                 <div class="container-fluid">
                     <div class="row page-titles">
                         <div class="col-md-5 col-8 align-self-center">
-                            <h3 class="text-themecolor m-b-0 m-t-0">Dashboard</h3>
+                            <h3 class="text-themecolor m-b-0 m-t-0">Meteo station data</h3>
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                                <li class="breadcrumb-item active">Meteo station data</li>
                             </ol>
                         </div>
                     </div>
@@ -88,25 +87,27 @@
                                     <form id="myform"  method="POST"  class="form_statusinput">
                                         <input type="datetime-local" name="yesterday" id="yesterday"/>
                                         <input type="datetime-local" name="now" id="now"/>
-                                        <input type="submit" class="submit-button" id="button" value="Parādīt">
-                                        <!-- <input type="submit" name="lastHour" id="button_1" value="Pēdējā stunda" class="range-button">
-                                        <input type="submit" name="last12hours" value="Pēdējās 12 stundas" class="range-button">
-                                        <input type="submit" name="lastDay" value="Pēdējā diennakts" class="range-button">
-                                        <input type="submit" name="lastWeek" value="Pēdējā nedēļa" class="range-button"> -->
-                                        <button type="button" onclick="changeInterval('lasthour')" class="range-button">Pēdējā stunda</button>
-                                        <button type="button" onclick="changeInterval('last12h')" class="range-button">Pēdējās 12 stundas</button>
-                                        <button type="button" onclick="changeInterval('yesterday')" class="range-button">Pēdējā diennakts</button>
-                                        <button type="button" onclick="changeInterval('lastweek')" class="range-button">Pēdējā nedēļa</button>
-                                    </form>
+                                        <input type="submit" class="submit-button" id="button" value="Show">
+                                        <button type="button" onclick="changeInterval('lasthour', true)" class="range-button">Last hour</button>
+                                        <button type="button" onclick="changeInterval('last12h', true)" class="range-button">Last 12 hours</button>
+                                        <button type="button" onclick="changeInterval('yesterday', true)" class="range-button">Last 24 hours</button>
+                                        <button type="button" onclick="changeInterval('lastweek', true)" class="range-button">Last week</button>
+                                    </form><br /><br />
+                                    <div>
+                                        <h3>Current data</h3>
 
-                                    <br />
-                                    <br />
-
+                                        <p id="lastRain"style="float:right; padding-right: 1%;"></p>
+                                        <p id="lastVoltage"style="float:right; padding-right: 1%;"></p>
+                                        <p id="lastTemperature" style="float:right; padding-right: 1%;"></p>
+                                        <p id="lastHumidity"style="float:right; padding-right: 1%;"></p>
+                                        <p id="lastPressure"style="float:right; padding-right: 1%;"></p>
+                                        <p id="lastTime"style="float:right; padding-right: 1%;"></p>
+                                    </div>
                                 <?php
-
-
+                                    // nothing to see here
                                 ?>
                                    <div id="chartsParent">
+
                                         <div id="left" class="left-line-chart-container">
                                             <div id="object1" class="chart-canvas">
                                                 <canvas id="chart1"></canvas><br/>
@@ -117,6 +118,12 @@
                                             <div id="object5" class="chart-canvas">
                                                 <canvas id="chart5"></canvas><br/>
                                             </div>
+                                            <div id="object7" class="chart-canvas">
+                                                <canvas id="chart7"></canvas><br/>
+                                            </div>
+                                            <div id="object9" class="chart-canvas">
+                                                <canvas id="chart9"></canvas><br/>
+                                            </div>
                                         </div>
 
                                         <div id="right" class="right-line-chart-container">
@@ -126,44 +133,17 @@
                                             </div>
                                             <div id="object4" class="chart-canvas">
                                                 <canvas id="chart4"></canvas><br/>
+                                            <div id="object6" class="chart-canvas">
+                                                <canvas id="chart6"></canvas><br/>
                                             </div>
+                                            <div id="object8" class="chart-canvas">
+                                                <canvas id="chart8"></canvas><br/>
+                                            </div>
+                                        </div>
 
 
                                         </div>
-                                        <!-- <div id="current-values-box">
-                                            <h3>Aktuālie dati</h3>
-                                            <p>Pēdēja mērījuma laiks -
-                                                <script type="text/javascript">
-                                                    document.write(time[time.length - 1]);
-                                                </script>
-                                            </p>
-                                            <p>Nokrišņi -
-                                                <script type="text/javascript">
-                                                    document.write(rainValues[rainValues.length - 1]);
-                                                </script>
-                                            </p>
-                                            <p>Ieejas strāva -
-                                                <script type="text/javascript">
-                                                    document.write(inputVoltageValues[inputVoltageValues.length - 1]);
-                                                </script>
-                                            </p>
-                                            <p>Temperatūra -
-                                                <script type="text/javascript">
-                                                    document.write(temperatureValues[temperatureValues.length - 1]);
-                                                </script>
-                                            </p>
-                                            <p>Gaisa mitrums -
-                                                <script type="text/javascript">
-                                                    document.write(humidityValues[humidityValues.length - 1]);
-                                                </script>
-                                            </p>
-                                            <p>Atmosfēras -
-                                                <script type="text/javascript">
-                                                    document.write(pressureValues[pressureValues.length - 1]);
-                                                </script>
-                                            </p>
 
-                                        </div> -->
                                     </div>
 
                                 </div>
@@ -192,7 +172,8 @@
                 var yesterday = $("#yesterday").val();
                 var now = $("#now").val();
                 var currentInterval = yesterday+"+"+now;
-                changeInterval(currentInterval);
+
+                changeInterval(currentInterval, false); // refresh not allowed
 
                 // $.ajax({
                 //     type: "POST",
