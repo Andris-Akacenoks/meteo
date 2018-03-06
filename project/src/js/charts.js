@@ -1,4 +1,4 @@
-var index = 0;
+﻿var index = 0;
 var myCharts = [];
 var interval;
 var pointBackgroundColors = [];
@@ -86,6 +86,7 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
       var pointsDrawn = 0;
       console.log("Point count: " + data.length);
 
+
       for (var j=0; j<data.length; j++) {
         measurementTime.push((data[j].measurement_time).substr(0, 16)); // nonemtas sekundes
         bar_pressure.push(data[j].bar_pressure);
@@ -93,10 +94,7 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
         humidity.push(data[j].humidity);
         rain.push(data[j].rain);
         input_voltage.push(data[j].input_voltage);
-        wind_speed.push(data[j].wind_speed);
-        wind_speed_count.push(data[j].wind_speed_count);
-        wind_direction.push(data[j].wind_direction);
-        wind_gust.push(data[j].wind_gust);
+
 
         pointsDrawn++;
       }
@@ -185,7 +183,6 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
         metric.push(data[i].input_voltage);
     }
   }
-
 
   var canvas = document.getElementById(element);
   var ctx = canvas.getContext('2d');

@@ -106,8 +106,8 @@
                                 <?php
                                     // nothing to see here
                                 ?>
-                                    <div id="chartsParent">
-                                        
+                                   <div id="chartsParent">
+
                                         <div id="left" class="left-line-chart-container">
                                             <div id="object1" class="chart-canvas">
                                                 <canvas id="chart1"></canvas><br/>
@@ -172,6 +172,7 @@
                 var yesterday = $("#yesterday").val();
                 var now = $("#now").val();
                 var currentInterval = yesterday+"+"+now;
+
                 changeInterval(currentInterval, false); // refresh not allowed
 
                 // $.ajax({
