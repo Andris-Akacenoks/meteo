@@ -49,9 +49,7 @@
                 <div class="navbar-collapse">
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
+                            
                         </li>
                     </ul>
                     <ul class="navbar-nav my-lg-0">
@@ -65,9 +63,9 @@
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Meteo stacijas dati</span></a>
+                        <li> <a class="waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home    </span></a>
                         </li>
-                        <li> <a class="waves-effect waves-dark" href="combined.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Apvienotie dati</span></a>
+                        <li> <a class="waves-effect waves-dark" href="combined.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Meteo station data</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -81,10 +79,10 @@
             <div class="container-fluid">
                 <div class="row page-titles">
                     <div class="col-md-5 col-8 align-self-center">
-                        <h3 class="text-themecolor m-b-0 m-t-0">Dashboard</h3>
+                        <h3 class="text-themecolor m-b-0 m-t-0">Seperated data</h3>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">Seperated data</li>
                         </ol>
                     </div>
                 </div>
