@@ -15,10 +15,6 @@
         <meta name="author" content="Andris Akacenoks">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
         <script src="../lib/plugins/jquery/jquery.min.js"></script>
-        <script src="../lib/plugins/jquery/jquery.ba-hashchange.min"></script>
-        <script type='text/javascript' src='js/dynamic_page.js'></script>
-
-
         <script src="js/moment.js"></script>
         <link href="../lib/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
@@ -31,7 +27,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     </head>
-    
+
 
     <body class="fix-header fix-sidebar card-no-border">
 
@@ -115,7 +111,7 @@
                                 <?php
                                     // nothing to see here
                                 ?>
-                                        
+
                                         <div id="left" class="left-line-chart-container">
                                             <div class="card-block" style="padding: 2% 0% 1% 1%;">
                                                 <div class="card" id="object1" class="chart-canvas">
@@ -223,14 +219,6 @@
             });
         });
 
-
-                $(function(){
-                    $("#testid").click(function(e){
-                        e.preventDefault(); //To prevent the default anchor tag behaviour
-                        var url = this.href;
-                        $("#main").load(url);
-                    });
-                });
         </script>
         <script src="js/charts.js"></script>
     </body>
