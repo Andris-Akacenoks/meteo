@@ -33,7 +33,8 @@ File: scss
 /*Top bar
 *******************/
 .topbar {
-  background: #5b4eb1; }
+  background: #8c8c8c
+  ; }
   .topbar .navbar-header {
     background: rgba(0, 0, 0, 0.05); }
   .topbar .top-navbar .navbar-header .navbar-brand .dark-logo {

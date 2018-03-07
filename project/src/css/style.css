@@ -479,7 +479,8 @@ html body .text-dark {
   color: #67757c; }
 
 html body .text-themecolor {
-  color: #009efb; }
+  color: #374049;
+}
 
 /*******************
 Background Colors
@@ -2382,8 +2383,11 @@ sidebar navigation
   transform: rotate(-135deg) translate(0, -50%); }
 
 .chart-canvas{
-  width:100%;
+  width:90%;
+
 }
+
+
 /****************
 When click on sidebar toggler and also for tablet
 *****************/

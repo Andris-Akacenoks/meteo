@@ -35,19 +35,18 @@ function createCharts() {
     dataType: "json",
     success: function (data) {
       console.log("GET success. Data retrieved and charts ready to be created.");
-      console.log(data);
+      //console.log(data);
       setLatestValues(data);
 
       createLineChart("Atmospheric pressure", 'chart1', data, "bar_pressure", "#0000FF"); index++;
       createLineChart("Temperature", "chart2", data, "temperature", "#CC0000");           index++;
       createLineChart("Humidity", "chart3", data, "humidity", "#008000");                 index++;
-      //createLineChart("Rain", "chart9", data, "rain", "#191970");                         index++;
+      createLineChart("Rain", "chart9", data, "rain", "#191970");                         index++;
       createLineChart("Voltage", "chart5", data, "input_voltage", "#2F4F4F");             index++;
-      //createLineChart("Wind speed", "chart6", data, "wind_speed", "#2F4F4F");             index++; // waiting for non-zero values 
-      //createLineChart("Wind gust", "chart7", data, "wind_gust", "#2F4F4F");               index++;
-      //createLineChart("Wind speed count", "chart8", data, "wind_speed_count", "#2F4F4F"); index++;
+      createLineChart("Wind speed", "chart6", data, "wind_speed", "#2F4F4F");             index++; // waiting for non-zero values 
+      createLineChart("Wind gust", "chart7", data, "wind_gust", "#2F4F4F");               index++;
+      createLineChart("Wind speed count", "chart8", data, "wind_speed_count", "#2F4F4F"); index++;
       createLineChart("Wind direction", "chart4", data, "wind_direction", "#2F4F4F");     
-
 
       index = 0;
       console.log("All charts are created.");
@@ -69,7 +68,7 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
     dataType: "json",
     success: function (data) {
       console.log("GET success. Data retrieved charts will be updated.");
-      console.log(data);
+      //console.log(data);
       setLatestValues(data);
 
       var measurementTime = [];
@@ -103,12 +102,12 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
       myCharts[0].data.datasets[0].data = bar_pressure;
       myCharts[1].data.datasets[0].data = temperature;
       myCharts[2].data.datasets[0].data = humidity;
-      //myCharts[3].data.datasets[0].data = rain;
-      myCharts[3].data.datasets[0].data = input_voltage;
-      //myCharts[5].data.datasets[0].data = wind_speed;
-      //myCharts[6].data.datasets[0].data = wind_gust;
-      //myCharts[7].data.datasets[0].data = wind_speed_count;
-      myCharts[4].data.datasets[0].data = wind_direction;
+      myCharts[3].data.datasets[0].data = rain;
+      myCharts[4].data.datasets[0].data = input_voltage;
+      myCharts[5].data.datasets[0].data = wind_speed;
+      myCharts[6].data.datasets[0].data = wind_gust;
+      myCharts[7].data.datasets[0].data = wind_speed_count;
+      myCharts[8].data.datasets[0].data = wind_direction;
 
 
       for(var i=0; i<5; i++){

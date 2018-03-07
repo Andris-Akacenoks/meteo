@@ -15,17 +15,23 @@
         <meta name="author" content="Andris Akacenoks">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
         <script src="../lib/plugins/jquery/jquery.min.js"></script>
+        <script src="../lib/plugins/jquery/jquery.ba-hashchange.min"></script>
+        <script type='text/javascript' src='js/dynamic_page.js'></script>
+
+
         <script src="js/moment.js"></script>
         <link href="../lib/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
         <link href="css/colors/blue.css" id="theme" rel="stylesheet">
+        <link rel="shortcut icon" type="image/png" href="css\images\favicon.ico"/>
 
-        <title>Sākums</title>
+        <title>Meteo station data</title>
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     </head>
+    
 
     <body class="fix-header fix-sidebar card-no-border">
 
@@ -55,9 +61,9 @@
                 <div class="scroll-sidebar">
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
-                            <li> <a class="waves-effect waves-dark" href="index.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home</span></a>
+                            <li> <a id="index-page" class="waves-effect waves-dark index" href="index.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Home</span></a>
                             </li>
-                            <li> <a class="waves-effect waves-dark" href="combined.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Meteo station data</span></a>
+                            <li> <a id="meteo-page" class="waves-effect waves-dark" href="combined.php" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Meteo station data</span></a>
                             </li>
                         </ul>
                     </nav>
@@ -81,9 +87,10 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                            <div id="show">
+                        <div>
                             </div>
                                 <div class="card-block"  id="card-block">
+
                                     <form id="myform"  method="POST"  class="form_statusinput">
                                         <input type="datetime-local" name="yesterday" id="yesterday"/>
                                         <input type="datetime-local" name="now" id="now"/>
@@ -103,50 +110,69 @@
                                         <p id="lastPressure"style="float:right; padding-right: 1%;"></p>
                                         <p id="lastTime"style="float:right; padding-right: 1%;"></p>
                                     </div>
+                                </div>
+                            </div>
                                 <?php
                                     // nothing to see here
                                 ?>
-                                    <div id="chartsParent">
                                         
                                         <div id="left" class="left-line-chart-container">
-                                            <div id="object1" class="chart-canvas">
-                                                <canvas id="chart1"></canvas><br/>
+                                            <div class="card-block" style="padding: 2% 0% 1% 1%;">
+                                                <div class="card" id="object1" class="chart-canvas">
+                                                    <canvas id="chart1"></canvas><br/>
+                                                </div>
                                             </div>
-                                            <div id="object3" class="chart-canvas">
-                                                <canvas id="chart3"></canvas><br/>
+                                            <div class="card-block" style="padding:0% 0% 1% 1%;">
+                                                <div class="card" id="object3"  class="chart-canvas">
+                                                    <canvas id="chart3"></canvas><br/>
+                                                </div>
                                             </div>
-                                            <div id="object5" class="chart-canvas">
-                                                <canvas id="chart5"></canvas><br/>
+                                            <div class="card-block" style="padding:0% 0% 1% 1%;">
+                                                <div class="card" id="object5"  class="chart-canvas">
+                                                    <canvas id="chart5"></canvas><br/>
+                                                </div>
                                             </div>
-                                            <div id="object7" class="chart-canvas">
-                                                <canvas id="chart7"></canvas><br/>
+                                            <div class="card-block" style="padding:0% 0% 1% 1%;">
+                                                <div class="card" id="object7"  class="chart-canvas">
+                                                    <canvas id="chart7"></canvas><br/>
+                                                </div>
                                             </div>
-                                            <div id="object9" class="chart-canvas">
-                                                <canvas id="chart9"></canvas><br/>
+                                            <div class="card-block" style="padding:0% 0% 1% 1%;">
+                                                <div class="card" id="object9"  class="chart-canvas">
+                                                    <canvas id="chart9"></canvas><br/>
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div id="right" class="right-line-chart-container">
 
-                                            <div id="object2" class="chart-canvas">
-                                                <canvas id="chart2"></canvas><br/>
+                                            <div class="card-block" style="padding:2% 1% 1% 0%;">
+                                                <div class="card" id="object2"  class="chart-canvas">
+                                                    <canvas id="chart2"></canvas><br/>
+                                                </div>
                                             </div>
-                                            <div id="object4" class="chart-canvas">
-                                                <canvas id="chart4"></canvas><br/>
-                                            <div id="object6" class="chart-canvas">
-                                                <canvas id="chart6"></canvas><br/>
+                                            <div class="card-block" style="padding:0% 1% 1% 0%;">
+                                                <div class="card" id="object4"  class="chart-canvas">
+                                                    <canvas id="chart4"></canvas><br/>
+                                                </div>
                                             </div>
-                                            <div id="object8" class="chart-canvas">
-                                                <canvas id="chart8"></canvas><br/>
+                                            <div class="card-block" style="padding:0% 1% 1% 0%;">
+                                                <div class="card" id="object6"  class="chart-canvas">
+                                                    <canvas id="chart6"></canvas><br/>
+                                                </div>
+                                            </div>
+                                            <div class="card-block" style="padding:0% 1% 1% 0%;">
+                                                <div class="card" id="object8"  class="chart-canvas">
+                                                    <canvas id="chart8"></canvas><br/>
+                                                </div>
                                             </div>
                                         </div>
 
 
-                                        </div>
 
-                                    </div>
 
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -154,6 +180,8 @@
 
             </div>
         </div>
+        <div class="main">This is the Main Div that will load either page1.html -> page6.html depending on which Nav link the user clicks.. Note that when user clicks the nav link.. Only this div should reload with the content of said clicked page. i.e. If user clicks page4.html link in nva menu. This lightblue div will change from whats written here now and load the content from page4.html in this div but the header, Nav, and rightsidebar of the page will stay static and not refresh at all.</div>
+
         <!-- Bootstrap tether Core JavaScript -->
         <script src="../lib/plugins/bootstrap/js/tether.min.js"></script>
         <script src="../lib/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -191,8 +219,18 @@
                 //         console.log(data);
                 //     }
                 // });
+
             });
         });
+
+
+                $(function(){
+                    $("#testid").click(function(e){
+                        e.preventDefault(); //To prevent the default anchor tag behaviour
+                        var url = this.href;
+                        $("#main").load(url);
+                    });
+                });
         </script>
         <script src="js/charts.js"></script>
     </body>

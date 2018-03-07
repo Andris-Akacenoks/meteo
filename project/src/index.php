@@ -26,7 +26,9 @@
 
     </script>
 
-    <title>Sākums!</title>
+        <link rel="shortcut icon" type="image/png" href="css\images\favicon.ico"/>
+
+<title>Home</title>
     <link href="../lib/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/colors/blue.css" id="theme" rel="stylesheet">
