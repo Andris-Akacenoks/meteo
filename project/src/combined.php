@@ -176,8 +176,6 @@
 
             </div>
         </div>
-        <div class="main">This is the Main Div that will load either page1.html -> page6.html depending on which Nav link the user clicks.. Note that when user clicks the nav link.. Only this div should reload with the content of said clicked page. i.e. If user clicks page4.html link in nva menu. This lightblue div will change from whats written here now and load the content from page4.html in this div but the header, Nav, and rightsidebar of the page will stay static and not refresh at all.</div>
-
         <!-- Bootstrap tether Core JavaScript -->
         <script src="../lib/plugins/bootstrap/js/tether.min.js"></script>
         <script src="../lib/plugins/bootstrap/js/bootstrap.min.js"></script>
