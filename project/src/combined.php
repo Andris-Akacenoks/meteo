@@ -162,6 +162,11 @@
                                                     <canvas id="chart8"></canvas><br/>
                                                 </div>
                                             </div>
+                                            <div class="card-block" style="padding:0% 1% 1% 0%;">
+                                                <div class="card" id="object10"  class="chart-canvas">
+                                                    <canvas id="chart10"></canvas><br/>
+                                                </div>
+                                            </div>
                                         </div>
 
 

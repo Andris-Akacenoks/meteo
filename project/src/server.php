@@ -18,9 +18,9 @@ $d = mysqli_connect($myServer,$myUser,$myPass,$myDB) or die('Nevaru pievienoties
 			measurement_time, wind_speed,
 			wind_gust,		  wind_speed_count,
 			rain,			  wind_direction,
-			input_voltage,	  solar_radiation,
+			input_voltage,
 			temperature,	  humidity,
-			bar_pressure
+			bar_pressure, solar_radiation
 			)
 		VALUES(
 			'{$data_json["measurementTime"]}',
@@ -30,10 +30,11 @@ $d = mysqli_connect($myServer,$myUser,$myPass,$myDB) or die('Nevaru pievienoties
 			{$data_json["rain"]},
 			{$data_json["windDirection"]},
 			{$data_json["inputVoltage"]},
-			NULL,
 			{$data_json["temperature"]},
 			{$data_json["humidity"]},
 			{$data_json["barPressure"]}
+			{$data_json["solarRadiation"]}
+
 		)";
 
 		$result=mysqli_query($d,$sql_vaicajums);

@@ -43,10 +43,12 @@ function createCharts() {
       createLineChart("Humidity", "chart3", data, "humidity", "#008000");                 index++;
       createLineChart("Rain", "chart9", data, "rain", "#191970");                         index++;
       createLineChart("Voltage", "chart5", data, "input_voltage", "#2F4F4F");             index++;
-      createLineChart("Wind speed", "chart6", data, "wind_speed", "#2F4F4F");             index++; // waiting for non-zero values 
+      createLineChart("Wind speed", "chart6", data, "wind_speed", "#2F4F4F");             index++; // waiting for non-zero values
       createLineChart("Wind gust", "chart7", data, "wind_gust", "#2F4F4F");               index++;
       createLineChart("Wind speed count", "chart8", data, "wind_speed_count", "#2F4F4F"); index++;
-      createLineChart("Wind direction", "chart4", data, "wind_direction", "#2F4F4F");     
+      createLineChart("Wind direction", "chart4", data, "wind_direction", "#2F4F4F");     index++;
+      createLineChart("Solar radiation", "chart10", data, "solar_radiation", "#0000FF");
+
 
       index = 0;
       console.log("All charts are created.");
@@ -81,6 +83,7 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
       var wind_speed = [];
       var wind_speed_count = [];
       var wind_direction = [];
+      var solar_radiation = [];
 
       var pointsDrawn = 0;
       console.log("Point count: " + data.length);
@@ -96,6 +99,8 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
         wind_speed_count.push(data[j].wind_speed_count);
         wind_direction.push(data[j].wind_direction);
         wind_gust.push(data[j].wind_gust);
+        solar_radiation.push(data[j].solar_radiation);
+
 
         pointsDrawn++;
       }
@@ -108,14 +113,16 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
       myCharts[6].data.datasets[0].data = wind_gust;
       myCharts[7].data.datasets[0].data = wind_speed_count;
       myCharts[8].data.datasets[0].data = wind_direction;
+      myCharts[9].data.datasets[0].data = solar_radiation;
 
 
-      for(var i=0; i<5; i++){
+
+      for(var i=0; i<10; i++ ){
         myCharts[i].data.labels = measurementTime;
         myCharts[i].update();
       }
-      console.log("All charts updated.");   
-      console.log("Points drawn: "+ pointsDrawn);   
+      console.log("All charts updated.");
+      console.log("Points drawn: "+ pointsDrawn);
     },
     error: function (data) {
       console.log("GET failed. Failed to retrieve data therefore graphs not shown..");
@@ -214,10 +221,10 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
         fullWidth: true
       },
       elements: {
-        
+
         point: {
-            hitRadius: 10, 
-            hoverRadius: 10         
+            hitRadius: 10,
+            hoverRadius: 10
           }
       },
       scales: {
