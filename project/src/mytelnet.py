@@ -54,7 +54,7 @@ while 1:
             first_line = ""
 
             # Response, status etc
-            #print(r.text)
+            print(r.text)
             print("POST response code:")
             print(r.status_code)
             print("\n")
