@@ -110,15 +110,17 @@ html body .mdi:before, html body .mdi-set {
   line-height: initial; }
 
 .right-line-chart-container{
-  width: 50%; 
-  float:right; 
+  width: 50%;
+  float:right;
   overflow:hidden;
-} 
+}
 .left-line-chart-container{
-  width: 50%; 
-  float:right; 
+  width: 50%;
+  float:right;
   overflow:hidden;
-} 
+}
+div.inline { float:left; }
+.clearBoth { clear:both; }
 
 /*******************
 Headings
@@ -3346,15 +3348,15 @@ File: scss
     width:800px;
   }
   .right-line-chart-container{
-    width: 100%; 
-    float:none; 
+    width: 100%;
+    float:none;
     overflow:hidden;
-  } 
+  }
   .left-line-chart-container{
-    width: 100%; 
-    float:none; 
+    width: 100%;
+    float:none;
     overflow:hidden;
-  } 
+  }
   .widget-app-columns {
     -webkit-column-count: 2;
     -moz-column-count: 2;
@@ -3375,15 +3377,15 @@ File: scss
     width:650px;
   }
   .right-line-chart-container{
-    width: 100%; 
-    float:none; 
+    width: 100%;
+    float:none;
     overflow:hidden;
-  } 
+  }
   .left-line-chart-container{
-    width: 100%; 
-    float:none; 
+    width: 100%;
+    float:none;
     overflow:hidden;
-  } 
+  }
 
 
   .page-wrapper {
@@ -3404,7 +3406,7 @@ File: scss
  Ipad & above all(768px)
  ============================================================== */
 @media (min-width: 768px) {
-  
+
   .navbar-header {
     width: 240px;
     -webkit-flex-shrink: 0;
@@ -3434,30 +3436,30 @@ File: scss
     width:200px;
   }
   .right-line-chart-container{
-    width: 100%; 
-    float:none; 
+    width: 100%;
+    float:none;
     overflow:hidden;
-  } 
+  }
   .left-line-chart-container{
-    width: 100%; 
-    float:none; 
+    width: 100%;
+    float:none;
     overflow:hidden;
-  } 
+  }
 }
 @media (max-width: 767px) {
   .chart-canvas{
     width:500px;
   }
   .right-line-chart-container{
-    width: 100%; 
-    float:none; 
+    width: 100%;
+    float:none;
     overflow:hidden;
-  } 
+  }
   .left-line-chart-container{
-    width: 100%; 
-    float:none; 
+    width: 100%;
+    float:none;
     overflow:hidden;
-  } 
+  }
   /*Header*/
   .topbar {
     position: fixed;
@@ -3584,4 +3586,3 @@ File: scss
     -webkit-flex-wrap: wrap !important; }
   .chat-list li .chat-content {
     width: calc(100% - 80px); } }
-

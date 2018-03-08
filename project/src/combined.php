@@ -96,16 +96,29 @@
                                         <button type="button" onclick="changeInterval('yesterday', true)" class="range-button">Last 24 hours</button>
                                         <button type="button" onclick="changeInterval('lastweek', true)" class="range-button">Last week</button>
                                     </form><br /><br />
-                                    <div>
-                                        <h3>Current data</h3>
+                                    <h3>Current data</h3>
+                                    <p id="lastTime"></p>
 
-                                        <p id="lastRain"style="float:right; padding-right: 1%;"></p>
-                                        <p id="lastVoltage"style="float:right; padding-right: 1%;"></p>
-                                        <p id="lastTemperature" style="float:right; padding-right: 1%;"></p>
-                                        <p id="lastHumidity"style="float:right; padding-right: 1%;"></p>
-                                        <p id="lastPressure"style="float:right; padding-right: 1%;"></p>
-                                        <p id="lastTime"style="float:right; padding-right: 1%;"></p>
-                                    </div>
+
+                                    <div style="float:right; display: flex">
+                                      <div style="padding-right: 1%;">
+                                        <p id="lastRain"></p>
+                                        <p id="lastVoltage"></p>
+                                        <p id="lastWindSpeed"></p>
+                                        <p id="lastWindGust"></p>
+                                        <p id="lastSolarRadiation"></p>
+
+                                      </div>
+                                      <div>
+                                        <p id="lastTemperature"></p>
+                                        <p id="lastHumidity"></p>
+                                        <p id="lastPressure"</p>
+                                        <p id="lastWindSpeedCount"></p>
+                                        <p id="lastWindDirection" ></p>
+                                      </div>
+                                  </div>
+
+
                                 </div>
                             </div>
                                 <?php

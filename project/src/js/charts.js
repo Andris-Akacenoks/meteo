@@ -13,7 +13,6 @@ function changeInterval(value, isRefreshAllowed){
   }
   else{
     console.log("refreshAllowed set to FALSE");
-
   }
 }
 
@@ -24,8 +23,14 @@ function setLatestValues(data){
   document.getElementById("lastHumidity").innerHTML = "<strong>Humidity: </strong>" + data[data.length-1].humidity+ " " + getMetric("humidity");
   document.getElementById("lastPressure").innerHTML = "<strong>Atmospheric pressure: </strong>" + data[data.length-1].bar_pressure + " " + getMetric("bar_pressure");
   document.getElementById("lastVoltage").innerHTML = "<strong>Voltage: </strong>" + data[data.length-1].input_voltage + " " + getMetric("input_voltage");
-}
 
+  document.getElementById("lastWindSpeed").innerHTML = "<strong>Wind speed: </strong>" + data[data.length-1].wind_speed + " " + getMetric("wind_speed");
+  document.getElementById("lastWindGust").innerHTML = "<strong>Wind gust: </strong>" + data[data.length-1].wind_gust + " " + getMetric("wind_gust");
+  document.getElementById("lastSolarRadiation").innerHTML = "<strong>Solar radiation: </strong>" + data[data.length-1].solar_radiation + " " + getMetric("solar_radiation");
+  document.getElementById("lastWindSpeedCount").innerHTML = "<strong>Wind speed count: </strong>" + data[data.length-1].wind_speed_count; // need metric here
+  document.getElementById("lastWindDirection").innerHTML = "<strong>Wind direction: </strong>" + data[data.length-1].wind_direction;
+
+}
 
 function createCharts() {
   var data = {};
@@ -48,7 +53,6 @@ function createCharts() {
       createLineChart("Wind speed count", "chart8", data, "wind_speed_count", "#2F4F4F"); index++;
       createLineChart("Wind direction", "chart4", data, "wind_direction", "#2F4F4F");     index++;
       createLineChart("Solar radiation", "chart10", data, "solar_radiation", "#0000FF");
-
 
       index = 0;
       console.log("All charts are created.");
@@ -101,7 +105,6 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
         wind_gust.push(data[j].wind_gust);
         solar_radiation.push(data[j].solar_radiation);
 
-
         pointsDrawn++;
       }
       myCharts[0].data.datasets[0].data = bar_pressure;
@@ -114,8 +117,6 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
       myCharts[7].data.datasets[0].data = wind_speed_count;
       myCharts[8].data.datasets[0].data = wind_direction;
       myCharts[9].data.datasets[0].data = solar_radiation;
-
-
 
       for(var i=0; i<10; i++ ){
         myCharts[i].data.labels = measurementTime;
@@ -187,8 +188,14 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
       case "wind_direction":
         metric.push(data[i].wind_direction);
         break;
-      default:
+      case "solar_radiation":
+        metric.push(data[i].solar_radiation);
+        break;
+      case "input_voltage":
         metric.push(data[i].input_voltage);
+        break;
+      default:
+          console.log("ERROR in reateCharts() - Following graphs don't have values: " + metricType);
     }
   }
 
