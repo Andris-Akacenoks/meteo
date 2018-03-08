@@ -16,10 +16,10 @@ $d = mysqli_connect($myServer,$myUser,$myPass,$myDB) or die('Nevaru pievienoties
 		$sql_vaicajums="
 		INSERT INTO meteo(
 			measurement_time, wind_speed,
-			wind_gust,		  wind_speed_count,
-			rain,			  wind_direction,
+			wind_gust, wind_speed_count,
+			rain, wind_direction,
 			input_voltage,
-			temperature,	  humidity,
+			temperature, humidity,
 			bar_pressure, solar_radiation
 			)
 		VALUES(
@@ -32,14 +32,16 @@ $d = mysqli_connect($myServer,$myUser,$myPass,$myDB) or die('Nevaru pievienoties
 			{$data_json["inputVoltage"]},
 			{$data_json["temperature"]},
 			{$data_json["humidity"]},
-			{$data_json["barPressure"]}
+			{$data_json["barPressure"]},
 			{$data_json["solarRadiation"]}
 
 		)";
-
-		$result=mysqli_query($d,$sql_vaicajums);
-		echo("Record added.");
-	}
+		
+		$result=mysqli_query($d,$sql_vaicajums) or die(mysqli_error($d));
+		var_dump($result);
+				echo("Record added.");
+	
+}
 
 
 ?>
