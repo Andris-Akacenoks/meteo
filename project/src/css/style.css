@@ -64,6 +64,7 @@ li {
 
 
 
+html, body {height: 100%;}
 
 #more-button {
     background-color: #1E90FF; /* Blue */
