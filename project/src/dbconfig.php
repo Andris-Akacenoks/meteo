@@ -104,21 +104,3 @@
 	print json_encode($data);
 
 ?>
-
-<!-- // $.ajax({
-//     type: "POST",
-//     url: "http://localhost/project/src/dbconfig.php",
-//     //data: {yesterday: yesterday, now: now},
-//     data: JSON.stringify({yesterday: yesterday, now: now}),
-//     contentType: "application/json",
-//     dataType: "json",
-//     success: function(data){
-//         console.log("POST success.");
-//         console.log(data);
-//         updateCharts(currentInterval);
-//     },
-//     error: function (data) {
-//         console.log("POST failed.");
-//         console.log(data);
-//     }
-// }); -->

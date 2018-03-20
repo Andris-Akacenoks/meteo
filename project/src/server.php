@@ -39,9 +39,9 @@ $d = mysqli_connect($myServer,$myUser,$myPass,$myDB) or die('Nevaru pievienoties
 		
 		$result=mysqli_query($d,$sql_vaicajums) or die(mysqli_error($d));
 		var_dump($result);
-				echo("Record added.");
+		echo("Record added.");
 	
 }
-
+mysql_close($d);
 
 ?>
