@@ -14,14 +14,14 @@
 
 	//get connection
 	$mysqli = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
-	$step = 1;	
+	$step = 1;
 
 	if(!$mysqli){
 		die("Connection failed: " . $mysqli->error);
 	}
 
 	if(isset($_GET['interval'])){
-	
+
 		if(($_GET['interval'] === 'lasthour') || ($_GET['interval'] === 'undefined') ){
 			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-1 hour'));
 			$todayDateSQL = date('Y-m-d H:i:s', strtotime('+1 hour'));
@@ -58,9 +58,9 @@
 		$todayDateSQL = date('Y-m-d H:i:s', strtotime('+1 hour'));
 	}
 
-	
 
-	
+
+
 // if($_SERVER["REQUEST_METHOD"] == "POST" && $_SERVER["CONTENT_TYPE"] == "application/json") // shis stradaa
 // {
 // 	$data = file_get_contents("php://input");
@@ -79,10 +79,10 @@
 // }
 
 
-	$query = "SELECT * FROM 
-	( SELECT @row := @row +1 
-	AS rownum, meteo.* 
-		FROM ( SELECT @row :=0) r, meteo) ranked 
+	$query = "SELECT * FROM
+	( SELECT @row := @row +1
+	AS rownum, meteo.*
+		FROM ( SELECT @row :=0) r, meteo) ranked
 		WHERE (rownum %{$step} =0) and(measurement_time >= '{$yesterdayDateSQL}' AND measurement_time <= '{$todayDateSQL}') ORDER BY measurement_time ASC";
 
 	//execute query
@@ -105,3 +105,20 @@
 
 ?>
 
+<!-- // $.ajax({
+//     type: "POST",
+//     url: "http://localhost/project/src/dbconfig.php",
+//     //data: {yesterday: yesterday, now: now},
+//     data: JSON.stringify({yesterday: yesterday, now: now}),
+//     contentType: "application/json",
+//     dataType: "json",
+//     success: function(data){
+//         console.log("POST success.");
+//         console.log(data);
+//         updateCharts(currentInterval);
+//     },
+//     error: function (data) {
+//         console.log("POST failed.");
+//         console.log(data);
+//     }
+// }); -->

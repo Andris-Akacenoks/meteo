@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Andris Akacenoks">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/0.5.0/chartjs-plugin-zoom.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
+        <script src="../lib/plugins/jquery/jquery.min.js"></script>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>    
+        <script src="js/moment.js"></script>
+        <link href="../lib/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+        <link href="css/style.css" rel="stylesheet">
+        <!-- <link href="css/scatter.css" rel="stylesheet" charset="utf-8"> -->
+
+        <link rel="shortcut icon" type="image/png" href="css\images\favicon.ico"/>
+        <title>Irbene</title>
+    </head>
+    <body class="fix-header fix-sidebar card-no-border">
+        <div id="main-wrapper">
+            <header class="topbar">
+                <ul>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#meteo-data">Meteo scatter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#page-wrappe">Meteo station data</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link scroll" href="#acu-data">ACU data</a>
+                    </li>
+                </ul>
+            </header>
+            <section class="acu-data" id="acu-data" style="height: 800px;">
+                <br><br><br>
+                <h3>ACU data</h3>
+            </section>
+            <section class="page-wrappe" id="page-wrappe">
+                <br><br><br>
+                <div class="container-fluid">
+                    <div class="row page-titles">
+                        <div class="col-md-5 col-8 align-self-center">
+                            <h3 class="text-themecolor m-b-0 m-t-0">Meteo station data</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card" id=card>
+                                <div class="card-block"  id="card-block">
+                                    <form id="myform"  method="POST"  class="form_statusinput">
+                                        <input type="datetime-local" name="yesterday" id="yesterday"/>
+                                        <input type="datetime-local" name="now" id="now"/>
+                                        <input type="submit" class="submit-button" id="button" value="Show">
+                                        <button type="button" onclick="changeInterval('lasthour', true)" class="range-button">Last hour</button>
+                                        <button type="button" onclick="changeInterval('last12h', true)" class="range-button">Last 12 hours</button>
+                                        <button type="button" onclick="changeInterval('yesterday', true)" class="range-button">Last 24 hours</button>
+                                        <button type="button" onclick="changeInterval('lastweek', true)" class="range-button">Last week</button>
+                                    </form><br /><br />
+                                    <h3>Current data</h3>
+                                    <p id="lastTime"></p>
+                                    <div style="float:right; display: flex">
+                                        <div style="padding-right: 3%;">
+                                            <p id="lastRain"></p>
+                                            <p id="lastVoltage"></p>
+                                            <p id="lastWindGust"></p>
+                                        </div>
+                                        <div style="padding-right: 3%;"> 
+                                            <p id="lastHumidity"></p>
+                                            <p id="lastTemperature"></p>
+                                            <p id="lastSolarRadiation"></p>
+                                        </div>
+                                        <div>
+                                            <p id="lastWindSpeed"></p>
+                                            <p id="lastWindSpeedCount"></p>
+                                            <p id="lastWindDirection" ></p>
+                                            <p id="lastPressure"</p>
+                                        </div>
+                                        <div>
+                                            <input id="more-button" value="Show more">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="card">
+                                <div id="left" class="left-line-chart-container card-child">
+                                    <div class="card-block" style="padding: 2% 0% 1% 1%;">
+                                        <canvas id="chart1"></canvas><br/>
+                                    </div>
+                                    <div class="card-block" style="padding:0% 0% 1% 1%;">
+                                        <canvas id="chart3"></canvas><br/>
+                                    </div>
+                                    <div class="card-block" style="padding:0% 0% 1% 1%;">
+                                        <canvas id="chart5"></canvas><br/>
+                                    </div>
+                                    <div class="card-block" style="padding:0% 0% 1% 1%;">
+                                        <canvas id="chart7"></canvas><br/>
+                                    </div>
+                                    <div class="card-block" style="padding:0% 0% 1% 1%;">
+                                        <canvas id="chart9"></canvas><br/>
+                                    </div>
+                                </div>
+                                <div id="right" class="right-line-chart-container card-child">
+                                    <div class="card-block" style="padding:2% 1% 1% 0%;">
+                                        <canvas id="chart2"></canvas><br/>
+                                    </div>
+                                    <div class="card-block" style="padding:0% 1% 1% 0%;">
+                                        <canvas id="chart4"></canvas><br/>
+                                    </div>
+                                    <div class="card-block" style="padding:0% 1% 1% 0%;">
+                                        <canvas id="chart6"></canvas><br/>
+                                    </div>
+                                    <div class="card-block" style="padding:0% 1% 1% 0%;">
+                                        <canvas id="chart8"></canvas><br/>
+                                    </div>
+                                    <div class="card-block" style="padding:0% 1% 1% 0%;">
+                                        <canvas id="chart10"></canvas><br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </section>
+            <section class="meteo-data" id="meteo-data" style="height: 800px;">
+                <br><br><br>
+                <h3>Meteo scatter data</h3>
+                <br>
+                <div class="card-block ct-chart" id="ct-chart" style="padding: 2% 0% 1% 1%; height:70%;">
+                 </div>
+            </section>
+        <script src="../lib/plugins/bootstrap/js/tether.min.js"></script>
+        <script src="../lib/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/jquery.slimscroll.js"></script>
+        <script src="../lib/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+        <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>     
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+   
+        <script>
+            $(document).ready(function(){
+
+                var scrollLink = $('.scroll');
+                scrollLink.click(function(e) {
+                    e.preventDefault();
+                    $('body,html').animate({
+                        scrollTop: $(this.hash).offset().top
+                    }, 750 );
+                });
+                
+                $(window).scroll(function() {
+                    var scrollbarLocation = $(this).scrollTop();
+                    scrollLink.each(function() {
+                        var sectionOffset = $(this.hash).offset().top - 20;
+                        if ( sectionOffset <= scrollbarLocation ) {
+                            $(this).parent().addClass('active');
+                            $(this).parent().siblings().removeClass('active');
+                        }
+                    });
+                });
+                
+                $("form#myform").submit(function(event) {
+                    event.preventDefault();
+                    var yesterday = $("#yesterday").val();
+                    var now = $("#now").val();
+                    var currentInterval = yesterday+"+"+now;
+                    changeInterval(currentInterval, false);
+                });
+
+                $(function() {
+                    $('#more-button').hover(function() {
+                        $('#card').css('height', '350');
+                    }, function() {
+                        $('#card').css('height', '210');
+                    });
+                });
+                // more functions welcome here
+            });
+        </script>
+        <script src="js/charts.js"></script>
+        <script src="js/scatter.js" charset="utf-8"></script>
+        <script src="js/plotly_scatter.js" charset="utf-8"></script>
+
+    </body>
+</html>

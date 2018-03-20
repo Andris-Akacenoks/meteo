@@ -17,6 +17,7 @@ function changeInterval(value, isRefreshAllowed){
 }
 
 function setLatestValues(data){
+  
   document.getElementById("lastTime").innerHTML = "<strong>Last measurement taken on: </strong>" + data[data.length-1].measurement_time;
   document.getElementById("lastRain").innerHTML = "<strong>Rain: </strong>" + data[data.length-1].rain+ " " + getMetric("rain");
   document.getElementById("lastTemperature").innerHTML = "<strong>Temperature: </strong>" + data[data.length-1].temperature+ " " + getMetric("temperature");
@@ -58,11 +59,12 @@ function createCharts() {
       console.log("All charts are created.");
     },
     error: function (data) {
-      console.log("GET failed. Failed to retrieve data therefore graphs not shown..");
+      console.log("GET failed. Failed to retrieve data therefore graphs not created.");
       console.log(data);
     }
   });
 }
+
 
 function updateCharts(parsedInterval, isRefreshAllowed) {
   refreshAllowed = isRefreshAllowed;
@@ -95,7 +97,9 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
       for (var j=0; j<data.length; j++) {
         measurementTime.push((data[j].measurement_time).substr(0, 16)); // nonemtas sekundes
         bar_pressure.push(data[j].bar_pressure);
-        temperature.push(data[j].temperature);
+        if((data[j].temperature < 35) && (data[j].temperature > (35 * -1))){ // -35 < temperature < 35
+          temperature.push(data[j].temperature);
+        }
         humidity.push(data[j].humidity);
         rain.push(data[j].rain);
         input_voltage.push(data[j].input_voltage);
@@ -126,7 +130,7 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
       console.log("Points drawn: "+ pointsDrawn);
     },
     error: function (data) {
-      console.log("GET failed. Failed to retrieve data therefore graphs not shown..");
+      console.log("GET failed. Failed to retrieve data therefore graphs not shown.");
       console.log(data);
     }
   });
@@ -144,7 +148,7 @@ function getMetric(yLabel) {
     case "input_voltage":
       return "Vdc";
     case "solar_radiation":
-      return "W/m^2";
+      return "W/m²";
     case "temperature":
       return "°C";
     case "humidity":
@@ -161,11 +165,14 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
   var measurementTime = [];
   var metric = [];
 
+if(data.length > 0){
   for (var i in data) {
     measurementTime.push((data[i].measurement_time).substr(0, 16)); // nonemtas sekundes
     switch (metricType) {
       case "temperature":
-        metric.push(data[i].temperature);
+        if((data[i].temperature < 35) && (data[i].temperature > (-35))){
+          metric.push(data[i].temperature);
+        }
         break;
       case "bar_pressure":
         metric.push(data[i].bar_pressure);
@@ -195,11 +202,14 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
         metric.push(data[i].input_voltage);
         break;
       default:
-          console.log("ERROR in reateCharts() - Following graphs don't have values: " + metricType);
+          console.log("ERROR in reateCharts() - Following graph does have any values: " + metricType);
     }
   }
-
-
+}
+else{
+  measurementTime.push(moment().subtract(2, 'hour').format());
+  metric.push(-1);
+}
   var canvas = document.getElementById(element);
   var ctx = canvas.getContext('2d');
 
@@ -214,6 +224,16 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
       data: metric
     }]
   };
+
+  var minMaxBoundaries  = {
+    min: Math.ceil(Math.min.apply(Math, metric)),
+    max: Math.floor(Math.max.apply(Math, metric))
+  };
+  var myTicks = {};
+
+  if(metricType == "input_voltage"){
+    myTicks = minMaxBoundaries;
+  }
 
   var options = {
     type: 'line',
@@ -255,12 +275,7 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
           }
         }],
         yAxes: [{
-          // ticks: {
-          //   //autoSkip: true,
-          //   //stepSize: 1
-          //   min: Math.ceil(Math.min.apply(Math, metric) - 1),
-          //   max: Math.floor(Math.max.apply(Math, metric) + 1)
-          // },
+          ticks: myTicks,
           scaleLabel: {
             display: true,
             labelString: getMetric(metricType),
@@ -275,18 +290,34 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
         text: mainLabel,
         fontSize: 15,
         fontColor: "black"
-      }
-    }
+      },
+      pan: {
+        enabled: true,
+        mode: 'xy',
+     },
+     zoom: {
+        enabled: true,
+        drag:true,
+        sensitivity:1,
+        mode: 'x',
+     }
+    },
   }
-  myCharts[index] = new Chart(ctx, options);
+  if(element != "largeChart"){
+    myCharts[index] = new Chart(ctx, options);
+  }
+  else{
+    return new Chart(ctx, options);
+  } 
 }
 
-$(document).ready(function () {
+$(document).ready(function(){
   var now = moment().subtract(2, 'hour').format();
   var yesterday = moment().subtract(1, 'day').subtract(2, 'hour').format();
   document.getElementById("now").defaultValue = now.substr(0, 16);
   document.getElementById("yesterday").defaultValue = yesterday.substr(0, 16);
   createCharts();
+  createSeperateTable("temperature");
 
   setInterval(function () {
     if(refreshAllowed){ // if refresh is not allowed (custom interval is set) then charts will not be updated (requests not sent)
@@ -296,5 +327,4 @@ $(document).ready(function () {
       console.log("Refresh not allowed. Press on any preset interval to enable chart refresh.")
     }
   }, 1000 * 60); //60 seconds
-
 });
