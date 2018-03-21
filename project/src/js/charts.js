@@ -126,6 +126,7 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
         myCharts[i].data.labels = measurementTime;
         myCharts[i].update();
       }
+      drawScatterPlot(data,"humidity");
       console.log("All charts updated.");
       console.log("Points drawn: "+ pointsDrawn);
     },
@@ -317,7 +318,8 @@ $(document).ready(function(){
   document.getElementById("now").defaultValue = now.substr(0, 16);
   document.getElementById("yesterday").defaultValue = yesterday.substr(0, 16);
   createCharts();
-  createSeperateTable("temperature");
+  createScatter("humidity");
+
 
   setInterval(function () {
     if(refreshAllowed){ // if refresh is not allowed (custom interval is set) then charts will not be updated (requests not sent)
