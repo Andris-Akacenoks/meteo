@@ -32,8 +32,15 @@ ws.onmessage = (event) => {
     var obj = JSON.parse(event.data);
     //console.log(Base64Decode(obj.data));
     var jsonData = Base64Decode(obj.data);
-    document.getElementById("streamed-data").innerHTML = jsonData;
+    // console.log(jsonData);
+    var jsonDataArray = $.parseJSON(jsonData);
+    // console.log(jsonDataArray);
 
+    document.getElementById('acu-params').style.visibility='visible';
+    // document.getElementById("streamed-data").innerHTML = jsonData;
+    setAzElValues(jsonDataArray);
+    setStow('El_stowed-indicator',jsonDataArray);
+    console.log("ACU updated.");
 }
 ws.onopen = () => {
     console.log("onopen");

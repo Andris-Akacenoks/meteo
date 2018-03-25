@@ -33,8 +33,84 @@
                 <br><br><br>
                 <h3>ACU data</h3>
                 <div id="streamed-data">
+                </div>
+                <div id="acu-params" style="float:left; display: flex">
+                    <div>
+                        <table>
+                            <tr>
+                                <th id="AzEl_pos" colspan="2"></th>
+                            </tr>
+                            <tr>
+                                <td id="AzEl_pos_1" ></td>
+                                <td id="AzEl_pos_2" ></td>
+                            </tr>
+                        </table>
+                    <br>
+                        <table>
+                            <tr>
+                                <th id="AzEl_vel" colspan="2"></th>
+                            </tr>
+                            <tr>
+                                <td id="AzEl_vel_1" ></td>
+                                <td id="AzEl_vel_2" ></td>
+                            </tr>
+                        </table>
+                    <br>
+                        <table>
+                            <tr>
+                                <th id="AzEl_des" colspan="2"></th>
+                            </tr>
+                            <tr>
+                                <td id="AzEl_des_1" ></td>
+                                <td id="AzEl_des_2" ></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br>
+                    <div>
+                        <table>
+                            <tr>
+                                <th id="AzEl_state" colspan="2"></th>
+                            </tr>
+                            <tr>
+                                <td id="AzEl_state_1" ></td>
+                                <td id="AzEl_state_2" ></td>
+                            </tr>
+                        </table>
+                        <br>
+                        <table>
+                            <tr>
+                                <th id="AzEl_pOffs" colspan="2"></th>
+                            </tr>
+                            <tr>
+                                <td id="AzEl_pOffs_1" ></td>
+                                <td id="AzEl_pOffs_2" ></td>
+                            </tr>
+                        </table>
+                        <br>
+
+                        <table>
+                            <tr>
+                                <th id="AzEl_trOffs" colspan="2"></th>
+                            </tr>
+                            <tr>
+                                <td id="AzEl_trOffs_1" ></td>
+                                <td id="AzEl_trOffs_2" ></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="El_stowed-indicator">El_stowed</div>
+                    <!-- <div id="El_stowPin1-">El_stowPin1</div>
+                    <div id="El_stowPin1-">El_stowPin2</div> -->
+
+
+
+
 
                 </div>
+                <textarea id="error-area" rows="4" cols="50">
+                        This is an error message.
+                    </textarea>
             </section>
             <section class="page-wrappe" id="page-wrappe">
                 <br><br><br>
@@ -44,6 +120,7 @@
                             <h3 class="text-themecolor m-b-0 m-t-0">Meteo station data</h3>
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-12">
                             <div class="card" id=card>
@@ -177,6 +254,7 @@
             });
         </script>
         <script src="js/charts.js"></script>
+        <script src="js/acu.js"></script>
         <script src="js/websocket_client.js"></script>
         <script src="js/scatter.js" charset="utf-8"></script>
 

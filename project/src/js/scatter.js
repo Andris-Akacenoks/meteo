@@ -1,20 +1,20 @@
-function createScatter(dataType){
-    var data = {};
-    $.ajax({
-      url: "http://35.187.40.70/project/src/dbconfig.php?interval=last12h",
-      type: "GET",
-      dataType: "json",
-      success: function (data) {
-        console.log("GET success. Data retrieved and chart ready to be created.");
-        drawScatterPlot(data, dataType);
-        console.log("All charts are created.");
-      },
-      error: function (data) {
-        console.log("GET failed. Failed to retrieve data therefore graphs not created.");
-        console.log(data);
-      }
-    });
-  }
+// function createScatter(dataType){
+//     var data = {};
+//     $.ajax({
+//       url: "http://35.187.40.70/project/src/dbconfig.php",
+//       type: "GET",
+//       dataType: "json",
+//       success: function (data) {
+//         console.log("GET success. Data retrieved and chart ready to be created.");
+//         drawScatterPlot(data, dataType);
+//         console.log("All charts are created.");
+//       },
+//       error: function (data) {
+//         console.log("GET failed. Failed to retrieve data therefore graphs not created.");
+//         console.log(data);
+//       }
+//     });
+//   }
   function drawScatterPlot(data,metricType){
     var measurementTime = [];
     var metric = [];

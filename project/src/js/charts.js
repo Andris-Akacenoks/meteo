@@ -54,6 +54,7 @@ function createCharts() {
       createLineChart("Wind speed count", "chart8", data, "wind_speed_count", "#2F4F4F"); index++;
       createLineChart("Wind direction", "chart4", data, "wind_direction", "#2F4F4F");     index++;
       createLineChart("Solar radiation", "chart10", data, "solar_radiation", "#0000FF");
+      drawScatterPlot(data, "bar_pressure");
 
       index = 0;
       console.log("All charts are created.");

@@ -32,6 +32,17 @@ li {
 
 }
 
+#El_stowed-indicator{
+  width: 150px;
+  height: 60px;
+  background-color: white;
+  border: 1px solid #dddddd;
+  color: white;
+}
+#acu-params{
+  visibility: hidden;
+}
+
 #meteo-data,
 #acu-data,
 #page-wrappe,
@@ -60,6 +71,18 @@ li {
 
 .card-block{
   background: #ffffff;
+}
+table, th, td{
+  border: 1px solid black;
+
+}
+
+#error-area{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  margin-top: 30%;
 }
 
 
@@ -145,10 +168,17 @@ html, body {height: 100%;}
   .page-wrapper {
     margin-left: 240px; }
   .footer {
-    left: 240px; } }
+    left: 240px; }
+  }
+
+@media (max-width: 1150px) {
+  .page-wrapper {
+    margin-left: 240px; }
+  .footer {
+    left: 240px; }
+  }
 
 @media (max-width: 1023px) {
-
   .chart-canvas{
     width:650px;
   }
@@ -162,9 +192,17 @@ html, body {height: 100%;}
     float:none;
     overflow:hidden;
   }
+}
   @media (max-width: 400px) {
    .chart-canvas{
      width:200px;
+   }
+   li a {
+    padding: 0;
+   }
+
+   .row{
+     width: 100%;
    }
    .right-line-chart-container{
      width: 100%;
@@ -181,6 +219,11 @@ html, body {height: 100%;}
    .chart-canvas{
      width:500px;
    }
+
+   .card{
+     width: 100%;
+   }
+
    .right-line-chart-container{
      width: 100%;
      float:none;
@@ -191,3 +234,19 @@ html, body {height: 100%;}
      float:none;
      overflow:hidden;
    }
+  }
+  @media only screen and (min-width:960px){
+    /* styles for browsers larger than 960px; */
+}
+@media only screen and (min-width:1440px){
+    /* styles for browsers larger than 1440px; */
+}
+@media only screen and (min-width:2000px){
+    /* for sumo sized (mac) screens */
+}
+@media only screen and (max-device-width:480px){
+   /* styles for mobile browsers smaller than 480px; (iPhone) */
+}
+@media only screen and (device-width:768px){
+   /* default iPad screens */
+}
