@@ -10,7 +10,11 @@
         <script src="../lib/plugins/jquery/jquery.min.js"></script>
         <script src="js/moment.js"></script>
         <link href="../lib/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <audio id="audio" src="css/sounds/toast.mp3" autostart="false" ></audio>
         <link href="css/style.css" rel="stylesheet">
+        <link href="css/toast.css" rel="stylesheet">
+        <link href="css/acu_loading_spinner.css" rel="stylesheet">
+
         <link rel="shortcut icon" type="image/png" href="css\images\favicon.ico"/>
         <title>Irbene</title>
     </head>
@@ -99,18 +103,25 @@
                             </tr>
                         </table>
                     </div>
+
                     <div id="El_stowed-indicator">El_stowed</div>
                     <!-- <div id="El_stowPin1-">El_stowPin1</div>
                     <div id="El_stowPin1-">El_stowPin2</div> -->
 
+                </div>
+                <div id="snackbar"></div>
 
-
+                <div id="loader" class="loader">
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                    <div class="box"></div>
+                  </div>
+                <div id="error-area">
+                    <p id="acu-error" style="margin: 10px 5% 10px 5%;"></p>
 
 
                 </div>
-                <textarea id="error-area" rows="4" cols="50">
-                        This is an error message.
-                    </textarea>
             </section>
             <section class="page-wrappe" id="page-wrappe">
                 <br><br><br>
@@ -212,16 +223,22 @@
         <script src="js/jquery.slimscroll.js"></script>
         <script src="../lib/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-   
+        <script src="js/scatter.js" charset="utf-8"></script>
+        <script src="js/charts.js"></script>
+
         <script>
+            
+
             $(document).ready(function(){
+
+                //showToast("hello world!");
 
                 var scrollLink = $('.scroll');
                 scrollLink.click(function(e) {
                     e.preventDefault();
                     $('body,html').animate({
                         scrollTop: $(this.hash).offset().top
-                    }, 750 );
+                    }, 500 );
                 });
                 
                 $(window).scroll(function() {
@@ -234,6 +251,7 @@
                         }
                     });
                 });
+
                 
                 $("form#myform").submit(function(event) {
                     event.preventDefault();
@@ -252,11 +270,11 @@
                 });
                 // more functions welcome here
             });
+
+
         </script>
-        <script src="js/charts.js"></script>
         <script src="js/acu.js"></script>
         <script src="js/websocket_client.js"></script>
-        <script src="js/scatter.js" charset="utf-8"></script>
 
     </body>
 </html>

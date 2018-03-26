@@ -36,7 +36,14 @@ ws.onmessage = (event) => {
     var jsonDataArray = $.parseJSON(jsonData);
     // console.log(jsonDataArray);
 
-    document.getElementById('acu-params').style.visibility='visible';
+    if(jsonData.length > 1){
+        document.getElementById('loader').style.visibility='hidden';
+        document.getElementById('acu-params').style.visibility='visible';
+    }
+    else{
+        $("#acu-error").append("<strong> Websocket error: </strong> "+ jsonData + "<br />");
+    }
+
     // document.getElementById("streamed-data").innerHTML = jsonData;
     setAzElValues(jsonDataArray);
     setStow('El_stowed-indicator',jsonDataArray);

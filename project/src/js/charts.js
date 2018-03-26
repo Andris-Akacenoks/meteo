@@ -127,6 +127,24 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
         myCharts[i].data.labels = measurementTime;
         myCharts[i].update();
       }
+
+      if(isWindGustTooBig(wind_gust)){
+        showToast("Wind gust has exceeded <strong>20m/s<strong> in the selected period");
+      }
+      if(isWindSpeedTooBig(wind_speed)){
+        showToast("Wind speed has exceeded <strong>15m/s<strong> in the selected period");
+      }
+      if(isTemperatureOutOfBouds(temperature)){
+        showToast("<strong>Temperature</strong>  has reached boundaries in the selected period!");
+      }
+
+      // console.log("isWindGustTooBig:");
+      // console.log(isWindGustTooBig(wind_gust));
+      // console.log("isWindSpeedTooBig:");
+      // console.log(isWindSpeedTooBig(wind_speed));
+      // console.log("isTemperatureOutOfBouds:");
+      // console.log(isTemperatureOutOfBouds(temperature));
+
       drawScatterPlot(data,"humidity");
       console.log("All charts updated.");
       console.log("Points drawn: "+ pointsDrawn);
@@ -303,7 +321,7 @@ else{
         sensitivity:1,
         mode: 'x',
      }
-    },
+    }
   }
   if(element != "largeChart"){
     myCharts[index] = new Chart(ctx, options);
@@ -313,18 +331,67 @@ else{
   } 
 }
 
+function showToast(message) {
+  var x = document.getElementById("snackbar")
+  x.className = "show";
+  document.getElementById('snackbar').innerHTML = message;
+  document.getElementById("audio").play();
+  setTimeout(function(){
+      x.className = x.className.replace("show", ""); 
+  }, 1000 * 10); // 10 seconds
+}
+
+function isWindSpeedTooBig(windSpeedArray){
+  var maxBound = 15;
+  for(var i=0; i<windSpeedArray.length; i++){
+    if(windSpeedArray[i] >= maxBound){
+      return true;
+    }
+  }
+  return false;
+}
+
+function isWindGustTooBig(windGustArray){
+  var maxBound = 20;
+  for(var i=0; i<windGustArray.length; i++){
+    if(windGustArray[i] >= maxBound){
+      return true;
+    }
+  }
+  return false;
+}
+
+function isTemperatureOutOfBouds(temperatureArray){
+  var maxBound = (-2.30);
+  var minBound = (-2.30);
+  for(var i=0; i<temperatureArray.length; i++){
+    if((temperatureArray[i] >= maxBound) || (temperatureArray[i] <= minBound)){
+      return true;
+    }
+  }
+  return false;
+}
+
+
 $(document).ready(function(){
   var now = moment().subtract(2, 'hour').format();
   var yesterday = moment().subtract(1, 'day').subtract(2, 'hour').format();
   document.getElementById("now").defaultValue = now.substr(0, 16);
   document.getElementById("yesterday").defaultValue = yesterday.substr(0, 16);
   createCharts();
-  createScatter("humidity");
+  //createScatter("humidity");
+
+  // if(isValueExceeded()){
+  //   showToast("Charts created");
+  // }
 
 
   setInterval(function () {
     if(refreshAllowed){ // if refresh is not allowed (custom interval is set) then charts will not be updated (requests not sent)
       updateCharts(interval, true);
+      // if(isValueExceeded()){
+      //   showToast("Charts updated");
+      // }
     }
     else{
       console.log("Refresh not allowed. Press on any preset interval to enable chart refresh.")
