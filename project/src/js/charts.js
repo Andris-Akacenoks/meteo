@@ -36,7 +36,7 @@ function setLatestValues(data){
 function createCharts() {
   var data = {};
   $.ajax({
-    url: "http://35.187.40.70/project/src/dbconfig.php",
+    url: "http://35.195.69.44/project/src/dbconfig.php",
     type: "GET",
     dataType: "json",
     success: function (data) {
@@ -72,7 +72,7 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
   interval = parsedInterval;
   var data = {};
   $.ajax({
-    url: "http://35.187.40.70/project/src/dbconfig.php?interval="+interval,
+    url: "http://35.195.69.44/project/src/dbconfig.php?interval="+interval,
     type: "GET",
     dataType: "json",
     success: function (data) {
