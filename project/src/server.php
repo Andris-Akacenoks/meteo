@@ -42,6 +42,6 @@ $d = mysqli_connect($myServer,$myUser,$myPass,$myDB) or die('Nevaru pievienoties
 		echo("Record added.");
 	
 }
-mysql_close($d);
+//mysql_close($d);
 
 ?>
