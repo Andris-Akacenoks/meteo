@@ -1,78 +1,90 @@
 
-  
-  .loader {
-    position: relative;
-    display: block;
-    width: 11%;
-    height: 18%;
-    margin: 0 auto;
+#container{
+  margin-top: 10%;
+}
+.loader {
+  height: 20px;
+  width: 250px;
 
+  margin: auto;
+}
+.loader--dot {
+  animation-name: loader;
+  animation-timing-function: ease-in-out;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  background-color: black;
+  position: absolute;
+  border: 2px solid white;
+}
+.loader--dot:first-child {
+  background-color: #8cc759;
+  animation-delay: 0.5s;
+}
+.loader--dot:nth-child(2) {
+  background-color: #8c6daf;
+  animation-delay: 0.4s;
+}
+.loader--dot:nth-child(3) {
+  background-color: #ef5d74;
+  animation-delay: 0.3s;
+}
+.loader--dot:nth-child(4) {
+  background-color: #f9a74b;
+  animation-delay: 0.2s;
+}
+.loader--dot:nth-child(5) {
+  background-color: #60beeb;
+  animation-delay: 0.1s;
+}
+.loader--dot:nth-child(6) {
+  background-color: #fbef5a;
+  animation-delay: 0s;
+}
+.loader--text {
+  position: absolute;
+  top: 200%;
+  left: 0;
+  right: 0;
+  width: 4rem;
+  margin: auto;
+}
+.loader--text:after {
+  content: "Loading";
+  font-weight: bold;
+  animation-name: loading-text;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes loader {
+  15% {
+    transform: translateX(0);
   }
-  
-  .box {
-    width: 45%;
-    height: 45%;
-    background: rgba(109, 106, 106, 0.7);
-    opacity: 0;
-    -webkit-filter: blur(1px);
-            filter: blur(1px);
-    -webkit-animation: load 1s linear infinite;
-            animation: load 1s linear infinite;
+  45% {
+    transform: translateX(230px);
   }
-  .box:nth-of-type(1) {
-    position: absolute;
-    top: 2.5%;
-    left: 2.5%;
+  65% {
+    transform: translateX(230px);
   }
-  .box:nth-of-type(2) {
-    position: absolute;
-    top: 2.5%;
-    right: 2.5%;
-    -webkit-animation-delay: -0.25s;
-            animation-delay: -0.25s;
+  95% {
+    transform: translateX(0);
   }
-  .box:nth-of-type(3) {
-    position: absolute;
-    bottom: 2.5%;
-    right: 2.5%;
-    -webkit-animation-delay: -0.5s;
-            animation-delay: -0.5s;
+}
+@keyframes loading-text {
+  0% {
+    content: "Loading";
   }
-  .box:nth-of-type(4) {
-    position: absolute;
-    bottom: 2.5%;
-    left: 2.5%;
-    -webkit-animation-delay: -0.75s;
-            animation-delay: -0.75s;
+  25% {
+    content: "Loading.";
   }
-  
-  @-webkit-keyframes load {
-    0% {
-      opacity: 0;
-    }
-    30% {
-      opacity: 0;
-    }
-    90% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
+  50% {
+    content: "Loading..";
   }
-  
-  @keyframes load {
-    0% {
-      opacity: 0;
-    }
-    30% {
-      opacity: 0;
-    }
-    90% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
+  75% {
+    content: "Loading...";
   }
-  
+}

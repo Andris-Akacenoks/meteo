@@ -37,7 +37,7 @@ ws.onmessage = (event) => {
     // console.log(jsonDataArray);
 
     if(jsonData.length > 1){
-        document.getElementById('loader').style.visibility='hidden';
+        document.getElementById('container').style.visibility='hidden';
         document.getElementById('acu-params').style.visibility='visible';
     }
     else{
