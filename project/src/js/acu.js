@@ -1,20 +1,3 @@
-var data = {
-    "AzEl_pos": [194.99960616230925, 90.02203400433041],  // done
-    "AzEl_vel": [-9.273242259513042e-20, 4.464285714287477e-07],  // done
-    "El_stowed": 1, //done
-    "El_stowPin1": 1, 
-    "El_stowPin2": 1, 
-    "El_stow_posOk": 1, 
-    "trTable_index": [1, 0], 
-    "El_stow_preDn": 0, 
-    "AzEl_state": [0, 0], 
-    "AzEl_pOffs": [0.0, 0.0],  //done
-    "offTable_index": [1, 0], //done
-    "El_stow_preUp": 0, 
-    "AzEl_trOffs": [0.0, 0.0], // done
-    "AzEl_des": [194.99960616230925, 90.02203400433041] // done
- }
-
 function setAzElValues(data){
     document.getElementById("AzEl_pos").innerHTML = "<strong> AzEl_pos </strong>";
     document.getElementById("AzEl_pos_1").innerHTML = data.AzEl_pos[0];
@@ -39,13 +22,81 @@ function setAzElValues(data){
     document.getElementById("AzEl_trOffs").innerHTML = "<strong> AzEl_trOffs </strong>";
     document.getElementById("AzEl_trOffs_1").innerHTML = data.AzEl_trOffs[0];
     document.getElementById("AzEl_trOffs_2").innerHTML = data.AzEl_trOffs[1];
+
+    document.getElementById("trTable_index").innerHTML = "<strong> trTable_index </strong>";
+    document.getElementById("trTable_index_1").innerHTML = data.trTable_index[0];
+    document.getElementById("trTable_index_2").innerHTML = data.trTable_index[1];
+
+    document.getElementById("offTable_index").innerHTML = "<strong> offTable_index </strong>";
+    document.getElementById("offTable_index_1").innerHTML = data.offTable_index[0];
+    document.getElementById("offTable_index_2").innerHTML = data.offTable_index[1];
 }
 
-function setStow(div, data){
+function setElStowed(div, data){
     if(data.El_stowed == 1){
         $('#'+div).css('background-color', 'green');
     }
     else if(data.El_stowed == 0){
+        $('#'+div).css('background-color', 'red ');
+    }
+    else{
+        $('#'+div).css('background-color', 'yellow');
+    }
+}
+
+function setElStowedPin1(div, data){
+    if(data.El_stowPin1 == 1){
+        $('#'+div).css('background-color', 'green');
+    }
+    else if(data.El_stowPin1 == 0){
+        $('#'+div).css('background-color', 'red ');
+    }
+    else{
+        $('#'+div).css('background-color', 'yellow');
+    }
+}
+
+function setElStowedPin2(div, data){
+    if(data.El_stowPin2 == 1){
+        $('#'+div).css('background-color', 'green');
+    }
+    else if(data.El_stowPin2 == 0){
+        $('#'+div).css('background-color', 'red ');
+    }
+    else{
+        $('#'+div).css('background-color', 'yellow');
+    }
+}
+
+function setEl_stow_posOk(div, data){
+    if(data.El_stow_posOk == 1){
+        $('#'+div).css('background-color', 'green');
+    }
+    else if(data.El_stow_posOk == 0){
+        $('#'+div).css('background-color', 'red ');
+    }
+    else{
+        $('#'+div).css('background-color', 'yellow');
+    }
+}
+
+function setEl_stow_preDn(div, data){
+    if(data.El_stow_preDn == 1){
+        $('#'+div).css('background-color', 'green');
+    }
+    else if(data.El_stow_preDn == 0){
+        $('#'+div).css('background-color', 'red ');
+    }
+    else{
+        $('#'+div).css('background-color', 'yellow');
+    }
+}
+
+function setEl_stow_preUp(div, data){
+    if(data.El_stow_preUp == 1){
+        $('#'+div).css('background-color', 'green');
+    }
+    else if(data.El_stow_preUp == 0){
         $('#'+div).css('background-color', 'red ');
     }
     else{

@@ -10,10 +10,13 @@
         <script src="../lib/plugins/jquery/jquery.min.js"></script>
         <script src="js/moment.js"></script>
         <link href="../lib/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <audio id="audio" src="css/sounds/toast.mp3" autostart="false" ></audio>
         <link href="css/style.css" rel="stylesheet">
         <link href="css/toast.css" rel="stylesheet">
         <link href="css/acu_loading_spinner.css" rel="stylesheet">
+        <script src="js/scatter.js" charset="utf-8"></script>
 
         <link rel="shortcut icon" type="image/png" href="css\images\favicon.ico"/>
         <title>Irbene</title>
@@ -38,7 +41,7 @@
                 <h3>ACU data</h3>
                 <div id="streamed-data">
                 </div>
-                <div id="acu-params" style="float:left; display: flex">
+                <div id="acu-params">
                     <div>
                         <table>
                             <tr>
@@ -102,31 +105,55 @@
                                 <td id="AzEl_trOffs_2" ></td>
                             </tr>
                         </table>
+                        <br>
+
+                        <table>
+                            <tr>
+                                <th id="trTable_index" colspan="2"></th>
+                            </tr>
+                            <tr>
+                                <td id="trTable_index_1" ></td>
+                                <td id="trTable_index_2" ></td>
+                            </tr>
+                        </table>
+                        <br>
+
+                        <table>
+                            <tr>
+                                <th id="offTable_index" colspan="2"></th>
+                            </tr>
+                            <tr>
+                                <td id="offTable_index_1" ></td>
+                                <td id="offTable_index_2" ></td>
+                            </tr>
+                        </table>
                     </div>
-
-                    <div id="El_stowed-indicator">El_stowed</div>
-                    <!-- <div id="El_stowPin1-">El_stowPin1</div>
-                    <div id="El_stowPin1-">El_stowPin2</div> -->
-
+                    <div id="acu-indicator-container-1">
+                        <div class="indicator" id="El_stowed-indicator">El_stowed</div>
+                        <div class="indicator" id="El_stowPin1-indicator">El_stowPin1</div>
+                        <div class="indicator" id="El_stowPin2-indicator">El_stowPin2</div>
+                    </div>
+                    <div id="acu-indicator-container-2">
+                        <div class="indicator" id="El_stow_posOk-indicator">El_stow_posOk</div>
+                        <div class="indicator" id="El_stow_preDn-indicator">El_stow_preDn</div>
+                        <div class="indicator" id="El_stow_preUp-indicator">El_stow_preUp</div>
+                    </div>
                 </div>
                 <div id="snackbar"></div>
 
                 <div id="container" class='container'>
                     <div class='loader'>
-                      <div class='loader--dot'></div>
-                      <div class='loader--dot'></div>
-                      <div class='loader--dot'></div>
-                      <div class='loader--dot'></div>
-                      <div class='loader--dot'></div>
-                      <div class='loader--dot'></div>
-                      <div class='loader--text'></div>
+                        <div class='loader--dot'></div>
+                        <div class='loader--dot'></div>
+                        <div class='loader--dot'></div>
+                        <div class='loader--dot'></div>
+                        <div class='loader--dot'></div>
+                        <div class='loader--dot'></div>
+                        <div class='loader--text'></div>
                     </div>
-                  </div>
-                  
+                </div>
                 <div id="error-area">
                     <p id="acu-error" style="margin: 10px 5% 10px 5%;"></p>
-
-
                 </div>
             </section>
             <section class="page-wrappe" id="page-wrappe">
@@ -220,7 +247,20 @@
             <section class="meteo-data" id="meteo-data" style="overflow-y:auto;height:100vh;">
                 <br><br><br>
                 <h3>Meteo scatter data</h3>
-                <br>
+                <div class="form-group">
+                    <select class="form-control" id="sel1" onchange="changeTypeForScatter(this)">
+                        <option value="humidity">Humidity</option>
+                        <option value="temperature">Temperature</option>
+                        <option value="bar_pressure">Atmospheric pressure</option>
+                        <option value="wind_speed">Wind speed</option>
+                        <option value="wind_gust">Wind gust</option>
+                        <option value="wind_speed_count">Wind speed count</option>
+                        <option value="wind_direction">Wind direction</option>
+                        <option value="rain">Rain</option>
+                        <option value="input_voltage">Input voltage</option>
+                        <option value="solar_radiation">Solar radiation</option>
+                    </select>
+                </div>
                 <div class="card-block ct-chart" id="ct-chart" style="padding: 2% 0% 1% 1%; height:70%;">
                  </div>
             </section>
@@ -229,12 +269,9 @@
         <script src="js/jquery.slimscroll.js"></script>
         <script src="../lib/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-        <script src="js/scatter.js" charset="utf-8"></script>
         <script src="js/charts.js"></script>
 
         <script>
-            
-
             $(document).ready(function(){
 
                 //showToast("hello world!");
@@ -257,7 +294,6 @@
                         }
                     });
                 });
-
                 
                 $("form#myform").submit(function(event) {
                     event.preventDefault();

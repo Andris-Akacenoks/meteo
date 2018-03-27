@@ -137,14 +137,7 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
       if(isTemperatureOutOfBouds(temperature)){
         showToast("<strong>Temperature</strong>  has reached boundaries in the selected period!");
       }
-
-      // console.log("isWindGustTooBig:");
-      // console.log(isWindGustTooBig(wind_gust));
-      // console.log("isWindSpeedTooBig:");
-      // console.log(isWindSpeedTooBig(wind_speed));
-      // console.log("isTemperatureOutOfBouds:");
-      // console.log(isTemperatureOutOfBouds(temperature));
-
+      
       drawScatterPlot(data,"humidity");
       console.log("All charts updated.");
       console.log("Points drawn: "+ pointsDrawn);

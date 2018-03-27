@@ -9,6 +9,9 @@
   width: 100%;
 }
 
+.form-group{
+  width: 300px;
+  margin-left:auto;}
 
 li a:hover{
   color: #e6e6e6;
@@ -32,15 +35,27 @@ li {
 
 }
 
-#El_stowed-indicator{
+.indicator{
   width: 150px;
   height: 60px;
   background-color: white;
   border: 1px solid #dddddd;
   color: white;
+  font-weight: bold;
 }
 #acu-params{
   visibility: hidden;
+  float:left; 
+  display: flex;
+}
+
+#acu-indicator-container-1{
+  padding-left: 3%;
+  display: inline-block;
+}
+#acu-indicator-container-2{
+  padding-left: 3%;
+  display: inline-block;
 }
 
 #meteo-data,
@@ -83,7 +98,7 @@ table, th, td{
   margin-right: auto;
   width: 80%;
   height: 20%;
-  margin-top: 20%;
+  margin-top: 25%;
   background: #ffffff;
   border-style: solid;
   border-width: 1px;
@@ -177,11 +192,14 @@ html, body {height: 100%;}
     left: 240px; }
   }
 
-@media (max-width: 1150px) {
+@media (max-width: 1190px) {
   .page-wrapper {
     margin-left: 240px; }
   .footer {
     left: 240px; }
+    #card{
+      height: 250px;
+    }
   }
 
 @media (max-width: 1023px) {
@@ -229,6 +247,9 @@ html, body {height: 100%;}
    .card{
      width: 100%;
    }
+   #card{
+    height: 260px;
+  }
 
    .right-line-chart-container{
      width: 100%;

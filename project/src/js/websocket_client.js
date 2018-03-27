@@ -21,20 +21,16 @@ function Base64Decode(str) {
         if (h4 == 0x40) d[c/4] = String.fromCharCode(o1, o2);
         if (h3 == 0x40) d[c/4] = String.fromCharCode(o1);
     }
-    str = d.join('');  // use Array.join() for better performance than repeated string appends
+    str = d.join('');  
 
     return str;
 }
 
 var ws = new WebSocket("wss://ws2s.feling.io/")
 ws.onmessage = (event) => {
-    //console.log("onmessage: ", event.data);
     var obj = JSON.parse(event.data);
-    //console.log(Base64Decode(obj.data));
     var jsonData = Base64Decode(obj.data);
-    // console.log(jsonData);
     var jsonDataArray = $.parseJSON(jsonData);
-    // console.log(jsonDataArray);
 
     if(jsonData.length > 1){
         document.getElementById('container').style.visibility='hidden';
@@ -46,7 +42,12 @@ ws.onmessage = (event) => {
 
     // document.getElementById("streamed-data").innerHTML = jsonData;
     setAzElValues(jsonDataArray);
-    setStow('El_stowed-indicator',jsonDataArray);
+    setElStowed('El_stowed-indicator',jsonDataArray);
+    setEl_stow_preDn('El_stow_preDn-indicator', jsonDataArray);
+    setEl_stow_preUp('El_stow_preUp-indicator', jsonDataArray);
+    setEl_stow_posOk('El_stow_posOk-indicator', jsonDataArray);
+    setElStowedPin1('El_stowPin1-indicator', jsonDataArray)
+    setElStowedPin2('El_stowPin2-indicator', jsonDataArray)
     console.log("ACU updated.");
 }
 ws.onopen = () => {
