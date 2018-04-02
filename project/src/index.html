@@ -8,14 +8,16 @@
         <meta name="author" content="Andris Akacenoks">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
         <script src="../lib/plugins/jquery/jquery.min.js"></script>
-        <script src="js/moment.js"></script>
+        <script src="js/external_lib/moment.js"></script>
         <link href="../lib/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <audio id="audio" src="css/sounds/toast.mp3" autostart="false" ></audio>
+        <!-- <audio id="audio" src="css/sounds/toast.mp3" autostart="false" ></audio> -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/toast.css" rel="stylesheet">
         <link href="css/acu_loading_spinner.css" rel="stylesheet">
+        <script src="js/base64.js" charset="utf-8"></script>
+        <script src="js/page_elements.js" charset="utf-8"></script>
         <script src="js/scatter.js" charset="utf-8"></script>
 
         <link rel="shortcut icon" type="image/png" href="css\images\favicon.ico"/>
@@ -45,99 +47,80 @@
                     <div>
                         <table>
                             <tr>
-                                <th id="AzEl_pos" colspan="2"></th>
+                                <th id="Az_des_pos_vel" colspan="2"></th>
                             </tr>
                             <tr>
-                                <td id="AzEl_pos_1" ></td>
-                                <td id="AzEl_pos_2" ></td>
+                                <td>Destination</td>
+                                <td id="Az_des" ></td>
+                            </tr>
+                            <tr>
+                                <td>Position</td>
+                                <td id="Az_pos" ></td>
+                            </tr>
+                                <td>Velocity</td>
+                                <td id="Az_vel" ></td>
                             </tr>
                         </table>
                     <br>
-                        <table>
+                    <table>
                             <tr>
-                                <th id="AzEl_vel" colspan="2"></th>
+                                <th id="El_des_pos_vel" colspan="2"></th>
                             </tr>
                             <tr>
-                                <td id="AzEl_vel_1" ></td>
-                                <td id="AzEl_vel_2" ></td>
+                                <td>Destination</td>
+                                <td id="El_des" ></td>
+                            </tr>
+                            <tr>
+                                <td>Position</td>
+                                <td id="El_pos" ></td>
+                            </tr>
+                                <td>Velocity</td>
+                                <td id="El_vel" ></td>
                             </tr>
                         </table>
                     <br>
-                        <table>
-                            <tr>
-                                <th id="AzEl_des" colspan="2"></th>
-                            </tr>
-                            <tr>
-                                <td id="AzEl_des_1" ></td>
-                                <td id="AzEl_des_2" ></td>
-                            </tr>
-                        </table>
                     </div>
                     <br>
                     <div>
-                        <table>
-                            <tr>
-                                <th id="AzEl_state" colspan="2"></th>
-                            </tr>
-                            <tr>
-                                <td id="AzEl_state_1" ></td>
-                                <td id="AzEl_state_2" ></td>
-                            </tr>
-                        </table>
                         <br>
                         <table>
                             <tr>
-                                <th id="AzEl_pOffs" colspan="2"></th>
+                                <th id="AzOffsets" colspan="2"></th>
                             </tr>
                             <tr>
-                                <td id="AzEl_pOffs_1" ></td>
-                                <td id="AzEl_pOffs_2" ></td>
+                                <td id="Az_pOffs" ></td>
+                                <td id="Az_trOffs" ></td>
                             </tr>
                         </table>
                         <br>
 
                         <table>
                             <tr>
-                                <th id="AzEl_trOffs" colspan="2"></th>
+                                <th id="ElOffsets" colspan="2"></th>
                             </tr>
                             <tr>
-                                <td id="AzEl_trOffs_1" ></td>
-                                <td id="AzEl_trOffs_2" ></td>
+                                <td id="El_pOffs" ></td>
+                                <td id="EL_trOffs" ></td>
                             </tr>
                         </table>
                         <br>
-
-                        <table>
-                            <tr>
-                                <th id="trTable_index" colspan="2"></th>
-                            </tr>
-                            <tr>
-                                <td id="trTable_index_1" ></td>
-                                <td id="trTable_index_2" ></td>
-                            </tr>
-                        </table>
-                        <br>
-
-                        <table>
-                            <tr>
-                                <th id="offTable_index" colspan="2"></th>
-                            </tr>
-                            <tr>
-                                <td id="offTable_index_1" ></td>
-                                <td id="offTable_index_2" ></td>
-                            </tr>
-                        </table>
+                        
                     </div>
                     <div id="acu-indicator-container-1">
+                        <div class="indicator" id="Az-state-indicator">Azimuth axis state</div>
                         <div class="indicator" id="El_stowed-indicator">El_stowed</div>
                         <div class="indicator" id="El_stowPin1-indicator">El_stowPin1</div>
                         <div class="indicator" id="El_stowPin2-indicator">El_stowPin2</div>
                     </div>
                     <div id="acu-indicator-container-2">
+                        <div class="indicator" id="El-state-indicator">Elevation axis state</div>
                         <div class="indicator" id="El_stow_posOk-indicator">El_stow_posOk</div>
                         <div class="indicator" id="El_stow_preDn-indicator">El_stow_preDn</div>
                         <div class="indicator" id="El_stow_preUp-indicator">El_stow_preUp</div>
+                        <p id="trTable_index"></p>
+                        <p id="offTable_index"></p>
                     </div>
+                    
                 </div>
                 <div id="snackbar"></div>
 
@@ -195,7 +178,7 @@
                                             <p id="lastWindSpeed"></p>
                                             <p id="lastWindSpeedCount"></p>
                                             <p id="lastWindDirection" ></p>
-                                            <p id="lastPressure"</p>
+                                            <p id="lastPressure"></p>
                                         </div>
                                         <div>
                                             <input id="more-button" value="Show more">
@@ -266,7 +249,7 @@
             </section>
         <script src="../lib/plugins/bootstrap/js/tether.min.js"></script>
         <script src="../lib/plugins/bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/jquery.slimscroll.js"></script>
+        <script src="js/external_lib/jquery.slimscroll.js"></script>
         <script src="../lib/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script src="js/charts.js"></script>

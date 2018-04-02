@@ -58,27 +58,6 @@
 		$todayDateSQL = date('Y-m-d H:i:s', strtotime('+1 hour'));
 	}
 
-
-
-
-// if($_SERVER["REQUEST_METHOD"] == "POST" && $_SERVER["CONTENT_TYPE"] == "application/json") // shis stradaa
-// {
-// 	$data = file_get_contents("php://input");
-// 	$data_json = json_decode($data,true);
-// 	// POST data
-// 	$yesterdayDate = $data_json["yesterday"];
-// 	$todayDate = $data_json["now"];
-
-//     $yesterdayDateSQL = date ("Y-m-d H:i:s", strtotime($yesterdayDate));
-// 	$todayDateSQL = date ("Y-m-d H:i:s", strtotime($todayDate));
-// }
-// else{
-// 	$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-2 hour'));
-// 	$todayDateSQL = date('Y-m-d H:i:s', strtotime('-1 hour'));
-
-// }
-
-
 	$query = "SELECT * FROM
 	( SELECT @row := @row +1
 	AS rownum, meteo.*

@@ -29,7 +29,7 @@ function setLatestValues(data){
   document.getElementById("lastWindGust").innerHTML = "<strong>Wind gust: </strong>" + data[data.length-1].wind_gust + " " + getMetric("wind_gust");
   document.getElementById("lastSolarRadiation").innerHTML = "<strong>Solar radiation: </strong>" + data[data.length-1].solar_radiation + " " + getMetric("solar_radiation");
   document.getElementById("lastWindSpeedCount").innerHTML = "<strong>Wind speed count: </strong>" + data[data.length-1].wind_speed_count; // need metric here
-  document.getElementById("lastWindDirection").innerHTML = "<strong>Wind direction: </strong>" + data[data.length-1].wind_direction;
+  document.getElementById("lastWindDirection").innerHTML = "<strong>Wind direction: </strong>" + data[data.length-1].wind_direction;      // looks similair to solar radiation
 
 }
 
@@ -178,51 +178,51 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
   var measurementTime = [];
   var metric = [];
 
-if(data.length > 0){
-  for (var i in data) {
-    measurementTime.push((data[i].measurement_time).substr(0, 16)); // nonemtas sekundes
-    switch (metricType) {
-      case "temperature":
-        if((data[i].temperature < 35) && (data[i].temperature > (-35))){
-          metric.push(data[i].temperature);
-        }
-        break;
-      case "bar_pressure":
-        metric.push(data[i].bar_pressure);
-        break;
-      case "humidity":
-        metric.push(data[i].humidity);
-        break;
-      case "rain":
-        metric.push(data[i].rain);
-        break;
-      case "wind_speed":
-        metric.push(data[i].wind_speed);
-        break;
-      case "wind_gust":
-        metric.push(data[i].wind_gust);
-        break;
-      case "wind_speed_count":
-        metric.push(data[i].wind_speed_count);
-        break;
-      case "wind_direction":
-        metric.push(data[i].wind_direction);
-        break;
-      case "solar_radiation":
-        metric.push(data[i].solar_radiation);
-        break;
-      case "input_voltage":
-        metric.push(data[i].input_voltage);
-        break;
-      default:
-          console.log("ERROR in reateCharts() - Following graph does have any values: " + metricType);
+  if(data.length > 0){
+    for (var i in data) {
+      measurementTime.push((data[i].measurement_time).substr(0, 16)); // nonemtas sekundes
+      switch (metricType) {
+        case "temperature":
+          if((data[i].temperature < 35) && (data[i].temperature > (-35))){
+            metric.push(data[i].temperature);
+          }
+          break;
+        case "bar_pressure":
+          metric.push(data[i].bar_pressure);
+          break;
+        case "humidity":
+          metric.push(data[i].humidity);
+          break;
+        case "rain":
+          metric.push(data[i].rain);
+          break;
+        case "wind_speed":
+          metric.push(data[i].wind_speed);
+          break;
+        case "wind_gust":
+          metric.push(data[i].wind_gust);
+          break;
+        case "wind_speed_count":
+          metric.push(data[i].wind_speed_count);
+          break;
+        case "wind_direction":
+          metric.push(data[i].wind_direction);
+          break;
+        case "solar_radiation":
+          metric.push(data[i].solar_radiation);
+          break;
+        case "input_voltage":
+          metric.push(data[i].input_voltage);
+          break;
+        default:
+            console.log("ERROR in reateCharts() - Following graph does have any values: " + metricType);
+      }
     }
   }
-}
-else{
-  measurementTime.push(moment().subtract(2, 'hour').format());
-  metric.push(-1);
-}
+  else{
+    measurementTime.push(moment().subtract(2, 'hour').format());
+    metric.push(-1);
+  }
   var canvas = document.getElementById(element);
   var ctx = canvas.getContext('2d');
 
@@ -324,16 +324,6 @@ else{
   } 
 }
 
-function showToast(message) {
-  var x = document.getElementById("snackbar")
-  x.className = "show";
-  document.getElementById('snackbar').innerHTML = message;
-  document.getElementById("audio").play();
-  setTimeout(function(){
-      x.className = x.className.replace("show", ""); 
-  }, 1000 * 10); // 10 seconds
-}
-
 function isWindSpeedTooBig(windSpeedArray){
   var maxBound = 15;
   for(var i=0; i<windSpeedArray.length; i++){
@@ -372,19 +362,10 @@ $(document).ready(function(){
   document.getElementById("now").defaultValue = now.substr(0, 16);
   document.getElementById("yesterday").defaultValue = yesterday.substr(0, 16);
   createCharts();
-  //createScatter("humidity");
-
-  // if(isValueExceeded()){
-  //   showToast("Charts created");
-  // }
-
 
   setInterval(function () {
-    if(refreshAllowed){ // if refresh is not allowed (custom interval is set) then charts will not be updated (requests not sent)
+    if(refreshAllowed){
       updateCharts(interval, true);
-      // if(isValueExceeded()){
-      //   showToast("Charts updated");
-      // }
     }
     else{
       console.log("Refresh not allowed. Press on any preset interval to enable chart refresh.")

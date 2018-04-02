@@ -5,7 +5,7 @@ $myServer = '127.0.0.1';
 $myDB = 'irbene';
 $myUser = 'oper';
 $myPass = 'parole';
-$d = mysqli_connect($myServer,$myUser,$myPass,$myDB) or die('Nevaru pievienoties datubāzei');
+$d = mysqli_connect($myServer,$myUser,$myPass,$myDB) or die('Could not connect to database');
 	$chs=mysqli_set_charset($d, "utf8");
 
 	if($_SERVER["REQUEST_METHOD"] == "POST" && $_SERVER["CONTENT_TYPE"] == "application/json")

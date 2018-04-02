@@ -41,12 +41,18 @@ li {
   background-color: white;
   border: 1px solid #dddddd;
   color: white;
-  font-weight: bold;
+  font-size: 16px; 
+  font-weight: 400;
+  border-radius: 30px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 55px;
 }
 #acu-params{
   visibility: hidden;
   float:left; 
   display: flex;
+  width: 100%;
 }
 
 #acu-indicator-container-1{
@@ -66,10 +72,12 @@ li {
   padding: 0 5% 0 5%;
 }
 #meteo-data{
+  overflow: hidden;
   background: #F8FCFF;
 }
 
 #acu-data{
+  overflow-x: hidden;
   background: #FFFEFA;
 }
 .page-wrappe{
