@@ -41,89 +41,89 @@
             <section class="acu-data" id="acu-data" style="overflow-y:auto;height:100vh;">
                 <br><br><br>
                 <h3>ACU data</h3>
-                <div id="streamed-data">
-                </div>
-                <div id="acu-params">
-                    <div>
-                        <table>
-                            <tr>
-                                <th id="Az_des_pos_vel" colspan="2"></th>
-                            </tr>
-                            <tr>
-                                <td>Destination</td>
-                                <td id="Az_des" ></td>
-                            </tr>
-                            <tr>
-                                <td>Position</td>
-                                <td id="Az_pos" ></td>
-                            </tr>
-                                <td>Velocity</td>
-                                <td id="Az_vel" ></td>
-                            </tr>
-                        </table>
-                    <br>
-                    <table>
-                            <tr>
-                                <th id="El_des_pos_vel" colspan="2"></th>
-                            </tr>
-                            <tr>
-                                <td>Destination</td>
-                                <td id="El_des" ></td>
-                            </tr>
-                            <tr>
-                                <td>Position</td>
-                                <td id="El_pos" ></td>
-                            </tr>
-                                <td>Velocity</td>
-                                <td id="El_vel" ></td>
-                            </tr>
-                        </table>
-                    <br>
-                    </div>
-                    <br>
-                    <div>
+                <div class="container">
+                    <div id="acu-params">
+                        <div id="acu-indicator-container-1">
+                            <div class="indicator" id="Az-state-indicator">Azimuth axis state<p id="Az-state-status"></p> </div>
+                            <div class="indicator" id="El_stowed-indicator">El axis stowed status<p id="El-stowed-status"></p></div>
+                            <div class="indicator" id="El_stowPin1-indicator">El axis Pin1 status<p id="El-stowPin1-status"></p></div>
+                            <div class="indicator" id="El_stow_preDn-indicator">Switch up status<p id="El_stow_preDn-status"></p></div>
+                            <div class="indicator" id="El-state-indicator">Elevation axis state<p id="El-state-status"></p></div>
+                            <div class="indicator" id="El_stow_posOk-indicator">Stow position status<p id="El_stow_posOk-status"></p></div>
+                            <div class="indicator" id="El_stowPin2-indicator">El axis Pin2 status<p id="El-stowPin2-status"></p></div>
+                            <div class="indicator" id="El_stow_preUp-indicator">Switch down status<p id="El_stow_preUp-status"></p></div>
+                        </div>
+                        <div id="acu-indicator-container-2">
+                            <div class="az-container">
+                                <table>
+                                    <tr>
+                                        <th style="text-align:center;" id="Az_des_pos_vel" colspan="2"></th>
+                                    </tr>
+                                    <tr>
+                                        <td>Destination</td>
+                                        <td class="acu-numbers" id="Az_des" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Position</td>
+                                        <td class="acu-numbers" id="Az_pos" ></td>
+                                    </tr>
+                                        <td>Velocity</td>
+                                        <td class="acu-numbers" id="Az_vel" ></td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <table>
+                                    <tr>
+                                        <th class="acu-offset-numbers"  id="AzOffsets" colspan="2"></th>
+                                    </tr>
+                                    <tr>
+                                        <td id="Az_pOffs" ></td>
+                                        <td id="Az_trOffs" ></td>
+                                    </tr>
+                                </table>
+                                <br>
+                            </div>
                         <br>
-                        <table>
-                            <tr>
-                                <th id="AzOffsets" colspan="2"></th>
-                            </tr>
-                            <tr>
-                                <td id="Az_pOffs" ></td>
-                                <td id="Az_trOffs" ></td>
-                            </tr>
-                        </table>
-                        <br>
-
-                        <table>
-                            <tr>
-                                <th id="ElOffsets" colspan="2"></th>
-                            </tr>
-                            <tr>
-                                <td id="El_pOffs" ></td>
-                                <td id="EL_trOffs" ></td>
-                            </tr>
-                        </table>
-                        <br>
-                        
+                        </div>
+                        <div id="acu-indicator-container-3">
+                            <div class="el-container">
+                                <table>
+                                    <tr>
+                                        <th style="text-align:center;" id="El_des_pos_vel" colspan="2"></th>
+                                    </tr>
+                                    <tr>
+                                        <td>Destination</td>
+                                        <td class="acu-numbers" id="El_des" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Position</td>
+                                        <td class="acu-numbers" id="El_pos" ></td>
+                                    </tr>
+                                        <td>Velocity</td>
+                                        <td class="acu-numbers" id="El_vel" ></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div>
+                                <br>
+                                <table>
+                                    <tr>
+                                        <th class="acu-offset-numbers" id="ElOffsets" colspan="2"></th>
+                                    </tr>
+                                    <tr>
+                                        <td id="El_pOffs" ></td>
+                                        <td id="EL_trOffs" ></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="acu-indicator-container-4">
+                            <p id="trTable_index"></p>
+                            <p id="offTable_index"></p>
+                        </div>
                     </div>
-                    <div id="acu-indicator-container-1">
-                        <div class="indicator" id="Az-state-indicator">Azimuth axis state</div>
-                        <div class="indicator" id="El_stowed-indicator">El_stowed</div>
-                        <div class="indicator" id="El_stowPin1-indicator">El_stowPin1</div>
-                        <div class="indicator" id="El_stowPin2-indicator">El_stowPin2</div>
-                    </div>
-                    <div id="acu-indicator-container-2">
-                        <div class="indicator" id="El-state-indicator">Elevation axis state</div>
-                        <div class="indicator" id="El_stow_posOk-indicator">El_stow_posOk</div>
-                        <div class="indicator" id="El_stow_preDn-indicator">El_stow_preDn</div>
-                        <div class="indicator" id="El_stow_preUp-indicator">El_stow_preUp</div>
-                        <p id="trTable_index"></p>
-                        <p id="offTable_index"></p>
-                    </div>
-                    
                 </div>
                 <div id="snackbar"></div>
-
                 <div id="container" class='container'>
                     <div class='loader'>
                         <div class='loader--dot'></div>
@@ -147,7 +147,6 @@
                             <h3 class="text-themecolor m-b-0 m-t-0">Meteo station data</h3>
                         </div>
                     </div>
-                    
                     <div class="row">
                         <div class="col-12">
                             <div class="card" id=card>

@@ -1,15 +1,32 @@
 
 var jsonDataArray = {};
-/*
-
-    Local enviroment below: static JSON data
 
 
-    document.getElementById('container').style.visibility='hidden';
-    document.getElementById('acu-params').style.visibility='visible';
-    setAzElValues(jsonDataArray);
-    console.log("ACU updated.");
-*/
+// local start
+
+//static ACU sample data for testing
+// var tempoData = {
+//     "AzEl_pos":         [194.99942176043947, 90.0313989371059], 
+//     "AzEl_vel":         [-6.547118988327969e-07, -1.2763370928963063e-07], 
+//     "El_stowed":        1, 
+//     "El_stowPin1":      1, 
+//     "El_stowPin2":      1, 
+//     "El_stow_posOk":    1, 
+//     "trTable_index":    [1, 0], 
+//     "El_stow_preDn":    0, 
+//     "AzEl_state":       [0, 0], 
+//     "AzEl_pOffs":       [0.0, 0.0], 
+//     "offTable_index":   [1, 0], 
+//     "El_stow_preUp":    0, 
+//     "AzEl_trOffs":      [0.0, 0.0], 
+//     "AzEl_des":         [194.99942176043947, 90.0313989371059]
+// }
+
+// document.getElementById('container').style.visibility='hidden';
+// document.getElementById('acu-params').style.visibility='visible';
+// setAzElValues(tempoData);
+// console.log("ACU updated.");
+// local end
 
 
 var ws = new WebSocket("wss://ws2s.feling.io/")
@@ -28,9 +45,10 @@ ws.onmessage = (event) => {
         $("#acu-error").append("<strong> Websocket error: </strong> "+ jsonData + "<br />");
     }
 
-    // document.getElementById("streamed-data").innerHTML = jsonData;
+    //public start
     setAzElValues(jsonDataArray);
     console.log("ACU updated.");
+    //public end
 }
 ws.onopen = () => {
     console.log("onopen");
