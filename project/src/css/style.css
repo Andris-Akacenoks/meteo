@@ -92,11 +92,11 @@ li {
 }
 
 .acu-numbers{
-  width: 105px;
+  width: 120px;
   text-align: center;
 }
 .acu-offset-numbers{
-  width: 193px;
+  width: 208px;
   text-align: center;
 }
 
@@ -121,7 +121,7 @@ li {
   background: #F8F8F8;
 }
 
-.container{
+#indicator-container{
   margin-top:2%;
   float:left;
   width:720px;

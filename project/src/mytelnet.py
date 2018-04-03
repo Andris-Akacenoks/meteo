@@ -48,7 +48,9 @@ while 1:
             }
 
             url = 'http://35.195.69.44/project/src/server.php'
-            headers = {'content-type': 'application/json'}
+            headers = {
+                'content-type': 'application/json'
+            }
 
             r = requests.post(url, data=json.dumps(data_json),  headers=headers)
             first_line = ""

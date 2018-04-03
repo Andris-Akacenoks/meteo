@@ -2,12 +2,12 @@ function setAzElValues(data){
     document.getElementById("Az_des_pos_vel").innerHTML = "<strong> RT32 Azimuth </strong>";
     document.getElementById("Az_des").innerHTML = data.AzEl_des[0].toFixed(5) + "&deg;";
     document.getElementById("Az_pos").innerHTML = data.AzEl_pos[0].toFixed(5) + "&deg;";
-    document.getElementById("Az_vel").innerHTML = data.AzEl_vel[0].toExponential(4) + "&deg;";
+    document.getElementById("Az_vel").innerHTML = data.AzEl_vel[0].toExponential(4) + "&deg;/s";
 
     document.getElementById("El_des_pos_vel").innerHTML = "<strong> RT32 Elevation </strong>";
     document.getElementById("El_des").innerHTML = data.AzEl_des[1].toFixed(5) + "&deg;";
     document.getElementById("El_pos").innerHTML = data.AzEl_pos[1].toFixed(5) + "&deg;";
-    document.getElementById("El_vel").innerHTML = data.AzEl_vel[1].toExponential(4) + "&deg;";
+    document.getElementById("El_vel").innerHTML = data.AzEl_vel[1].toExponential(4) + "&deg;/s";
     
     document.getElementById("AzOffsets").innerHTML = "<strong> Azimuth offsets </strong>";
     document.getElementById("Az_pOffs").innerHTML = data.AzEl_pOffs[0] + "&deg;";
@@ -30,7 +30,7 @@ function setAzElValues(data){
     setElStowedPin2('El_stowPin2-indicator', data)
     setAzAxisState(data);
     setElAxisState(data);
-
+    setCurrentScheduledObs(data)
 }
 
 function setElStowed(div, data){
@@ -172,3 +172,31 @@ function setElAxisState(data){
     }
 }
 
+function setCurrentScheduledObs(data){
+
+    var currentDate = new Date();
+    var utcDate = currentDate.toUTCString();
+
+    if(data.schedule[2] == 0){
+        if(data.schedule[0] == data.schedule[1]){
+            // noverojums notiek (iekrasot zallaa)
+            document.getElementById("acu-error").innerHTML =utcDate+"<strong> Research is in progress: "+data.schedule[1]+" </strong><br />";
+        }
+        else if((data.schedule[0] == "" || data.schedule[0] == "station") && (data.schedule[1] == "")){
+            document.getElementById("acu-error").innerHTML =utcDate+"<strong> No research is in scheduled now. </strong><br />";
+        }
+        else if(data.schedule[0] == ""){
+            document.getElementById("acu-error").innerHTML =utcDate+"<strong> Field system is not running. </strong><br />";
+        }
+        else if(data.schedule[0] == "station"){
+            document.getElementById("acu-error").innerHTML = utcDate+"<strong> Field system is running, no experiment is scheduled right now. </strong><br />";
+        }
+    }
+    else if(data.schedule[2] == -1){
+        document.getElementById("acu-error").innerHTML =utcDate+"<strong> Scheduled operation is not set up in FS. </strong><br />";
+        // noverojums nav palaists FS (iekrasot sarkana)
+    }
+    else if(data.schedule[2] == -2){
+        document.getElementById("acu-error").innerHTML =utcDate+"<strong> Operation is scheduled but telescope is not moving. </strong><br />";
+    }
+}
