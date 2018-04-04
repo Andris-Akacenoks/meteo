@@ -173,7 +173,6 @@ function setElAxisState(data){
 }
 
 function setCurrentScheduledObs(data){
-
     var currentDate = new Date();
     var utcDate = currentDate.toUTCString();
 
@@ -183,7 +182,7 @@ function setCurrentScheduledObs(data){
             document.getElementById("acu-error").innerHTML =utcDate+"<strong> Research is in progress: "+data.schedule[1]+" </strong><br />";
         }
         else if((data.schedule[0] == "" || data.schedule[0] == "station") && (data.schedule[1] == "")){
-            document.getElementById("acu-error").innerHTML =utcDate+"<strong> No research is in scheduled now. </strong><br />";
+            document.getElementById("acu-error").innerHTML =utcDate+"<strong> No research is scheduled now. </strong><br />";
         }
         else if(data.schedule[0] == ""){
             document.getElementById("acu-error").innerHTML =utcDate+"<strong> Field system is not running. </strong><br />";
@@ -191,12 +190,15 @@ function setCurrentScheduledObs(data){
         else if(data.schedule[0] == "station"){
             document.getElementById("acu-error").innerHTML = utcDate+"<strong> Field system is running, no experiment is scheduled right now. </strong><br />";
         }
+        else{
+            document.getElementById("acu-error").innerHTML = utcDate+"<strong> Experiment running: "+data.schedule[0]+"  </strong><br />";
+        }
     }
     else if(data.schedule[2] == -1){
-        document.getElementById("acu-error").innerHTML =utcDate+"<strong> Scheduled operation is not set up in FS. </strong><br />";
+        document.getElementById("acu-error").innerHTML =utcDate+"<strong> Scheduled operation is not set up in FS. Operation: "+data.schedule[1]+" </strong><br />";
         // noverojums nav palaists FS (iekrasot sarkana)
     }
     else if(data.schedule[2] == -2){
-        document.getElementById("acu-error").innerHTML =utcDate+"<strong> Operation is scheduled but telescope is not moving. </strong><br />";
+        document.getElementById("acu-error").innerHTML =utcDate+"<strong> Operation is scheduled but telescope is not moving. Operation: "+data.schedule[1  ]+" </strong><br />";
     }
 }

@@ -1,4 +1,6 @@
-
+body{
+  font-size: 14px;
+}
 
 th, td {
   padding: 3px;
@@ -44,10 +46,13 @@ li {
   list-style-type: none;
 
 }
+.indicator p{
+  font-size:15px;
 
+}
 .indicator{
-  width: 150px;
-  height: 60px;
+  width: 140px;
+  height: 53px;
   background-color: white;
   border: 0px solid #dddddd;
   margin: 0 5px 5px 0;
@@ -66,6 +71,10 @@ li {
   float:left; 
   /* display: flex; */
   width: 100%;
+}
+
+.indicator-title{
+  font-size: 14px;
 }
 
 #acu-indicator-container-1{
@@ -143,13 +152,13 @@ table, th, td{
 
 }
 
+
 #error-area{
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 80%;
   height: 20%;
-  margin-top: 25%;
   background: #ffffff;
   border-style: solid;
   border-width: 1px;

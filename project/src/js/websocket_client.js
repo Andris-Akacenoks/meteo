@@ -44,7 +44,7 @@ ws.onmessage = (event) => {
 
     //public start
     setAzElValues(jsonDataArray);
-    console.log("ACU updated.");
+    //console.log("ACU updated.");
     //public end
 }
 ws.onopen = () => {
