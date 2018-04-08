@@ -18,8 +18,8 @@ function setAzElValues(data){
     document.getElementById("EL_trOffs").innerHTML = data.AzEl_trOffs[1] + "&deg;";
 
     // reversed
-    document.getElementById("trTable_index").innerHTML ="<strong>Track table index: </strong>" +data.trTable_index[1] + " (out of "+data.trTable_index[0] + ")";
-    document.getElementById("offTable_index").innerHTML ="<strong>Offset table index: </strong>" +data.offTable_index[1] + " (out of "+data.offTable_index[0] + ")";
+    document.getElementById("trTable_index").innerHTML ="<strong>Track table index: </strong>" +data.trTable_index[0] + " (out of "+data.trTable_index[1] + ")";
+    document.getElementById("offTable_index").innerHTML ="<strong>Offset table index: </strong>" +data.offTable_index[0] + " (out of "+data.offTable_index[1] + ")";
 
 
     setElStowed('El_stowed-indicator',data);
@@ -179,7 +179,7 @@ function setCurrentScheduledObs(data){
     if(data.schedule[2] == 0){
         if(data.schedule[0] == data.schedule[1]){
             // noverojums notiek (iekrasot zallaa)
-            document.getElementById("acu-error").innerHTML =utcDate+"<strong> Research is in progress: "+data.schedule[1]+" </strong><br />";
+            document.getElementById("acu-error").innerHTML =utcDate+"<strong> Research is in progress: "+data.schedule[0]+" </strong><br />";
         }
         else if((data.schedule[0] == "" || data.schedule[0] == "station") && (data.schedule[1] == "")){
             document.getElementById("acu-error").innerHTML =utcDate+"<strong> No research is scheduled now. </strong><br />";

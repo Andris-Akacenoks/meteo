@@ -67,7 +67,7 @@ function drawScatterPlot(data,metricType){
   }
 
   var trace1 = {
-      x: measurementTime,
+    x: measurementTime,
       y: metric,
       mode: 'markers+text',
       type: 'scatter',
@@ -76,24 +76,32 @@ function drawScatterPlot(data,metricType){
         family:  'Raleway, sans-serif'
       },
       marker: { size: 12 }
-    };
+  };
+
+  var trace2 = {
+    x: measurementTime,
+    y: metric,
+    mode: 'lines+markers',
+    type: 'scatter',
+    line: {shape: 'spline'},
+  };
     
-    var data = [ trace1 ];
+  var data = [ trace1 , trace2];
     
-    var layout = {
-      legend: {
-        y: 0.5,
-        yref: 'paper',
-        font: {
-          family: 'Arial, sans-serif',
-          size: 20,
-          color: 'grey',
-        }
-      },
-      title: metricType
-    };
+  var layout = {
+    legend: {
+      y: 0.5,
+      yref: 'paper',
+      font: {
+        family: 'Arial, sans-serif',
+        size: 20,
+        color: 'grey',
+      }
+    },
+    title: metricType
+  };
     
-    return Plotly.newPlot('ct-chart', data, layout);
+  return Plotly.newPlot('ct-chart', data, layout);
 }
 
 function changeTypeForScatter(selectedType) {

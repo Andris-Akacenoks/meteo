@@ -25,44 +25,50 @@ var jsonDataArray = {};
 // console.log("ACU updated.");
 // local end
 
+function createWebSocket(){
+    var ws = new WebSocket("wss://ws2s.feling.io/")
+    console.log("WebSocket created. SHoul now Work!")
+    ws.onmessage = (event) => {
+        var obj = JSON.parse(event.data);
+        var jsonData = Base64Decode(obj.data);
+        //console.log(jsonData);
+        var jsonDataArray = $.parseJSON(jsonData);
+        
 
-var ws = new WebSocket("wss://ws2s.feling.io/")
-ws.onmessage = (event) => {
-    var obj = JSON.parse(event.data);
-    var jsonData = Base64Decode(obj.data);
-    //console.log(jsonData);
-    var jsonDataArray = $.parseJSON(jsonData);
-    
-
-    if(jsonData.length > 1){
-        document.getElementById('container').style.visibility='hidden';
-        document.getElementById('acu-params').style.visibility='visible';
-    }
-    else{
-        $("#acu-error").append("<strong> Websocket error: </strong> "+ jsonData + "<br />");
-    }
-
-    //public start
-    setAzElValues(jsonDataArray);
-    //console.log("ACU updated.");
-    //public end
-}
-ws.onopen = () => {
-    console.log("onopen");
-    ws.send(JSON.stringify(
-        {
-            command: "connect",
-            host: "193.105.155.166",
-            port: 8888
+        if(jsonData.length > 1){
+            document.getElementById('container').style.visibility='hidden';
+            document.getElementById('acu-params').style.visibility='visible';
         }
-    ))
-    ws.send(JSON.stringify(
-        {
-            command: "send",
-            data: "GET / HTTP/1.1\r\nHost: feling.io\r\nConnection: close\r\n\r\n"
+        else{
+            $("#acu-error").append("<strong> Websocket error: </strong> "+ jsonData + "<br />");
         }
-    ))
+
+        //public start
+        setAzElValues(jsonDataArray);
+        //console.log("ACU updated.");
+        //public end
+    }
+    ws.onopen = () => {
+        console.log("onopen");
+        ws.send(JSON.stringify(
+            {
+                command: "connect",
+                host: "193.105.155.166",
+                port: 8888
+            }
+        ))
+        ws.send(JSON.stringify(
+            {
+                command: "send",
+                data: "GET / HTTP/1.1\r\nHost: feling.io\r\nConnection: close\r\n\r\n"
+            }
+        ))
+    }
+    ws.onclose = () => {
+        console.log("onclose - NEW SOCKET WILL TRY TO CONNECT");
+
+        createWebSocket();
+    }
 }
-ws.onclose = () => {
-    console.log("onclose");
-}
+
+createWebSocket();
