@@ -177,7 +177,7 @@ function setCurrentScheduledObs(data){
     var utcDate = currentDate.toUTCString();
 
     if(data.schedule[2] == 0){
-        if(data.schedule[0] == data.schedule[1]){
+        if((data.schedule[0] == data.schedule[1]) && data.schedule[0] != ""){
             // noverojums notiek (iekrasot zallaa)
             document.getElementById("acu-error").innerHTML =utcDate+"<strong> Research is in progress: "+data.schedule[0]+" </strong><br />";
         }
