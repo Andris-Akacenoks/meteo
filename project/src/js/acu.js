@@ -1,13 +1,16 @@
+var currentDate = new Date();
+var utcDate = currentDate.toUTCString();
+
 function setAzElValues(data){
     document.getElementById("Az_des_pos_vel").innerHTML = "<strong> RT32 Azimuth </strong>";
-    document.getElementById("Az_des").innerHTML = data.AzEl_des[0].toFixed(5) + "&deg;";
-    document.getElementById("Az_pos").innerHTML = data.AzEl_pos[0].toFixed(5) + "&deg;";
-    document.getElementById("Az_vel").innerHTML = data.AzEl_vel[0].toExponential(4) + "&deg;/s";
+    document.getElementById("Az_des").innerHTML = data.AzEl_des[0].toFixed(6) + "&deg;";
+    document.getElementById("Az_pos").innerHTML = data.AzEl_pos[0].toFixed(6) + "&deg;";
+    document.getElementById("Az_vel").innerHTML = data.AzEl_vel[0].toFixed(6) + "&deg;/s";
 
     document.getElementById("El_des_pos_vel").innerHTML = "<strong> RT32 Elevation </strong>";
-    document.getElementById("El_des").innerHTML = data.AzEl_des[1].toFixed(5) + "&deg;";
-    document.getElementById("El_pos").innerHTML = data.AzEl_pos[1].toFixed(5) + "&deg;";
-    document.getElementById("El_vel").innerHTML = data.AzEl_vel[1].toExponential(4) + "&deg;/s";
+    document.getElementById("El_des").innerHTML = data.AzEl_des[1].toFixed(6) + "&deg;";
+    document.getElementById("El_pos").innerHTML = data.AzEl_pos[1].toFixed(6) + "&deg;";
+    document.getElementById("El_vel").innerHTML = data.AzEl_vel[1].toFixed(6) + "&deg;/s";
     
     document.getElementById("AzOffsets").innerHTML = "<strong> Azimuth offsets </strong>";
     document.getElementById("Az_pOffs").innerHTML = data.AzEl_pOffs[0] + "&deg;";
@@ -31,6 +34,8 @@ function setAzElValues(data){
     setAzAxisState(data);
     setElAxisState(data);
     setCurrentScheduledObs(data)
+    displayFsError(data);
+    displayAcuError(data);
 }
 
 function setElStowed(div, data){
@@ -98,11 +103,11 @@ function setEl_stow_posOk(div, data){
 
 function setEl_stow_preDn(div, data){
     if(data.El_stow_preDn == 1){
-        $('#'+div).css('background-color', 'green');
+        $('#'+div).css('background-color', 'red');
         document.getElementById("El_stow_preDn-status").innerHTML = " <p><strong>Reached</strong></p>";
     }
     else if(data.El_stow_preDn == 0){
-        $('#'+div).css('background-color', 'red ');
+        $('#'+div).css('background-color', 'green ');
         document.getElementById("El_stow_preDn-status").innerHTML = " <p><strong>Not reached</strong></p>";
     }
     else{
@@ -113,11 +118,11 @@ function setEl_stow_preDn(div, data){
 
 function setEl_stow_preUp(div, data){
     if(data.El_stow_preUp == 1){
-        $('#'+div).css('background-color', 'green');
+        $('#'+div).css('background-color', 'red');
         document.getElementById("El_stow_preUp-status").innerHTML = " <p><strong>Reached</strong></p>";
     }
     else if(data.El_stow_preUp == 0){
-        $('#'+div).css('background-color', 'red ');
+        $('#'+div).css('background-color', 'green ');
         document.getElementById("El_stow_preUp-status").innerHTML = " <p><strong>Not reached</strong></p>";
     }
     else{
@@ -173,16 +178,14 @@ function setElAxisState(data){
 }
 
 function setCurrentScheduledObs(data){
-    var currentDate = new Date();
-    var utcDate = currentDate.toUTCString();
 
     if(data.schedule[2] == 0){
         if((data.schedule[0] == data.schedule[1]) && data.schedule[0] != ""){
             // noverojums notiek (iekrasot zallaa)
-            document.getElementById("acu-error").innerHTML =utcDate+"<strong> Research is in progress: "+data.schedule[0]+" </strong><br />";
+            document.getElementById("acu-error").innerHTML =utcDate+"<strong> Experiment is in progress: "+data.schedule[0]+" </strong><br />";
         }
         else if((data.schedule[0] == "" || data.schedule[0] == "station") && (data.schedule[1] == "")){
-            document.getElementById("acu-error").innerHTML =utcDate+"<strong> No research is scheduled now. </strong><br />";
+            document.getElementById("acu-error").innerHTML =utcDate+"<strong> No experiment is scheduled now. </strong><br />";
         }
         else if(data.schedule[0] == ""){
             document.getElementById("acu-error").innerHTML =utcDate+"<strong> Field system is not running. </strong><br />";
@@ -195,10 +198,26 @@ function setCurrentScheduledObs(data){
         }
     }
     else if(data.schedule[2] == -1){
-        document.getElementById("acu-error").innerHTML =utcDate+"<strong> Scheduled operation is not set up in FS. Operation: "+data.schedule[1]+" </strong><br />";
+        document.getElementById("acu-error").innerHTML =utcDate+"<strong> Scheduled experiment is not set up in FS. Experiment: "+data.schedule[1]+" </strong><br />";
         // noverojums nav palaists FS (iekrasot sarkana)
     }
     else if(data.schedule[2] == -2){
-        document.getElementById("acu-error").innerHTML =utcDate+"<strong> Operation is scheduled but telescope is not moving. Operation: "+data.schedule[1  ]+" </strong><br />";
+        document.getElementById("acu-error").innerHTML =utcDate+"<strong> Experiment is scheduled but telescope is not moving. Experiment: "+data.schedule[1]+" </strong><br />";
     }
+}
+
+
+function displayFsError(data){
+    document.getElementById("acu-error").innerHTML += "<br/>"+utcDate+"<strong> "+data.fsErr+" </strong>";
+
+}
+
+function displayAcuError(data){
+    var old = JSON.stringify(data.acuErr);
+    var newArray = JSON.parse(old); //convert back to array
+
+    document.getElementById("acu-error").innerHTML += "<br/>"+utcDate+"<strong> ACU errors:<br />"+newArray+"</strong><br />";
+    var output = document.getElementById("acu-error").innerHTML.replace(/,/g, ""); 
+    output2 = output.replace(/\n/g, "<br />"); 
+    document.getElementById("acu-error").innerHTML = output2;
 }
