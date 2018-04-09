@@ -9,10 +9,10 @@ function changeInterval(value, isRefreshAllowed){
   refreshAllowed = isRefreshAllowed;
   updateCharts(interval, refreshAllowed);
   if(isRefreshAllowed){
-    console.log("refreshAllowed set to TRUE");
+    printLog("refreshAllowed set to TRUE");
   }
   else{
-    console.log("refreshAllowed set to FALSE");
+    printLog("refreshAllowed set to FALSE");
   }
 }
 
@@ -40,8 +40,7 @@ function createCharts() {
     type: "GET",
     dataType: "json",
     success: function (data) {
-      console.log("GET success. Data retrieved and charts ready to be created.");
-      //console.log(data);
+      printLog("GET success. Data retrieved and charts ready to be created.");
       setLatestValues(data);
 
       createLineChart("Atmospheric pressure", 'chart1', data, "bar_pressure", "#0000FF"); index++;
@@ -57,11 +56,11 @@ function createCharts() {
       drawScatterPlot(data, "bar_pressure");
 
       index = 0;
-      console.log("All charts are created.");
+      printLog("All charts are created.");
     },
     error: function (data) {
-      console.log("GET failed. Failed to retrieve data therefore graphs not created.");
-      console.log(data);
+      printLog("GET failed. Failed to retrieve data therefore graphs not created.");
+      printLog(data);
     }
   });
 }
@@ -76,8 +75,9 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
     type: "GET",
     dataType: "json",
     success: function (data) {
-      console.log("GET success. Data retrieved charts will be updated.");
-      //console.log(data);
+      printLog("GET success. Data retrieved charts will be updated.");
+
+      //printLog(data);
       setLatestValues(data);
 
       var measurementTime = [];
@@ -93,7 +93,7 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
       var solar_radiation = [];
 
       var pointsDrawn = 0;
-      console.log("Point count: " + data.length);
+      printLog("Point count: " + data.length);
 
       for (var j=0; j<data.length; j++) {
         measurementTime.push((data[j].measurement_time).substr(0, 16)); // nonemtas sekundes
@@ -139,12 +139,12 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
       }
       
       drawScatterPlot(data,"humidity");
-      console.log("All charts updated.");
-      console.log("Points drawn: "+ pointsDrawn);
+      printLog("All charts updated.");
+      printLog("Points drawn: "+ pointsDrawn);
     },
     error: function (data) {
-      console.log("GET failed. Failed to retrieve data therefore graphs not shown.");
-      console.log(data);
+      printLog("GET failed. Failed to retrieve data therefore graphs not shown.");
+      printLog(data);
     }
   });
 }
@@ -215,7 +215,7 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
           metric.push(data[i].input_voltage);
           break;
         default:
-            console.log("ERROR in reateCharts() - Following graph does have any values: " + metricType);
+          printLog("ERROR in reateCharts() - Following graph does have any values: " + metricType);
       }
     }
   }
@@ -368,7 +368,7 @@ $(document).ready(function(){
       updateCharts(interval, true);
     }
     else{
-      console.log("Refresh not allowed. Press on any preset interval to enable chart refresh.")
+      printLog("Refresh not allowed. Press on any preset interval to enable chart refresh.")
     }
   }, 1000 * 60); //60 seconds
 });

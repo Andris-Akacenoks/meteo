@@ -5,13 +5,13 @@
 //       type: "GET",
 //       dataType: "json",
 //       success: function (data) {
-//         console.log("GET success. Data retrieved and chart ready to be created.");
+//         printLog("GET success. Data retrieved and chart ready to be created.");
 //         drawScatterPlot(data, dataType);
-//         console.log("All charts are created.");
+//         printLog("All charts are created.");
 //       },
 //       error: function (data) {
-//         console.log("GET failed. Failed to retrieve data therefore graphs not created.");
-//         console.log(data);
+//         printLog("GET failed. Failed to retrieve data therefore graphs not created.");
+//         printLog(data);
 //       }
 //     });
 //   }
@@ -57,7 +57,7 @@ function drawScatterPlot(data,metricType){
           metric.push(data[i].input_voltage);
           break;
         default:
-            console.log("ERROR in reateCharts() - Following graph does have any values: " + metricType);
+          printLog("ERROR in reateCharts() - Following graph does have any values: " + metricType);
       }
     }
   }
@@ -112,13 +112,13 @@ function changeTypeForScatter(selectedType) {
     type: "GET",
     dataType: "json",
     success: function (data) {
-      console.log("GET success. Data retrieved scatter will be updated. Maybe.");  
+      printLog("GET success. Data retrieved scatter will be updated. Maybe.");  
       drawScatterPlot(data, value);
-      console.log("Scatter updated.");
+      printLog("Scatter updated.");
     },
     error: function (data) {
-      console.log("GET failed. Failed to retrieve data therefore scatter not updated.");
-      console.log(data);
+      printLog("GET failed. Failed to retrieve data therefore scatter not updated.");
+      printLog(data);
     }
   });
 }

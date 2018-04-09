@@ -22,16 +22,16 @@ var jsonDataArray = {};
 // document.getElementById('container').style.visibility='hidden';
 // document.getElementById('acu-params').style.visibility='visible';
 // setAzElValues(tempoData);
-// console.log("ACU updated.");
+// printLog("ACU updated.");
 // local end
 
 function createWebSocket(){
     var ws = new WebSocket("wss://ws2s.feling.io/")
-    console.log("WebSocket created. SHoul now Work!")
+    printLog("WebSocket connected.")
     ws.onmessage = (event) => {
         var obj = JSON.parse(event.data);
         var jsonData = Base64Decode(obj.data);
-        //console.log(jsonData);
+        //printLog(jsonData);
         var jsonDataArray = $.parseJSON(jsonData);
         
 
@@ -45,11 +45,11 @@ function createWebSocket(){
 
         //public start
         setAzElValues(jsonDataArray);
-        //console.log("ACU updated.");
+        //printLoglog("ACU updated.");
         //public end
     }
     ws.onopen = () => {
-        console.log("onopen");
+        printLog("onOpen called");
         ws.send(JSON.stringify(
             {
                 command: "connect",
@@ -65,8 +65,8 @@ function createWebSocket(){
         ))
     }
     ws.onclose = () => {
-        console.log("onclose - NEW SOCKET WILL TRY TO CONNECT");
-
+        printLog("OnClose called");
+        printLog("Seocket will reconnect shortly");
         createWebSocket();
     }
 }
