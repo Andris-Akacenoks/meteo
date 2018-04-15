@@ -15,6 +15,7 @@
         <!-- <audio id="audio" src="css/sounds/toast.mp3" autostart="false" ></audio> -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/toast.css" rel="stylesheet">
+        <link href="css/toggle.css" rel="stylesheet">
         <link href="css/acu_loading_spinner.css" rel="stylesheet">
         <script src="js/base64.js" charset="utf-8"></script>
         <script src="js/page_elements.js" charset="utf-8"></script>
@@ -40,7 +41,13 @@
             </header>
             <section class="acu-data" id="acu-data" style="overflow-y:auto;height:100vh;">
                 <br><br><br>
-                <h3>ACU data</h3>
+                <h3 id="acu-heading">ACU data</h3>
+                <button class="telescope-button" id="rt16button" style="opacity:0.5;">RT16</button>
+                <button class="telescope-button" id="rt32button">RT32</button>
+                <div style="position: absolute; left: 50%;">
+                    <div id='popup'></div>
+                </div>
+
                 <div id="indicator-container" class="container">
                     <div id="acu-params">
                         <div id="acu-indicator-container-1">
@@ -135,9 +142,11 @@
                         <div class='loader--text'></div>
                     </div>
                 </div>
+                <div id='mask'></div>
                 <div id="error-area">
+                    <button id="show-error">Open in window</button>  
                     <p id="acu-error" style="margin: 10px 5% 10px 5%;"></p>
-                </div>  
+                </div>
             </section>
             <section class="page-wrappe" id="page-wrappe">
                 <br><br><br>
@@ -255,6 +264,27 @@
 
         <script>
             $(document).ready(function(){
+
+                showRT16();
+
+                $('#rt16button').click(function(){
+                    showRT16();
+                });
+                $('#rt32button').click(function(){
+                    showRT32();
+                });
+
+                $("#show-error").click(function() {
+                    showPopup();
+                });
+
+                $("#mask").click(function() {
+                    $(this).hide();
+                    $("#popup").hide();
+                    $("#error-area").show();
+                    $("#show-error").show();
+                });
+
 
                 var scrollLink = $('.scroll');
                 scrollLink.click(function(e) {

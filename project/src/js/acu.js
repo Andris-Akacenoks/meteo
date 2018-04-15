@@ -3,7 +3,13 @@ var utcDate = currentDate.toUTCString();
 
 function setAzElValues(data){
     document.getElementById("Az_des_pos_vel").innerHTML = "<strong> RT32 Azimuth </strong>";
-    document.getElementById("Az_des").innerHTML = data.AzEl_des[0].toFixed(6) + "&deg;";
+    try{
+        document.getElementById("Az_des").innerHTML = data.AzEl_des[0].toFixed(6) + "&deg;";
+    }
+    catch(error){
+        printLog(error);
+
+    }    
     document.getElementById("Az_pos").innerHTML = data.AzEl_pos[0].toFixed(6) + "&deg;";
     document.getElementById("Az_vel").innerHTML = data.AzEl_vel[0].toFixed(6) + "&deg;/s";
 
@@ -216,8 +222,12 @@ function displayAcuError(data){
     var old = JSON.stringify(data.acuErr);
     var newArray = JSON.parse(old); //convert back to array
 
-    document.getElementById("acu-error").innerHTML += "<br/>"+utcDate+"<strong> ACU errors:<br />"+newArray+"</strong><br />";
-    var output = document.getElementById("acu-error").innerHTML.replace(/,/g, ""); 
-    output2 = output.replace(/\n/g, "<br />"); 
-    document.getElementById("acu-error").innerHTML = output2;
+    // If there are errors in ACU then display the errors
+    if(newArray.length > 1){
+        document.getElementById("acu-error").innerHTML += "<br/>"+utcDate+"<strong> ACU errors:<br />"+newArray+"</strong><br />";
+        var output = document.getElementById("acu-error").innerHTML.replace(/,/g, ""); 
+        output2 = output.replace(/\n/g, "<br />"); 
+        document.getElementById("acu-error").innerHTML = output2;
+    }
+
 }

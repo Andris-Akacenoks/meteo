@@ -8,15 +8,25 @@ function showToast(message) {
     setTimeout(function(){
         x.className = x.className.replace("show", ""); 
     }, 1000 * 10); // 10 seconds
-  }
+}
 
-  function getTimestamp(){
+function getTimestamp(){
     var time = new Date();
     return  ("0" + time.getHours()).slice(-2)   + ":" + 
             ("0" + time.getMinutes()).slice(-2) + ":" + 
             ("0" + time.getSeconds()).slice(-2);
-  }
+}
 
-  function printLog(message){
-      console.log(getTimestamp() + ": " + message);
-  }
+function printLog(message){
+    console.log(getTimestamp() + ": " + message);
+}
+
+function showPopup() {
+    $("#mask").fadeTo(300, 0.7);
+    $("#popup").show();
+    var popupContent = document.getElementById('popup');
+    var errorcontent = document.getElementById('error-area');
+    popupContent.innerHTML = errorcontent.innerHTML;
+    $("#error-area").hide();
+    $("#show-error").hide();
+}
