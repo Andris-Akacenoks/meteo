@@ -66,10 +66,9 @@ li {
   float:left;
   /* line-height: 55px; */
 }
-
+#show-status,
 #show-error{
   float:right;
-  background-color: #1E90FF; /* red */
   border: none;
   color: white;
   padding: 0.2% 0.5%;
@@ -77,7 +76,17 @@ li {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-radius: 2px;}
+  border-radius: 2px;
+}
+
+#show-status{
+  background-color: orange; /* red */
+
+}
+#show-error{
+  background-color: #1E90FF; /* red */
+}
+
 
 #acu-params{
   visibility: hidden;

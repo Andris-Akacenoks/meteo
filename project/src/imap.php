@@ -1,51 +1,54 @@
 
 <?php /* connect to gmail */
-    $hostname = '{imap.gmail.com:993/imap/ssl}INBOX';
-    $username = 'irbene.bot@gmail.com';
-    $password = 'Irbene.Imap';
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+	header('Access-Control-Allow-Origin: *');
+    header('Content-Type: application/json');
+    
+
 
     /* try to connect */
-    $inbox = imap_open($hostname,$username,$password) or die('Cannot connect to Gmail: ' . imap_last_error());
+    if(isset($_GET)){
+        $hostname = '{imap.gmail.com:993/imap/ssl}INBOX';
+        $username = 'irbene.bot@gmail.com';
+        $password = 'Irbene.Imap';
 
-    /* grab emails */
-    $emails = imap_search($inbox,'ALL');
+            $inbox = imap_open($hostname,$username,$password) or die('Cannot connect to Gmail: ' . imap_last_error());
 
-    /* if emails are returned, cycle through each... */
-    if($emails) {
+            $emails = imap_search($inbox,'ALL');
+    
+            if($emails) {
+    
+                /* for every email... */
+                // foreach($emails as $email_number) {
+                    
+                //     /* get information specific to this email */
+                //     $overview = imap_fetch_overview($inbox,$email_number,0);
+                //     $message = imap_fetchbody($inbox,$email_number,2);
+                    
+                //     echo "=======EMAIL CONTENTS=======";
+                //     echo "<br />Subject: ";
+                //     echo $overview[0]->subject;
+                    
+                //     echo "<br />From: ";
+                //     echo $overview[0]->from;
+                    
+                //     echo "<br />Date: ";
+                //     echo $overview[0]->date;
+                    
+                //     echo "<br />Message: ";
+                //     echo $message;
+    
+                // }
+                $message = imap_fetchbody($inbox,$emails[sizeof($emails)-1],2);
+                print json_encode(strip_tags($message));
+                
+            } 
         
-        /* begin output var */
-        $output = '';
-        
-        /* put the newest emails on top */
-        rsort($emails);
-        
-        /* for every email... */
-        foreach($emails as $email_number) {
-            
-            /* get information specific to this email */
-            $overview = imap_fetch_overview($inbox,$email_number,0);
-            $message = imap_fetchbody($inbox,$email_number,2);
-            
-            /* output the email header information */
-            echo "=======EMAIL CONTENTS=======";
-            echo "<br />Subject: ";
-            echo $overview[0]->subject;
-            
-            echo "<br />From: ";
-            echo $overview[0]->from;
-            
-            echo "<br />Date: ";
-            echo $overview[0]->date;
-            
-            echo "<br />Message: ";
-            echo $message;
-
-        }
-        
-    } 
+        imap_close($inbox);
+    }
 
     /* close the connection */
-    imap_close($inbox);
-
     // surce: https://davidwalsh.name/gmail-php-imap
 ?>

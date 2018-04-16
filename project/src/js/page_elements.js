@@ -29,4 +29,14 @@ function showPopup() {
     popupContent.innerHTML = errorcontent.innerHTML;
     $("#error-area").hide();
     $("#show-error").hide();
+    $("#show-status").hide();
+
+}
+
+function showPopupWithStatus() {
+    $("#mask").fadeTo(300, 0.7);
+    $("#popup").show();
+    getLatestStatus();
+    $("#error-area").hide();
+    $("#show-error").hide();
 }

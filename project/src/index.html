@@ -20,6 +20,8 @@
         <script src="js/base64.js" charset="utf-8"></script>
         <script src="js/page_elements.js" charset="utf-8"></script>
         <script src="js/scatter.js" charset="utf-8"></script>
+        <script src="js/imap.js" charset="utf-8"></script>
+
 
         <link rel="shortcut icon" type="image/png" href="css\images\favicon.ico"/>
         <title>Irbene</title>
@@ -145,6 +147,7 @@
                 <div id='mask'></div>
                 <div id="error-area">
                     <button id="show-error">Open in window</button>  
+                    <button id="show-status">Custom status</button>  
                     <p id="acu-error" style="margin: 10px 5% 10px 5%;"></p>
                 </div>
             </section>
@@ -265,7 +268,9 @@
         <script>
             $(document).ready(function(){
 
-                showRT16();
+                showRT32();
+                getLatestStatus();
+
 
                 $('#rt16button').click(function(){
                     showRT16();
@@ -277,12 +282,17 @@
                 $("#show-error").click(function() {
                     showPopup();
                 });
+                $("#show-status").click(function() {
+                    showPopupWithStatus();
+                });
+                
 
                 $("#mask").click(function() {
                     $(this).hide();
                     $("#popup").hide();
                     $("#error-area").show();
                     $("#show-error").show();
+                    $("#show-status").show();
                 });
 
 

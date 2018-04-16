@@ -3,13 +3,7 @@ var utcDate = currentDate.toUTCString();
 
 function setAzElValues(data){
     document.getElementById("Az_des_pos_vel").innerHTML = "<strong> RT32 Azimuth </strong>";
-    try{
-        document.getElementById("Az_des").innerHTML = data.AzEl_des[0].toFixed(6) + "&deg;";
-    }
-    catch(error){
-        printLog(error);
-
-    }    
+    document.getElementById("Az_des").innerHTML = data.AzEl_des[0].toFixed(6) + "&deg;";
     document.getElementById("Az_pos").innerHTML = data.AzEl_pos[0].toFixed(6) + "&deg;";
     document.getElementById("Az_vel").innerHTML = data.AzEl_vel[0].toFixed(6) + "&deg;/s";
 
@@ -39,7 +33,8 @@ function setAzElValues(data){
     setElStowedPin2('El_stowPin2-indicator', data)
     setAzAxisState(data);
     setElAxisState(data);
-    setCurrentScheduledObs(data)
+    setCurrentScheduledObs(data);
+    
     displayFsError(data);
     displayAcuError(data);
 }

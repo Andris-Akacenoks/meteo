@@ -22,16 +22,18 @@ function createWebSocket(desiredPort){
         var jsonData = {};
         try {
             jsonData = Base64Decode(obj.data);
-            var jsonDataArray = $.parseJSON(jsonData);
         }
         catch(error) {
             printLog(error);
         }
+        var jsonDataArray = $.parseJSON(jsonData);
+
 
         if(jsonData.length > 1){
             document.getElementById('container').style.visibility='hidden';
             document.getElementById('acu-params').style.visibility='visible';
             document.getElementById('show-error').style.visibility='visible';
+            document.getElementById('show-status').style.visibility='visible';
             setAzElValues(jsonDataArray);
         }
     }
@@ -60,21 +62,25 @@ function createWebSocket(desiredPort){
 
 function showRT16(){
     $('#acu-heading').text('ACU data for RT16');
+    document.getElementById("acu-error").innerHTML = "";
     document.getElementById('rt16button').style.opacity=1;
     document.getElementById('rt32button').style.opacity=0.5;
     closeWebSockets();
     document.getElementById('container').style.visibility='visible';
     document.getElementById('acu-params').style.visibility='hidden';
     document.getElementById('show-error').style.visibility='hidden';
+    document.getElementById('show-status').style.visibility='hidden';
     createWebSocket(8889);
 }
 function showRT32(){
     $('#acu-heading').text('ACU data for RT32');
+    document.getElementById("acu-error").innerHTML = "";
     document.getElementById('rt32button').style.opacity=1;
     document.getElementById('rt16button').style.opacity=0.5;
     closeWebSockets();
     document.getElementById('container').style.visibility='visible';
     document.getElementById('acu-params').style.visibility='hidden';
     document.getElementById('show-error').style.visibility='hidden';
+    document.getElementById('show-status').style.visibility='hidden';
     createWebSocket(8888);
 }
