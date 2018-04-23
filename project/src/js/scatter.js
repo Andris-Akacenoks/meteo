@@ -1,20 +1,3 @@
-// function createScatter(dataType){
-//     var data = {};
-//     $.ajax({
-//       url: "http://35.187.40.70/project/src/dbconfig.php",
-//       type: "GET",
-//       dataType: "json",
-//       success: function (data) {
-//         printLog("GET success. Data retrieved and chart ready to be created.");
-//         drawScatterPlot(data, dataType);
-//         printLog("All charts are created.");
-//       },
-//       error: function (data) {
-//         printLog("GET failed. Failed to retrieve data therefore graphs not created.");
-//         printLog(data);
-//       }
-//     });
-//   }
 
 function drawScatterPlot(data,metricType){
   var measurementTime = [];
@@ -86,7 +69,8 @@ function drawScatterPlot(data,metricType){
     line: {shape: 'spline'},
   };
     
-  var data = [ trace1 , trace2];
+  var data = [ trace1 ];
+  //var data = [ trace1 , trace2];
     
   var layout = {
     legend: {

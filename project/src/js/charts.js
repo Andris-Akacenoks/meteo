@@ -21,7 +21,13 @@ function setLatestValues(data){
   document.getElementById("lastTime").innerHTML = "<strong>Last measurement taken on: </strong>" + data[data.length-1].measurement_time;
   document.getElementById("lastRain").innerHTML = "<strong>Rain: </strong>" + data[data.length-1].rain+ " " + getMetric("rain");
   document.getElementById("lastTemperature").innerHTML = "<strong>Temperature: </strong>" + data[data.length-1].temperature+ " " + getMetric("temperature");
-  document.getElementById("lastHumidity").innerHTML = "<strong>Humidity: </strong>" + data[data.length-1].humidity+ " " + getMetric("humidity");
+
+  if((data[data.length-1].humidity >= 0) && (data[data.length-1].humidity <= 100)){
+    document.getElementById("lastHumidity").innerHTML = "<strong>Humidity: </strong>" + data[data.length-1].humidity+ " " + getMetric("humidity");
+  }
+  else{
+    document.getElementById("lastHumidity").innerHTML = "<strong>Humidity: </strong>" + 0 + " " + getMetric("humidity");
+  }
   document.getElementById("lastPressure").innerHTML = "<strong>Atmospheric pressure: </strong>" + data[data.length-1].bar_pressure + " " + getMetric("bar_pressure");
   document.getElementById("lastVoltage").innerHTML = "<strong>Voltage: </strong>" + data[data.length-1].input_voltage + " " + getMetric("input_voltage");
 
@@ -41,7 +47,9 @@ function createCharts() {
     dataType: "json",
     success: function (data) {
       printLog("GET success. Data retrieved and charts ready to be created.");
-      setLatestValues(data);
+      if(data.length > 3){
+        setLatestValues(data);
+      }
 
       createLineChart("Atmospheric pressure", 'chart1', data, "bar_pressure", "#0000FF"); index++;
       createLineChart("Temperature", "chart2", data, "temperature", "#CC0000");           index++;
@@ -53,7 +61,7 @@ function createCharts() {
       createLineChart("Wind speed count", "chart8", data, "wind_speed_count", "#2F4F4F"); index++;
       createLineChart("Wind direction", "chart4", data, "wind_direction", "#2F4F4F");     index++;
       createLineChart("Solar radiation", "chart10", data, "solar_radiation", "#0000FF");
-      drawScatterPlot(data, "bar_pressure");
+      drawScatterPlot(data, "humidity");
 
       index = 0;
       printLog("All charts are created.");
@@ -98,10 +106,15 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
       for (var j=0; j<data.length; j++) {
         measurementTime.push((data[j].measurement_time).substr(0, 16)); // nonemtas sekundes
         bar_pressure.push(data[j].bar_pressure);
+
         if((data[j].temperature < 35) && (data[j].temperature > (35 * -1))){ // -35 < temperature < 35
           temperature.push(data[j].temperature);
         }
-        humidity.push(data[j].humidity);
+
+        if((data[j].humidity >= 0) && (data[j].humidity <= 100)){
+          humidity.push(data[j].humidity);
+        }
+        
         rain.push(data[j].rain);
         input_voltage.push(data[j].input_voltage);
         wind_speed.push(data[j].wind_speed);
@@ -191,7 +204,9 @@ function createLineChart(mainLabel, element, data, metricType, lineColor) {
           metric.push(data[i].bar_pressure);
           break;
         case "humidity":
-          metric.push(data[i].humidity);
+          if((data[i].humidity >= 0) && (data[i].humidity <= 100)){
+            metric.push(data[i].humidity);
+          }
           break;
         case "rain":
           metric.push(data[i].rain);
@@ -361,11 +376,11 @@ $(document).ready(function(){
   var yesterday = moment().subtract(1, 'day').subtract(2, 'hour').format();
   document.getElementById("now").defaultValue = now.substr(0, 16);
   document.getElementById("yesterday").defaultValue = yesterday.substr(0, 16);
-  //createCharts();
+  createCharts();
 
   setInterval(function () {
     if(refreshAllowed){
-      //updateCharts(interval, true);
+      updateCharts(interval, true);
     }
     else{
       printLog("Refresh not allowed. Press on any preset interval to enable chart refresh.")
