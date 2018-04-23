@@ -13,12 +13,12 @@ function setAzElValues(data){
     document.getElementById("El_vel").innerHTML = data.AzEl_vel[1].toFixed(6) + "&deg;/s";
     
     document.getElementById("AzOffsets").innerHTML = "<strong> Azimuth offsets </strong>";
-    document.getElementById("Az_pOffs").innerHTML = data.AzEl_pOffs[0] + "&deg;";
-    document.getElementById("Az_trOffs").innerHTML = data.AzEl_trOffs[0] + "&deg;";
+    document.getElementById("Az_pOffs").innerHTML = data.AzEl_pOffs[0].toFixed(6) + "&deg;";
+    document.getElementById("Az_trOffs").innerHTML = data.AzEl_trOffs[0].toFixed(6) + "&deg;";
 
     document.getElementById("ElOffsets").innerHTML = "<strong> Elevation offsets </strong>";
-    document.getElementById("El_pOffs").innerHTML = data.AzEl_pOffs[1] + "&deg;";
-    document.getElementById("EL_trOffs").innerHTML = data.AzEl_trOffs[1] + "&deg;";
+    document.getElementById("El_pOffs").innerHTML = data.AzEl_pOffs[1].toFixed(6) + "&deg;";
+    document.getElementById("EL_trOffs").innerHTML = data.AzEl_trOffs[1].toFixed(6) + "&deg;";
 
     // reversed
     document.getElementById("trTable_index").innerHTML ="<strong>Track table index: </strong>" +data.trTable_index[0] + " (out of "+data.trTable_index[1] + ")";

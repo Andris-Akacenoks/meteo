@@ -27,7 +27,6 @@ function showPopup() {
     var errorcontent = document.getElementById('acu-error');
     document.getElementById('popup').innerHTML = errorcontent.innerHTML;
     $("#error-area").hide();
-    $("#show-error").hide();
     $("#show-status").hide();
 
 }
@@ -37,5 +36,11 @@ function showPopupWithStatus() {
     $("#popup").show();
     getLatestStatus();
     $("#error-area").hide();
-    $("#show-error").hide();
+}
+
+function closeErrorPopup(){
+    $("#mask").hide();
+    $("#popup").hide();
+    $("#error-area").show();
+    $("#show-status").show();
 }

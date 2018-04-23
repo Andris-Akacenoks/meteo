@@ -30,7 +30,6 @@ function createWebSocket(desiredTelescope){
                 if(obj.AzEl_pos.length > 1){
                     document.getElementById('container').style.visibility='hidden';
                     document.getElementById('acu-params').style.visibility='visible';
-                    document.getElementById('show-error').style.visibility='visible';
                     document.getElementById('show-status').style.visibility='visible';
                     setAzElValues(obj);
                 }
@@ -52,7 +51,6 @@ function showRT16(){
     }
     document.getElementById('container').style.visibility='visible';
     document.getElementById('acu-params').style.visibility='hidden';
-    document.getElementById('show-error').style.visibility='hidden';
     document.getElementById('show-status').style.visibility='hidden';
     createWebSocket(1);
 }
@@ -67,7 +65,6 @@ function showRT32(){
     }    
     document.getElementById('container').style.visibility='visible';
     document.getElementById('acu-params').style.visibility='hidden';
-    document.getElementById('show-error').style.visibility='hidden';
     document.getElementById('show-status').style.visibility='hidden';
     createWebSocket(2);
 }

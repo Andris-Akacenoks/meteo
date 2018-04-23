@@ -185,7 +185,6 @@ table, th, td{
   border-style: solid;
   border-width: 1px;
   overflow: auto;
-  cursor: pointer;
   position: relative;
   z-index: 2;
 
