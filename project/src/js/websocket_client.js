@@ -6,7 +6,7 @@ function closeWebSockets() {
     eventSources.forEach(function(s) {
         s.close();
     });
-    console.log("All event sources closed.");
+    console.log("Event stream is closed.");
 }
 
 function createWebSocket(desiredTelescope){
@@ -18,6 +18,7 @@ function createWebSocket(desiredTelescope){
         else{
             var source = new EventSource("rt16_data_stream.php");
         }
+        console.log("Event stream is opened.");
         eventSources.push(source);
         source.onmessage = function(event) {
             if (!event){
@@ -45,7 +46,10 @@ function showRT16(){
     document.getElementById("acu-error").innerHTML = "";
     document.getElementById('rt16button').style.opacity=1;
     document.getElementById('rt32button').style.opacity=0.5;
-    closeWebSockets();
+    
+    if(eventSources.length > 0){
+        closeWebSockets();
+    }
     document.getElementById('container').style.visibility='visible';
     document.getElementById('acu-params').style.visibility='hidden';
     document.getElementById('show-error').style.visibility='hidden';
@@ -57,7 +61,10 @@ function showRT32(){
     document.getElementById("acu-error").innerHTML = "";
     document.getElementById('rt32button').style.opacity=1;
     document.getElementById('rt16button').style.opacity=0.5;
-    closeWebSockets();
+    
+    if(eventSources.length > 0){
+        closeWebSockets();
+    }    
     document.getElementById('container').style.visibility='visible';
     document.getElementById('acu-params').style.visibility='hidden';
     document.getElementById('show-error').style.visibility='hidden';

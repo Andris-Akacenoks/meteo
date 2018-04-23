@@ -24,9 +24,8 @@ function printLog(message){
 function showPopup() {
     $("#mask").fadeTo(300, 0.7);
     $("#popup").show();
-    var popupContent = document.getElementById('popup');
-    var errorcontent = document.getElementById('error-area');
-    popupContent.innerHTML = errorcontent.innerHTML;
+    var errorcontent = document.getElementById('acu-error');
+    document.getElementById('popup').innerHTML = errorcontent.innerHTML;
     $("#error-area").hide();
     $("#show-error").hide();
     $("#show-status").hide();
