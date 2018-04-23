@@ -37,6 +37,9 @@
                         <a class="nav-link scroll" href="#page-wrappe">Meteo station data</a>
                     </li>
                     <li class="nav-item active">
+                        <a class="nav-link scroll" href="#rxc-data">RXC data</a>
+                    </li>
+                    <li class="nav-item active">
                         <a class="nav-link scroll" href="#acu-data">ACU data</a>
                     </li>
                 </ul>
@@ -44,7 +47,6 @@
             <section class="acu-data" id="acu-data" style="overflow-y:auto;height:100vh;">
                 <br><br><br>
                 <h3 id="acu-heading">ACU data</h3>
-                <div id="result"></div>
 
                 <button class="telescope-button" id="rt16button" style="opacity:0.5;">RT16</button>
                 <button class="telescope-button" id="rt32button">RT32</button>
@@ -151,6 +153,15 @@
                     <button id="show-status">Custom status</button>  
                     <p id="acu-error" style="margin: 10px 5% 10px 5%;"></p>
                 </div>
+            </section>
+            <section class="acu-data" id="rxc-data" style="overflow-y:auto;height:100vh;">
+                <br><br><br>
+                <h3 id="rxc-heading">RXC receiver data</h3>
+
+                <div id="rxc-result">
+
+                </div>
+
             </section>
             <section class="page-wrappe" id="page-wrappe">
                 <br><br><br>

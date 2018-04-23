@@ -32,6 +32,7 @@ function showPopup() {
 }
 
 function showPopupWithStatus() {
+    document.getElementById("acu-error").innerHTML = "";
     $("#mask").fadeTo(300, 0.7);
     $("#popup").show();
     getLatestStatus();

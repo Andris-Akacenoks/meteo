@@ -5,7 +5,6 @@ function getLatestStatus(){
         type: "GET",
         dataType: "json",
         success: function (data) {
-            console.log(data);
             document.getElementById('popup').innerHTML =utcDate+"<strong> Latest status message: </strong> "+data+" <br />";
         },
         error: function (data) {

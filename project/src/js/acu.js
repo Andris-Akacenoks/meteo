@@ -37,6 +37,7 @@ function setAzElValues(data){
     
     displayFsError(data);
     displayAcuError(data);
+    displayRxcStatus(data);
 }
 
 function setElStowed(div, data){
@@ -207,10 +208,8 @@ function setCurrentScheduledObs(data){
     }
 }
 
-
 function displayFsError(data){
     document.getElementById("acu-error").innerHTML += "<br/>"+utcDate+"<strong> "+data.fsErr+" </strong>";
-
 }
 
 function displayAcuError(data){
@@ -224,5 +223,23 @@ function displayAcuError(data){
         output2 = output.replace(/\n/g, "<br />"); 
         document.getElementById("acu-error").innerHTML = output2;
     }
-
 }
+
+ function displayRxcStatus(data){
+    if(data.hasOwnProperty('rxc_status')){
+        document.getElementById("rxc-result").innerHTML = "";
+        // for(var i=0; i<data.rxc_status.length; i++){
+        //     document.getElementById("rxc-result").innerHTML += "<p>"+data.rxc_status[i]+"</p>";
+        // }
+        
+        document.getElementById("rxc-result").innerHTML += "<p> <strong>Uztvērēja statuss no 0 līdz 6:</strong> "                       +data.rxc_status[0]+"</p>";
+        document.getElementById("rxc-result").innerHTML += "<p> <strong>Sensora A temperatūra kelvinos: </strong> "                     +data.rxc_status[1]+"</p>";
+        document.getElementById("rxc-result").innerHTML += "<p> <strong>Sensora B temperatūra kelvinos </strong> "                      +data.rxc_status[2]+"</p>";
+        document.getElementById("rxc-result").innerHTML += "<p> <strong>Darba frekvence (working frequency) MHz: </strong> "            +data.rxc_status[3]+"</p>";
+        document.getElementById("rxc-result").innerHTML += "<p> <strong>Ģeneratora frekvence (local oscilator frequency):  </strong> "  +data.rxc_status[4]+"</p>";
+        document.getElementById("rxc-result").innerHTML += "<p> <strong>Vakuuma līmenis mbar: </strong> "                               +data.rxc_status[5]+"</p>";
+        document.getElementById("rxc-result").innerHTML += "<p> <strong>On Off reģistrs hex, kuras apakšsistēmas ir on/off.</strong> "  +data.rxc_status[6]+"</p>";
+        document.getElementById("rxc-result").innerHTML += "<p> <strong>Brīdinājumu reģistsrs (alarms) hex: </strong> "                 +data.rxc_status[7]+"</p>";
+        document.getElementById("rxc-result").innerHTML += "<p> <strong>Uztvērēja taures pozīcija mm: </strong> "                       +data.rxc_status[8]+"</p>";
+    }
+ }
