@@ -50,7 +50,7 @@ function setElStowed(div, data){
         document.getElementById("El-stowed-status").innerHTML = " <p><strong>Not stowed</strong></p>";
     }
     else{
-        $('#'+div).css('background-color', 'yellow');
+        $('#'+div).css('background-color', '#DAA520');
         document.getElementById("El-stowed-status").innerHTML = " <p><strong>Unknown</strong></p>";
     }
 }
@@ -65,7 +65,7 @@ function setElStowedPin1(div, data){
         document.getElementById("El-stowPin1-status").innerHTML = " <p><strong>Not stowed</strong></p>";
     }
     else{
-        $('#'+div).css('background-color', 'yellow');
+        $('#'+div).css('background-color', '#DAA520');
         document.getElementById("El-stowPin1-status").innerHTML = " <p><strong>Unknown</strong></p>";
     }
 }
@@ -80,7 +80,7 @@ function setElStowedPin2(div, data){
         document.getElementById("El-stowPin2-status").innerHTML = " <p><strong>Not stowed</strong></p>";
     }
     else{
-        $('#'+div).css('background-color', 'yellow');
+        $('#'+div).css('background-color', '#DAA520');
         document.getElementById("El-stowPin2-status").innerHTML = " <p><strong>Unknown</strong></p>";
 
     }
@@ -97,7 +97,7 @@ function setEl_stow_posOk(div, data){
         document.getElementById("El_stow_posOk-status").innerHTML = " <p><strong>Not reached</strong></p>";
     }
     else{
-        $('#'+div).css('background-color', 'yellow');
+        $('#'+div).css('background-color', '#DAA520');
         document.getElementById("El_stow_posOk-status").innerHTML = " <p><strong>Unknown</strong></p>";
     }
 }
@@ -112,7 +112,7 @@ function setEl_stow_preDn(div, data){
         document.getElementById("El_stow_preDn-status").innerHTML = " <p><strong>Not reached</strong></p>";
     }
     else{
-        $('#'+div).css('background-color', 'yellow');
+        $('#'+div).css('background-color', '#DAA520');
         document.getElementById("El_stow_preDn-status").innerHTML = " <p><strong>Unknown</strong></p>";
     }
 }
@@ -127,7 +127,7 @@ function setEl_stow_preUp(div, data){
         document.getElementById("El_stow_preUp-status").innerHTML = " <p><strong>Not reached</strong></p>";
     }
     else{
-        $('#'+div).css('background-color', 'yellow');
+        $('#'+div).css('background-color', '#DAA520');
         document.getElementById("El_stow_preUp-status").innerHTML = " <p><strong>Unknown</strong></p>";
     }
 }

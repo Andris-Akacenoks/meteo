@@ -1,64 +1,44 @@
 var jsonDataArray = {};
-var currentTelescope = 1; // 1 = RT32, 2 = RT16
-var sockets = [];
+var eventSources = [];
 
-function setCurrentTelescope(telescope){
-    telescope = currentTelescope;
-}
 
 function closeWebSockets() {
-    sockets.forEach(function(s) {
+    eventSources.forEach(function(s) {
         s.close();
     });
-    printLog("All websockets closed.");
+    console.log("All event sources closed.");
 }
 
-function createWebSocket(desiredPort){
-    var ws = new WebSocket("wss://ws2s.feling.io/");
-    sockets.push(ws);
-    printLog("WebSocket connected.");
-    ws.onmessage = (event) => {
-        var obj = JSON.parse(event.data);
-        var jsonData = {};
-        try {
-            jsonData = Base64Decode(obj.data);
+function createWebSocket(desiredTelescope){
+    
+    if(typeof(EventSource) !== "undefined") {
+        if(desiredTelescope == 2){
+            var source = new EventSource("rt32_data_stream.php");
         }
-        catch(error) {
-            printLog(error);
+        else{
+            var source = new EventSource("rt16_data_stream.php");
         }
-        var jsonDataArray = $.parseJSON(jsonData);
-
-
-        if(jsonData.length > 1){
-            document.getElementById('container').style.visibility='hidden';
-            document.getElementById('acu-params').style.visibility='visible';
-            document.getElementById('show-error').style.visibility='visible';
-            document.getElementById('show-status').style.visibility='visible';
-            setAzElValues(jsonDataArray);
-        }
-    }
-    ws.onopen = () => {
-        printLog("onOpen called");
-        ws.send(JSON.stringify(
-            {
-                command: "connect",
-                host: "193.105.155.166",
-                port: desiredPort
+        eventSources.push(source);
+        source.onmessage = function(event) {
+            if (!event){
+                source.close();
             }
-        ))
-        ws.send(JSON.stringify(
-            {
-                command: "send",
-                data: "GET / HTTP/1.1\r\nHost: feling.io\r\nConnection: close\r\n\r\n"
+            else{
+                var obj = JSON.parse(event.data);
+        
+                if(obj.AzEl_pos.length > 1){
+                    document.getElementById('container').style.visibility='hidden';
+                    document.getElementById('acu-params').style.visibility='visible';
+                    document.getElementById('show-error').style.visibility='visible';
+                    document.getElementById('show-status').style.visibility='visible';
+                    setAzElValues(obj);
+                }
             }
-        ))
+        };
+    } else {
+        console.log("Sorry, your browser does not support server-sent events...");
     }
-    ws.onclose = () => {
-        printLog("OnClose called");
-        //printLog("Seocket will reconnect shortly");
-        //createWebSocket(desiredPort);
-    }
-}
+};
 
 function showRT16(){
     $('#acu-heading').text('ACU data for RT16');
@@ -70,7 +50,7 @@ function showRT16(){
     document.getElementById('acu-params').style.visibility='hidden';
     document.getElementById('show-error').style.visibility='hidden';
     document.getElementById('show-status').style.visibility='hidden';
-    createWebSocket(8889);
+    createWebSocket(1);
 }
 function showRT32(){
     $('#acu-heading').text('ACU data for RT32');
@@ -82,5 +62,5 @@ function showRT32(){
     document.getElementById('acu-params').style.visibility='hidden';
     document.getElementById('show-error').style.visibility='hidden';
     document.getElementById('show-status').style.visibility='hidden';
-    createWebSocket(8888);
+    createWebSocket(2);
 }

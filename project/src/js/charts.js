@@ -361,11 +361,11 @@ $(document).ready(function(){
   var yesterday = moment().subtract(1, 'day').subtract(2, 'hour').format();
   document.getElementById("now").defaultValue = now.substr(0, 16);
   document.getElementById("yesterday").defaultValue = yesterday.substr(0, 16);
-  createCharts();
+  //createCharts();
 
   setInterval(function () {
     if(refreshAllowed){
-      updateCharts(interval, true);
+      //updateCharts(interval, true);
     }
     else{
       printLog("Refresh not allowed. Press on any preset interval to enable chart refresh.")
