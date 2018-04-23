@@ -17,7 +17,7 @@ while(true){
     }
 
     else{
-        $fh = fopen('../rt16.json','r');
+        $fh = fopen('../../../clients/rt16.json','r');
         while ($line = fgets($fh)) {
           echo "data: {$line}\n\n";
           ob_flush();
