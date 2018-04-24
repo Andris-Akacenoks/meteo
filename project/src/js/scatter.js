@@ -16,7 +16,9 @@ function drawScatterPlot(data,metricType){
           metric.push(data[i].bar_pressure);
           break;
         case "humidity":
-          metric.push(data[i].humidity);
+          if((data[i].humidity >= 0) && (data[i].humidity <= 100)){
+            metric.push(data[i].humidity);
+          }
           break;
         case "rain":
           metric.push(data[i].rain);

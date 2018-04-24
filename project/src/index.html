@@ -178,11 +178,13 @@
                                     <form id="myform"  method="POST"  class="form_statusinput">
                                         <input type="datetime-local" name="yesterday" id="yesterday"/>
                                         <input type="datetime-local" name="now" id="now"/>
-                                        <input type="submit" class="submit-button" id="button" value="Show">
-                                        <button type="button" onclick="changeInterval('lasthour', true)" class="range-button">Last hour</button>
-                                        <button type="button" onclick="changeInterval('last12h', true)" class="range-button">Last 12 hours</button>
-                                        <button type="button" onclick="changeInterval('yesterday', true)" class="range-button">Last 24 hours</button>
-                                        <button type="button" onclick="changeInterval('lastweek', true)" class="range-button">Last week</button>
+                                        <span id="button-container">
+                                            <input type="submit" class="submit-button" id="button" value="Show">
+                                            <button type="button" onclick="changeInterval('lasthour', true)" class="range-button">Last hour</button>
+                                            <button type="button" onclick="changeInterval('last12h', true)" class="range-button">Last 12 hours</button>
+                                            <button type="button" onclick="changeInterval('yesterday', true)" class="range-button">Last 24 hours</button>
+                                            <button type="button" onclick="changeInterval('lastweek', true)" class="range-button">Last week</button>
+                                        </span>
                                     </form><br /><br />
                                     <h3>Current data</h3>
                                     <p id="lastTime"></p>
@@ -342,7 +344,7 @@
                     $('#more-button').hover(function() {
                         $('#card').css('height', '350');
                     }, function() {
-                        $('#card').css('height', '210');
+                        $('#card').css('height', '200');
                     });
                 });
                 // more functions welcome here
