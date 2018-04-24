@@ -13,9 +13,7 @@ function displayRxcStatus(data){
         displayHornPos(data);
 
     }
-    else{
-        showToast("RXC is not avaliable");
-    }
+
  }
 
  // 0 element

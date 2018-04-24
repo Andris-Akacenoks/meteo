@@ -67,4 +67,5 @@ function showRT32(){
     document.getElementById('acu-params').style.visibility='hidden';
     document.getElementById('show-status').style.visibility='hidden';
     createWebSocket(2);
+    showToast("RXC is not avaliable for RT32");
 }
