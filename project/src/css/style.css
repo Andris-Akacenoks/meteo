@@ -175,6 +175,10 @@ table, th, td{
 
 }
 
+#rxc-container{
+  display: flex;
+}
+
 
 #error-area{
   display: block;
@@ -187,7 +191,7 @@ table, th, td{
   border-width: 1px;
   overflow: auto;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 
 }
 

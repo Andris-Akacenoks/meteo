@@ -158,9 +158,132 @@
                 <br><br><br>
                 <h3 id="rxc-heading">RXC receiver data</h3>
 
-                <div id="rxc-result">
 
-                </div>
+                    <div id="rxc-container">
+
+                        <table>
+                            <tr>
+                                <th id="rxc-system-status-label" ></th>
+                            </tr>
+                            <tr>
+                                <td id="rxc-system-status" ></td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <th id="rxc-temperature-a-label" ></th>
+                            </tr>
+                            <tr>
+                                <td id="rxc-temperature-a" ></td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <th id="rxc-temperature-b-label" ></th>
+                            </tr>
+                            <tr>
+                                <td id="rxc-temperature-b" ></td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <th id="rxc-frequency-label" ></th>
+                            </tr>
+                            <tr>
+                                <td id="rxc-frequency" ></td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <th id="rxc-oscilator-label" ></th>
+                            </tr>
+                            <tr>
+                                <td id="rxc-oscilator" ></td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <th id="rxc-vacuum-label" ></th>
+                            </tr>
+                            <tr>
+                                <td id="rxc-vacuum" ></td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <th id="rxc-onoff-label" colspan=2></th>
+                            </tr>
+                            <tr>
+                                <td>Dry Air</td>
+                                <td id="rxc-onoff-1" ></td>
+                            </tr>
+                            <tr>
+                                <td>Cryostat Heating</td>
+                                <td id="rxc-onoff-2" ></td>
+                            </tr>
+                            <tr>
+                                <td>Noise Source</td>
+                                <td id="rxc-onoff-3" ></td>
+                            </tr>
+                            <tr>
+                                <td>Phase Cal</td>
+                                <td id="rxc-onoff-4" ></td>
+                            </tr>
+                            <tr>
+                                <td>Compressor</td>
+                                <td id="rxc-onoff-5" ></td>
+                            </tr>
+                            <tr>
+                                <td>Vacuum Pump</td>
+                                <td id="rxc-onoff-6" ></td>
+                            </tr>
+                            <tr>
+                                <td>Vacuum Valve</td>
+                                <td id="rxc-onoff-7" ></td>
+                            </tr>
+                            <tr>
+                                <td>Signal Generator</td>
+                                <td id="rxc-onoff-8" ></td>
+                            </tr>
+                            <tr>
+                                <td>Motor</td>
+                                <td id="rxc-onoff-9" ></td>
+                            </tr>
+
+                        </table>
+
+                        <table>
+                            <tr>
+                                <th id="rxc-alarms-label" ></th>
+                            </tr>
+                            <tr>
+                                <td id="rxc-alarms" ></td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <th id="rxc-horn-pos-label" ></th>
+                            </tr>
+                            <tr>
+                                <td id="rxc-horn-pos" ></td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <!-- <div> 
+                        <object type="text/html" data="http://venta.lv/" width="1000px" height="600px" style="overflow:auto;">
+                        </object>
+                     </div> -->
+
+                
 
             </section>
             <section class="page-wrappe" id="page-wrappe">
@@ -282,7 +405,7 @@
         <script>
             $(document).ready(function(){
 
-                showRT32();
+                showRT16();
                 getLatestStatus();
 
 
@@ -352,6 +475,8 @@
 
 
         </script>
+        
+        <script src="js/rxc.js"></script>
         <script src="js/acu.js"></script>
         <script src="js/websocket_client.js"></script>
 
