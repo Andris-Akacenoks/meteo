@@ -205,7 +205,7 @@ html, body {height: 100%;}
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 8px;
 }
 
@@ -217,8 +217,8 @@ html, body {height: 100%;}
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  border-radius: 8px;
+  font-size: 14px;
+  border-radius: 5px;
 }
 .telescope-button{
   float: right;
@@ -243,8 +243,8 @@ html, body {height: 100%;}
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  border-radius: 8px;
+  font-size: 14px;
+  border-radius: 5px;
 }
 
 .right-line-chart-container{
@@ -298,18 +298,21 @@ html, body {height: 100%;}
   .footer {
     left: 240px; }
 
-    #card{
-      height:350px;
-    }
 
+  }
+
+  @media (max-width: 1073px) {
     #more-button{
       visibility: hidden;
     }
-
     #button-container{
       display: block;
 
     }
+    #card{
+      height:350px;
+    }
+    
   }
 
 @media (max-width: 1023px) {
