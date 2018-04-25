@@ -70,7 +70,7 @@
                             <div class="az-container">
                                 <table>
                                     <tr>
-                                        <th style="text-align:center;" id="Az_des_pos_vel" colspan="2"></th>
+                                        <th class="table-heading" style="text-align:center;" id="Az_des_pos_vel" colspan="2"></th>
                                     </tr>
                                     <tr>
                                         <td>Destination</td>
@@ -87,7 +87,7 @@
                                 <br>
                                 <table>
                                     <tr>
-                                        <th class="acu-offset-numbers"  id="AzOffsets" colspan="2"></th>
+                                        <th class="acu-offset-numbers table-heading"  id="AzOffsets" colspan="2"></th>
                                     </tr>
                                     <tr>
                                         <td id="Az_pOffs" ></td>
@@ -102,7 +102,7 @@
                             <div class="el-container">
                                 <table>
                                     <tr>
-                                        <th style="text-align:center;" id="El_des_pos_vel" colspan="2"></th>
+                                        <th  class="table-heading"  style="text-align:center;" id="El_des_pos_vel" colspan="2"></th>
                                     </tr>
                                     <tr>
                                         <td>Destination</td>
@@ -121,7 +121,7 @@
                                 <br>
                                 <table>
                                     <tr>
-                                        <th class="acu-offset-numbers" id="ElOffsets" colspan="2"></th>
+                                        <th class="acu-offset-numbers table-heading" id="ElOffsets" colspan="2"></th>
                                     </tr>
                                     <tr>
                                         <td id="El_pOffs" ></td>
@@ -156,21 +156,129 @@
             </section>
             <section class="acu-data" id="rxc-data" style="overflow-y:auto;height:100vh;">
                 <br><br><br>
-                <h3 id="rxc-heading">RXC receiver data</h3>
+                <h3 id="rxc-heading">RXC receiver status</h3>
 
+                    <div id="alarm-container">
+                        <div id="alert-label">
+                            <p>Alarms</p>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-1">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-1">
+                                <span class="tooltiptext" id="rxc-alarm-text-1">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-2">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-2">
+                                <span class="tooltiptext" id="rxc-alarm-text-2">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-3">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-3">
+                                 <span class="tooltiptext" id="rxc-alarm-text-3">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-4">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-4">
+                                <span class="tooltiptext" id="rxc-alarm-text-4">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-5">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-5">
+                                <span class="tooltiptext" id="rxc-alarm-text-5">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-6">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-6">
+                                <span class="tooltiptext" id="rxc-alarm-text-6">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-7">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-7">
+                                <span class="tooltiptext" id="rxc-alarm-text-7">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-8">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-8">
+                                <span class="tooltiptext" id="rxc-alarm-text-8">Tooltip text</span>
+                            </div>
+                        </div>
+                        
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-9">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-9">
+                                <span class="tooltiptext" id="rxc-alarm-text-9">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-10">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-10">
+                                <span class="tooltiptext" id="rxc-alarm-text-10">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-11">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-11">
+                                <span class="tooltiptext" id="rxc-alarm-text-11">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-12">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-12">
+                                <span class="tooltiptext" id="rxc-alarm-text-12">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-13">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-13">
+                                <span class="tooltiptext" id="rxc-alarm-text-13">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-14">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-14">
+                                <span class="tooltiptext" id="rxc-alarm-text-14">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-15">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-15">
+                                <span class="tooltiptext" id="rxc-alarm-text-15">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-16">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-16">
+                                <span class="tooltiptext" id="rxc-alarm-text-16">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-17">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-17">
+                                <span class="tooltiptext" id="rxc-alarm-text-17">Tooltip text</span>
+                            </div>
+                        </div>
+                        <div class="alarm-text-ind">
+                            <!-- <p id="rxc-alarm-text-18">Text</p> -->
+                            <div class="alarm-indicator" id="rxc-alarm-18">
+                                <span class="tooltiptext" id="rxc-alarm-text-18">Tooltip text</span>
+                            </div>
+                        </div>
+                    </div>
 
+                    </div>
                     <div id="rxc-container">
+                        <div>
 
-                        <table>
-                            <tr>
-                                <th id="rxc-system-status-label" ></th>
-                            </tr>
-                            <tr>
-                                <td id="rxc-system-status" ></td>
-                            </tr>
-                        </table>
-
-                        <table>
+                        <table class="rxc-status-table">
                             <tr>
                                 <th id="rxc-temperature-a-label" ></th>
                             </tr>
@@ -179,7 +287,7 @@
                             </tr>
                         </table>
 
-                        <table>
+                        <table class="rxc-status-table">
                             <tr>
                                 <th id="rxc-temperature-b-label" ></th>
                             </tr>
@@ -188,7 +296,15 @@
                             </tr>
                         </table>
 
-                        <table>
+                        <table class="rxc-status-table">
+                            <tr>
+                                <th id="rxc-vacuum-label" ></th>
+                            </tr>
+                            <tr>
+                                <td id="rxc-vacuum" ></td>
+                            </tr>
+                        </table>
+                        <table class="rxc-status-table">
                             <tr>
                                 <th id="rxc-frequency-label" ></th>
                             </tr>
@@ -196,8 +312,9 @@
                                 <td id="rxc-frequency" ></td>
                             </tr>
                         </table>
+                    </div>
 
-                        <table>
+                        <table class="rxc-status-table">
                             <tr>
                                 <th id="rxc-oscilator-label" ></th>
                             </tr>
@@ -206,68 +323,7 @@
                             </tr>
                         </table>
 
-                        <table>
-                            <tr>
-                                <th id="rxc-vacuum-label" ></th>
-                            </tr>
-                            <tr>
-                                <td id="rxc-vacuum" ></td>
-                            </tr>
-                        </table>
-
-                        <table>
-                            <tr>
-                                <th id="rxc-onoff-label" colspan=2></th>
-                            </tr>
-                            <tr>
-                                <td>Dry Air</td>
-                                <td id="rxc-onoff-1" ></td>
-                            </tr>
-                            <tr>
-                                <td>Cryostat Heating</td>
-                                <td id="rxc-onoff-2" ></td>
-                            </tr>
-                            <tr>
-                                <td>Noise Source</td>
-                                <td id="rxc-onoff-3" ></td>
-                            </tr>
-                            <tr>
-                                <td>Phase Cal</td>
-                                <td id="rxc-onoff-4" ></td>
-                            </tr>
-                            <tr>
-                                <td>Compressor</td>
-                                <td id="rxc-onoff-5" ></td>
-                            </tr>
-                            <tr>
-                                <td>Vacuum Pump</td>
-                                <td id="rxc-onoff-6" ></td>
-                            </tr>
-                            <tr>
-                                <td>Vacuum Valve</td>
-                                <td id="rxc-onoff-7" ></td>
-                            </tr>
-                            <tr>
-                                <td>Signal Generator</td>
-                                <td id="rxc-onoff-8" ></td>
-                            </tr>
-                            <tr>
-                                <td>Motor</td>
-                                <td id="rxc-onoff-9" ></td>
-                            </tr>
-
-                        </table>
-
-                        <table>
-                            <tr>
-                                <th id="rxc-alarms-label" ></th>
-                            </tr>
-                            <tr>
-                                <td id="rxc-alarms" ></td>
-                            </tr>
-                        </table>
-
-                        <table>
+                        <table class="rxc-status-table">
                             <tr>
                                 <th id="rxc-horn-pos-label" ></th>
                             </tr>
@@ -276,6 +332,54 @@
                             </tr>
                         </table>
 
+                        <table class="rxc-status-table">
+                            <tr>
+                                <th id="rxc-system-status-label" ></th>
+                            </tr>
+                            <tr>
+                                <td id="rxc-system-status" ></td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div id="onoff-container">
+                        <div class="onoff-btn">
+                            <p id="onoff-name-1"></p>
+                            <div class="btn" id="btn-1">?</div>
+                        </div>
+                        <div class="onoff-btn">
+                            <p id="onoff-name-2"></p>
+                            <div class="btn" id="btn-2">?</div>
+                        </div>
+                        <div class="onoff-btn">
+                            <p id="onoff-name-3"></p>
+                            <div class="btn" id="btn-3">ON</div>
+                        </div>                        
+                        <div class="onoff-btn">
+                            <p id="onoff-name-4"></p>
+                            <div class="btn" id="btn-4">ON</div>
+                        </div>                        
+                        <div class="onoff-btn">
+                            <p id="onoff-name-5"></p>
+                            <div class="btn" id="btn-5">ON</div>
+                        </div>
+                        <div class="onoff-btn">
+                            <p id="onoff-name-6"></p>
+                            <div class="btn" id="btn-6">ON</div>
+                        </div>
+                        <div class="onoff-btn">
+                            <p id="onoff-name-7"></p>
+                            <div class="btn" id="btn-7">ON</div>
+                        </div>
+                        <div class="onoff-btn">
+                            <p id="onoff-name-8"></p>
+                            <div class="btn" id="btn-8">ON</div>
+                        </div>
+                        <div class="onoff-btn">
+                            <p id="onoff-name-9"></p>
+                            <div class="btn" id="btn-9">ON</div>
+                        </div>
+                                        
                     </div>
 
                     <!-- <div> 
@@ -465,9 +569,9 @@
 
                 $(function() {
                     $('#more-button').hover(function() {
-                        $('#card').css('height', '350');
+                        $('#card').css('height', '330');
                     }, function() {
-                        $('#card').css('height', '200');
+                        $('#card').css('height', '190');
                     });
                 });
                 // more functions welcome here

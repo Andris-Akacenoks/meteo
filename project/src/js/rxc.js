@@ -127,10 +127,8 @@ function displayVacuumLevel(data){
 
 // 6th element
 function displayOnOff(data){
-    document.getElementById("rxc-onoff-label").innerHTML = "<strong> Sub System </strong>";
+    setOnOffDeviceNames();
     var currentStatus = data.rxc_status[6];
-
-    //console.log("0x"+currentStatus); // ???
 
     var dryAir =            0x00000001;
     var cryostatHeating =   0x00000002;
@@ -142,22 +140,19 @@ function displayOnOff(data){
     var signalGenerator =   0x00000080;
     var motor =             0x00000100;
 
-    document.getElementById("rxc-onoff-1").innerHTML = (currentStatus && dryAir)            ? "ON" : "OFF";
-    document.getElementById("rxc-onoff-2").innerHTML = (currentStatus && cryostatHeating)   ? "ON" : "OFF";
-    document.getElementById("rxc-onoff-3").innerHTML = (currentStatus && noiseSource)       ? "ON" : "OFF";
-    document.getElementById("rxc-onoff-4").innerHTML = (currentStatus && phaseCal)          ? "ON" : "OFF";
-    document.getElementById("rxc-onoff-5").innerHTML = (currentStatus && compressor)        ? "ON" : "OFF";
-    document.getElementById("rxc-onoff-6").innerHTML = (currentStatus && vacuumPump)        ? "ON" : "OFF";
-    document.getElementById("rxc-onoff-7").innerHTML = (currentStatus && vacuumValve)       ? "ON" : "OFF";
-    document.getElementById("rxc-onoff-8").innerHTML = (currentStatus && signalGenerator)   ? "ON" : "OFF";
-    document.getElementById("rxc-onoff-9").innerHTML = (currentStatus && motor)             ? "ON" : "OFF";
+    setOnOffState((currentStatus && dryAir), 1);
+    setOnOffState((currentStatus && cryostatHeating), 2);
+    setOnOffState((currentStatus && noiseSource), 3);
+    setOnOffState((currentStatus && phaseCal), 4);
+    setOnOffState((currentStatus && compressor), 5);
+    setOnOffState((currentStatus && vacuumPump), 6);
+    setOnOffState((currentStatus && vacuumValve), 7);
+    setOnOffState((currentStatus && signalGenerator), 8);
+    setOnOffState((currentStatus && motor), 9);
 }
 
 // 7th element
 function displayAlarmRegistry(data){
-    document.getElementById("rxc-alarms-label").innerHTML = "<strong> Alarms </strong>";
-    document.getElementById("rxc-alarms").innerHTML = "";
-
     var currentStatus = data.rxc_status[8];
 
     var errors = [
@@ -165,71 +160,114 @@ function displayAlarmRegistry(data){
             message: "NO alarm",
             code: 0x00000000,
         },{
-            message: "Vacuum temp alarm",
+            message: "Vacuum temp",
             code: 0x00000001,
         },{
-            message: "Operating temp alarm",
+            message: "Operating temp",
             code: 0x00000002,
         },{
-            message: "Communication with the motor alarm",
+            message: "Communication with the motor",
             code: 0x00000004,
         },{
-            message: "Communication with the signal generator alarm",
+            message: "Communication with the signal generator",
             code: 0x00000008,
         },{
-            message: "Communication with the temp sensor A alarm",
+            message: "Communication with the temp sensor A",
             code: 0x00000010,
         },{
-            message: "Communication with the temp sensor B alarm",
+            message: "Communication with the temp sensor B",
             code: 0x00000020,
         },{
-            message: "Communication with the temp vacuum sensor alarm",
+            message: "Communication with the temp vacuum sensor",
             code: 0x00000040,
         },{
-            message: "Feeder end switch alarm",
+            message: "Feeder end switch",
             code: 0x00000080,
         },{
-            message: "Feeder home switch alarm",
+            message: "Feeder home switch",
             code: 0x00000100,
         },{
-            message: "Low vacuum level alarm",
+            message: "Low vacuum level",
             code: 0x00000200,
         },{
-            message: "Communication I2C bus alarm",
+            message: "Communication I2C bus",
             code: 0x00000400,
         },{
             message: "Signal Generator External Reference",
             code: 0x00000200,
         },{
-            message: "Motor movement timeout alarm",
+            message: "Motor movement timeout",
             code: 0x00001000,
         },{
-            message: "Phase Cal High Temperature alarm",
+            message: "Phase Cal High Temperature",
             code: 0x00002000,
         },{
-            message: "Phase Cal Low Temperature alarm",
+            message: "Phase Cal Low Temperature",
             code: 0x00004000,
         },{ 
-            message: "Signal Generator Params alarm",
+            message: "Signal Generator Params",
             code: 0x00008000,
         },{
-            message: "MCU flash alarm",
+            message: "MCU flash",
             code: 0x20000000,
         },{
-            message: "MCU Parameters alarm",
+            message: "MCU Parameters",
             code: 0x40000000,
         }
     ];
 
-    for(var i=0; i< errors.length; i++){
-        if((errors[i].code && currentStatus) == false){
-            document.getElementById("rxc-alarms").innerHTML +=errors[i].message + "<br />";
-        }
+    for(var i=1; i< errors.length; i++){
+        //document.getElementById("rxc-alarms").innerHTML +=errors[i].message + "<br />";
+        setAlarmState(((errors[i].code && currentStatus) == false), i, errors[i].message);
     }
 }
 
 // 8th element
 function displayHornPos(data){
-    document.getElementById("rxc-horn-pos-label").innerHTML = "<strong> Reciever Horn position </strong>";
+    document.getElementById("rxc-horn-pos-label").innerHTML = "Reciever Horn position";
     document.getElementById("rxc-horn-pos").innerHTML = data.rxc_status[8]+" mm";
+}
+
+
+ // if isRed == true then alarm is active
+function setAlarmState(isRed, alarmID, msg){
+    document.getElementById("rxc-alarm-text-"+alarmID).innerHTML = msg;
+
+    if(isRed){
+        document.getElementById("rxc-alarm-"+alarmID).style.background = "red";
+        document.getElementById("rxc-alarm-"+alarmID).style.background = "linear-gradient(to bottom right, grey, red)";
+    }
+    else{
+        document.getElementById("rxc-alarm-"+alarmID).style.background = "grey";
+        document.getElementById("rxc-alarm-"+alarmID).style.background = "linear-gradient(to bottom right, grey, white)"; 
+        
+    }
+}
+
+function setOnOffState(isOn, indicatorID){
+    if(isOn){
+        $('#btn-'+indicatorID).css('background-image', 'linear-gradient(to right, #00b300 0%, #006400 51%, #00b300 100%)');
+        document.getElementById("btn-"+indicatorID).innerHTML = "ON";
+    }
+    else{
+        $('#btn-'+indicatorID).css('background-image', 'linear-gradient(to right, #666666 0%, #b3b3b3 51%, #666666 100%)');
+        document.getElementById("btn-"+indicatorID).innerHTML = "OFF";
+    }
+}
+
+function setOnOffDeviceNames(){
+    var names = [
+        "Dry Air",
+        "Cryostat Heating",
+        "Noise Source",
+        "Phase Cal",
+        "Compressor",
+        "Vacuum Pump",
+        "Vacuum Valve",
+        "Signal Generator",
+        "Motor"
+    ];
+    for(var i=0; i<names.length; i++){
+        document.getElementById("onoff-name-"+(i+1)).innerHTML = names[i];
+    }
 }
