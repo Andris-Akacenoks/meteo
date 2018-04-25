@@ -11,7 +11,7 @@ th, td {
 
 .rxc-status-table{
   width: 200px;
-  height:80px;
+  height:70px;
   display: inline-block;
 }
 
@@ -214,11 +214,9 @@ th{
 }
 
 #alarm-container{
-  margin-top: 4%;
-  margin-bottom: 4%;
   margin: auto;
-  width: 650px;
-  padding: 30px;
+  width: 600px;
+  padding: 20px;
   /* border: 1px solid grey; */
 }
 
@@ -242,11 +240,11 @@ th{
 
 
 .btn {
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 75px;
   text-align: center;
   font-size: 22px;
-  line-height: 60px;
+  line-height: 55px;
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
@@ -289,8 +287,8 @@ th{
 
 
 .alarm-indicator{
-    height: 60px;
-    width: 60px;
+    height: 55px;
+    width: 55px;
     background-color: #bbb;
     border-radius: 50%;
     border: 1px solid grey;
