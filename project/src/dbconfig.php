@@ -23,22 +23,22 @@
 	if(isset($_GET['interval'])){
 
 		if(($_GET['interval'] === 'lasthour') || ($_GET['interval'] === 'undefined') ){
-			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime("-30 days -1 hour"));
-			$todayDateSQL = date('Y-m-d H:i:s', strtotime("-30 days +1 hour"));
+			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime("-20 days -1 hour"));
+			$todayDateSQL = date('Y-m-d H:i:s', strtotime("-20 days +1 hour"));
 		}
 		elseif($_GET['interval'] === 'last12h'){
-			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-30 days -12 hour'));
-			$todayDateSQL = date('Y-m-d H:i:s', strtotime('-30 days +1 hour'));
+			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-20 days -12 hour'));
+			$todayDateSQL = date('Y-m-d H:i:s', strtotime('-20 days +1 hour'));
 		}
 		elseif($_GET['interval'] === 'yesterday'){
 			$step = 2;
-			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-30 days -1 day'));
-			$todayDateSQL = date('Y-m-d H:i:s', strtotime('-30 days +1 hour'));
+			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-20 days -1 day'));
+			$todayDateSQL = date('Y-m-d H:i:s', strtotime('-20 days +1 hour'));
 		}
 		elseif($_GET['interval'] === 'lastweek'){
 			$step = 12;
-			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-30 days -7 day'));
-			$todayDateSQL = date('Y-m-d H:i:s', strtotime('-30 days +1 hour'));
+			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-20 days -7 day'));
+			$todayDateSQL = date('Y-m-d H:i:s', strtotime('-20 days +1 hour'));
 		}
 		else{
 			$interval = $_GET['interval'];
@@ -54,8 +54,8 @@
 		}
 	}
 	else{
-		$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-30 days -1 hour')); // default pedeja stunda
-		$todayDateSQL = date('Y-m-d H:i:s', strtotime('-30 days +1 hour'));
+		$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime('-20 days -1 hour')); // default pedeja stunda
+		$todayDateSQL = date('Y-m-d H:i:s', strtotime('-20 days +1 hour'));
 	}
 
 	$query = "SELECT * FROM
