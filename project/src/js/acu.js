@@ -44,7 +44,7 @@ function setAzElValues(data){
 function setElStowed(div, data){
     var status = "";
     if(data.El_stowed == 1){
-        $('#'+div).css('background', 'linear-gradient(to right, #e60000 0%, #008000 51%,  #e60000 100%)');
+        $('#'+div).css('background', 'linear-gradient(to right, #00b300 0%, #008000 51%, #00b300 100%)');
         document.getElementById("El-stowed-status").innerHTML = " <p><strong>Stowed</strong></p>";
     }
     else if(data.El_stowed == 0){
@@ -160,7 +160,7 @@ function setAzAxisState(data){
 }
 function setElAxisState(data){
     if(data.AzEl_state[1] == 0){
-        $('#El-state-indicator').css('background', 'linear-gradient(to right, #b3b3b3 0%, #737373 51%, #b3b3b3 100%)');
+        $('#El-state-indicator').css('background', 'linear-gradient(to right,  #999999 0%, #737373 51%,  #999999 100%)');
         document.getElementById("El-state-status").innerHTML = " <p><strong>Inactive</strong></p>";
     }
     else if(data.AzEl_state[1] == 1){
