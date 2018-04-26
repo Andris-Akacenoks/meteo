@@ -126,12 +126,31 @@ function displayVacuumLevel(data){
 }
 
 // 6th element
+
+function dec2hex(i) {
+    return i.toString(16).toUpperCase();
+}
+
+function getStatus(first, second){
+    if((currentStatus && dryAir) == true){
+        return true;
+    }
+    else return false;
+}
+
 function displayOnOff(data){
+
+
     setOnOffDeviceNames();
-    var currentStatus = data.rxc_status[6];
+    var currentStatus = dec2hex(data.rxc_status[6]);
+
+    yourNumber = parseInt("0x00000100", 16);
+
 
     var dryAir =            0x00000001;
+
     var cryostatHeating =   0x00000002;
+
     var noiseSource =       0x00000004;
     var phaseCal =          0x00000008;
     var compressor =        0x00000010;
@@ -142,10 +161,10 @@ function displayOnOff(data){
 
     setOnOffState((currentStatus && dryAir), 1);
     setOnOffState((currentStatus && cryostatHeating), 2);
-    setOnOffState((currentStatus && noiseSource), 3);
+    setOnOffState((currentStatus < noiseSource), 3);
     setOnOffState((currentStatus && phaseCal), 4);
-    setOnOffState((currentStatus && compressor), 5);
-    setOnOffState((currentStatus && vacuumPump), 6);
+    setOnOffState((currentStatus > compressor), 5);
+    setOnOffState((currentStatus < vacuumPump), 6);
     setOnOffState((currentStatus && vacuumValve), 7);
     setOnOffState((currentStatus && signalGenerator), 8);
     setOnOffState((currentStatus && motor), 9);
@@ -218,7 +237,7 @@ function displayAlarmRegistry(data){
 
     for(var i=1; i< errors.length; i++){
         //document.getElementById("rxc-alarms").innerHTML +=errors[i].message + "<br />";
-        setAlarmState(((errors[i].code && currentStatus) == false), i, errors[i].message);
+        setAlarmState(((errors[i].code > currentStatus)), i, errors[i].message);
     }
 }
 
