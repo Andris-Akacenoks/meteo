@@ -59,7 +59,7 @@ function setElStowed(div, data){
 
 function setElStowedPin1(div, data){
     if(data.El_stowPin1 == 1){
-        $('#'+div).css('background', 'linear-gradient(to right, #e60000 0%, #008000 51%,  #e60000 100%)');
+        $('#'+div).css('background', 'linear-gradient(to right, #00b300 0%, #008000 51%, #00b300 100%)');
         document.getElementById("El-stowPin1-status").innerHTML = " <p><strong>Stowed</strong></p>";
     }
     else if(data.El_stowPin1 == 0){
@@ -106,7 +106,7 @@ function setEl_stow_posOk(div, data){
 
 function setEl_stow_preDn(div, data){
     if(data.El_stow_preDn == 1){
-        $('#'+div).css('background', 'linear-gradient(to right, #e60000 0%, #b30000 51%,  #e60000 100%)');
+        $('#'+div).css('background', 'linear-gradient(to right, #00b300 0%, #008000 51%, #00b300 100%)');
         document.getElementById("El_stow_preDn-status").innerHTML = " <p><strong>Reached</strong></p>";
     }
     else if(data.El_stow_preDn == 0){
