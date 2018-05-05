@@ -94,7 +94,7 @@ function changeTypeForScatter(selectedType) {
   var value = selectedType.value;  
   var data = {};
   $.ajax({
-    url: "http://35.195.69.44/project/src/dbconfig.php",
+    url: "http://35.195.233.207/meteo/project/src/dbconfig.php",
     type: "GET",
     dataType: "json",
     success: function (data) {

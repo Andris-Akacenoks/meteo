@@ -48,7 +48,7 @@ while 1:
                 "barPressure"       : first_line.split(',')[20]
             }
 
-            url = 'http://35.195.69.44/project/src/server.php'
+            url = 'http://35.195.233.207/meteo/project/src/server.php'
             headers = {
                 'content-type': 'application/json'
             }

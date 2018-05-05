@@ -1,7 +1,7 @@
 
 function getLatestStatus(){
     $.ajax({
-        url: "http://35.195.69.44/project/src/imap.php",
+        url: "http://35.195.233.207/meteo/project/src/imap.php",
         type: "GET",
         dataType: "json",
         success: function (data) {
