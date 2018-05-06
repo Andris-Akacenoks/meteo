@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 session_write_close();
 
@@ -8,46 +7,44 @@ ignore_user_abort(true);
 header("Content-Type: text/event-stream");
 header("Cache-Control: no-cache");
 header("Access-Control-Allow-Origin: *");
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+header('Access-Control-Allow-Origin: *');
 
-//database
 define('DB_HOST', '127.0.0.1');
 define('DB_USERNAME', 'oper');
 define('DB_PASSWORD', 'parole');
 define('DB_NAME', 'irbene');
 
-//get connection
 $mysqli = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
-// start stream
+
+if(!$mysqli){
+die("Connection failed: " . $mysqli->error);
+}
+$query = "SELECT * from rt32 ORDER BY Measurement_ID DESC LIMIT 1;";
+
 while(true){
 
-    if(connection_aborted()){
-        exit();
-    }
-
-    else{
-        $query = "SELECT * FROM rt32 LIMIT 1 ORDER BY Measurement_ID ASC";
-    
-        //execute query
-        $result = $mysqli->query($query);
-    
-        //loop through the returned data
-        $data = array();
-        foreach ($result as $row) {
-            $data[] = $row;
-        }
-    
-        //free memory associated with result
-        $result->close();
-    
-        //close connection
-        $mysqli->close();
-    
-        //now print the data
-        print json_encode($data);
-
-    }
-    sleep(1);
+if(connection_aborted()){
+exit();
 }
-    
+
+else{
+
+if ($result = $mysqli->query($query)) {
+$result = $mysqli->query($query);
+$data = array();
+foreach ($result as $row) {
+$data[] = $row["Data"];
+}
+echo "data: " . json_encode($data) . "\n\n";
+ob_flush();
+flush();
+}
+}
+sleep(1);
+
+}
 ?>

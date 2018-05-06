@@ -25,8 +25,17 @@ function createWebSocket(desiredTelescope){
                 source.close();
             }
             else{
-                var obj = JSON.parse(event.data);
-        
+		var rawData = event.data;
+		var str = rawData.substring(0, rawData.length - 2);
+		str = str.substring(2);
+		//console.log(str);
+		str = str.replace(/\\r/g,'');
+		str = str.replace(/\\n/g, '<br/>');
+		str = str.replace(/\\/g, '');
+		//console.log(str);
+
+		var obj = JSON.parse(str);	
+		//console.log(event.data);
                 if(obj.AzEl_pos.length > 1){
                     document.getElementById('container').style.visibility='hidden';
                     document.getElementById('acu-params').style.visibility='visible';
