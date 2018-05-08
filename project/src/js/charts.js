@@ -41,7 +41,7 @@ function setLatestValues(data){
 function createCharts() {
   var data = {};
   $.ajax({
-    url: "http://35.195.233.207/meteo/project/src/dbconfig.php",
+    url: "http://35.195.233.207/meteo/project/src/meteo_data_source.php",
     type: "GET",
     dataType: "json",
     success: function (data) {
@@ -77,7 +77,7 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
   interval = parsedInterval;
   var data = {};
   $.ajax({
-    url: "http://35.195.233.207/meteo/project/src/dbconfig.php?interval="+interval,
+    url: "http://35.195.233.207/meteo/project/src/meteo_data_source.php?interval="+interval,
     type: "GET",
     dataType: "json",
     success: function (data) {

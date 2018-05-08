@@ -1,16 +1,11 @@
     <?php
     session_start();
     session_write_close();
-
     ignore_user_abort(true);
-
     header("Content-Type: text/event-stream");
     header("Cache-Control: no-cache");
     header("Access-Control-Allow-Origin: *");
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    header('Access-Control-Allow-Origin: *');
 
     $config = parse_ini_file('../../../../clients/config.ini'); 
     $mysqli = mysqli_connect('127.0.0.1',$config['username'],$config['password'],$config['dbname']);

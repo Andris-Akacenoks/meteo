@@ -1,24 +1,17 @@
 
 <?php
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 	header('Access-Control-Allow-Origin: *');
 	header('Content-Type: application/json');
 
-	//database
-	define('DB_HOST', '127.0.0.1');
-	define('DB_USERNAME', 'oper');
-	define('DB_PASSWORD', 'parole');
-	define('DB_NAME', 'irbene');
-
-	//get connection
-	$mysqli = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
-	$step = 1;
-
+	$config = parse_ini_file('../../../../clients/config.ini'); 
+    $mysqli = mysqli_connect('127.0.0.1',$config['username'],$config['password'],$config['dbname']);
+	
 	if(!$mysqli){
 		die("Connection failed: " . $mysqli->error);
 	}
+
+	$step = 1;
 
 	if(isset($_GET['interval'])){
 
