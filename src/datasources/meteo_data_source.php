@@ -4,7 +4,7 @@
 	header('Access-Control-Allow-Origin: *');
 	header('Content-Type: application/json');
 
-	$config = parse_ini_file('../../../../clients/config.ini'); 
+	$config = parse_ini_file('../../../clients/config.ini'); 
     $mysqli = mysqli_connect('127.0.0.1',$config['username'],$config['password'],$config['dbname']);
 	
 	if(!$mysqli){

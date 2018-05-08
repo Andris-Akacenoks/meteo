@@ -7,7 +7,7 @@
     header("Access-Control-Allow-Origin: *");
     error_reporting(E_ALL);
 
-    $config = parse_ini_file('../../../../clients/config.ini'); 
+    $config = parse_ini_file('../../../clients/config.ini'); 
     $mysqli = mysqli_connect('127.0.0.1',$config['username'],$config['password'],$config['dbname']);
 
     if(!$mysqli){
