@@ -25,7 +25,6 @@
             exit();
         }
         else{
-
             if ($result = $mysqli->query($query)) {
                 $result = $mysqli->query($query);
                 $data = array();
