@@ -20,16 +20,14 @@
             exit();
         }
         else{
-            if ($result = $mysqli->query($query)) {
-                $result = $mysqli->query($query);
-                $data = array();
-                foreach ($result as $row) {
-                    $data[] = $row["Data"];
-                }
-                echo "data: " . json_encode($data) . "\n\n";
-                ob_flush();
-                flush();
+            $result = $mysqli->query($query);
+            $data = array();
+            foreach ($result as $row) {
+                $data[] = $row["Data"];
             }
+            echo "data: " . json_encode($data) . "\n\n";
+            ob_flush();
+            flush();
         }
         sleep(1);
     }
