@@ -3,12 +3,12 @@ var utcDate = currentDate.toUTCString();
 
 function setAzElValues(data){
 
-    document.getElementById("Az_des_pos_vel").innerHTML = "<strong> RT32 Azimuth </strong>";
+    document.getElementById("Az_des_pos_vel").innerHTML = "<strong> Azimuth axis </strong>";
     document.getElementById("Az_des").innerHTML = data.AzEl_des[0].toFixed(6) + "&deg;";
     document.getElementById("Az_pos").innerHTML = data.AzEl_pos[0].toFixed(6) + "&deg;";
     document.getElementById("Az_vel").innerHTML = data.AzEl_vel[0].toFixed(6) + "&deg;/s";
 
-    document.getElementById("El_des_pos_vel").innerHTML = "<strong> RT32 Elevation </strong>";
+    document.getElementById("El_des_pos_vel").innerHTML = "<strong> Elevation axis </strong>";
     document.getElementById("El_des").innerHTML = data.AzEl_des[1].toFixed(6) + "&deg;";
     document.getElementById("El_pos").innerHTML = data.AzEl_pos[1].toFixed(6) + "&deg;";
     document.getElementById("El_vel").innerHTML = data.AzEl_vel[1].toFixed(6) + "&deg;/s";
