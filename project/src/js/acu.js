@@ -158,6 +158,7 @@ function setAzAxisState(data){
         document.getElementById("Az-state-indicator").innerHTML = " <p><strong>Error</strong></p>";
     }
 }
+
 function setElAxisState(data){
     if(data.AzEl_state[1] == 0){
         $('#El-state-indicator').css('background', 'linear-gradient(to right,  #999999 0%, #737373 51%,  #999999 100%)');

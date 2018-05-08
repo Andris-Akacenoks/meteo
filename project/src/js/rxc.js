@@ -126,7 +126,6 @@ function displayVacuumLevel(data){
 }
 
 // 6th element
-
 function dec2hex(i) {
     return i.toString(16).toUpperCase();
 }
@@ -246,7 +245,6 @@ function displayHornPos(data){
     document.getElementById("rxc-horn-pos-label").innerHTML = "Reciever Horn position";
     document.getElementById("rxc-horn-pos").innerHTML = data.rxc_status[8]+" mm";
 }
-
 
  // if isRed == true then alarm is active
 function setAlarmState(isRed, alarmID, msg){

@@ -12,6 +12,7 @@
         <link href="../lib/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
         <!-- <audio id="audio" src="css/sounds/toast.mp3" autostart="false" ></audio> -->
         <link href="css/style.css" rel="stylesheet">
         <link href="css/toast.css" rel="stylesheet">
@@ -137,6 +138,7 @@
                     </div>
                 </div>
                 <div id="snackbar"></div>
+                <div id="message-box"></div>
                 <div id="container" class='container'>
                     <div class='loader'>
                         <div class='loader--dot'></div>
@@ -536,11 +538,16 @@
                 $(function() {
                     $('#more-button').hover(function() {
                         $('#card').css('height', '330');
+                        $('#more-button').css('background', 'linear-gradient(to top right, #1256d6, #1e90ff)');
                     }, function() {
                         $('#card').css('height', '190');
+                        $('#more-button').css('background', 'linear-gradient(to bottom right, #1256d6, #1e90ff)');
                     });
                 });
                 // more functions welcome here
+
+
+                // end
             });
 
 

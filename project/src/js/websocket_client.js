@@ -13,10 +13,10 @@ function createWebSocket(desiredTelescope){
     
     if(typeof(EventSource) !== "undefined") {
         if(desiredTelescope == 2){
-            var source = new EventSource("rt32_data_stream.php");
+            var source = new EventSource("http://35.195.233.207/meteo/project/src/rt32_data_stream.php");
         }
         else{
-            var source = new EventSource("rt16_data_stream.php");
+            var source = new EventSource("http://35.195.233.207/meteo/project/src/rt16_data_stream.php");
         }
         console.log("Event stream is opened.");
         eventSources.push(source);
@@ -25,17 +25,14 @@ function createWebSocket(desiredTelescope){
                 source.close();
             }
             else{
-		var rawData = event.data;
-		var str = rawData.substring(0, rawData.length - 2);
-		str = str.substring(2);
-		//console.log(str);
-		str = str.replace(/\\r/g,'');
-		str = str.replace(/\\n/g, '<br/>');
-		str = str.replace(/\\/g, '');
-		//console.log(str);
+                var rawData = event.data;
+                var str = rawData.substring(0, rawData.length - 2);
+                str = str.substring(2);
+                str = str.replace(/\\r/g,'');
+                str = str.replace(/\\n/g, '<br/>');
+                str = str.replace(/\\/g, '');
+                var obj = JSON.parse(str);	
 
-		var obj = JSON.parse(str);	
-		//console.log(event.data);
                 if(obj.AzEl_pos.length > 1){
                     document.getElementById('container').style.visibility='hidden';
                     document.getElementById('acu-params').style.visibility='visible';
@@ -63,6 +60,7 @@ function showRT16(){
     document.getElementById('show-status').style.visibility='hidden';
     createWebSocket(1);
 }
+
 function showRT32(){
     $('#acu-heading').text('ACU data for RT32');
     document.getElementById("acu-error").innerHTML = "";

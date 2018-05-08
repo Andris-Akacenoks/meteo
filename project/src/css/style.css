@@ -319,7 +319,8 @@ th{
 html, body {height: 100%;}
 
 #more-button {
-    background-color: #1E90FF; /* Blue */
+    background-color: #0d41c7;
+    background: linear-gradient(to bottom right, #0d41c7, #1e90ff); /* Standard syntax (must be last) */
     border: none;
     color: white;
     padding: 0.2% 0.5%;
@@ -328,10 +329,12 @@ html, body {height: 100%;}
     display: inline-block;
     font-size: 14px;
     border-radius: 8px;
+    width: 120px;
 }
 
 .range-button {
-  background-color: #4CAF50; /* Green */
+  background-color: #006600; /* Green */
+  background: linear-gradient(to bottom right, #137d00, #4cc200); /* Standard syntax (must be last) */
   border: none;
   color: white;
   padding: 0.2% 0.5%;
@@ -362,6 +365,7 @@ a p {
 
 .submit-button {
   background-color: #f44336; /* red */
+  background: linear-gradient(to bottom right, #cc0000,#e37373); /* Standard syntax (must be last) */
   border: none;
   color: white;
   padding: 0.2% 0.5%;

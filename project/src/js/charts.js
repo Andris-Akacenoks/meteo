@@ -5,14 +5,13 @@ var pointBackgroundColors = [];
 var refreshAllowed = true; // default view is last 1 hour so chart updating will be enabled when page is first openend
 
 function changeInterval(value, isRefreshAllowed){
-  interval = value;
   refreshAllowed = isRefreshAllowed;
-  updateCharts(interval, refreshAllowed);
-  if(isRefreshAllowed){
-    printLog("refreshAllowed set to TRUE");
+  updateCharts(value, refreshAllowed);
+  if(refreshAllowed){
+    console.log("refreshAllowed set to TRUE");
   }
   else{
-    printLog("refreshAllowed set to FALSE");
+    console.log("refreshAllowed set to FALSE");
   }
 }
 
@@ -56,7 +55,7 @@ function createCharts() {
       createLineChart("Humidity", "chart3", data, "humidity", "#008000");                 index++;
       createLineChart("Rain", "chart9", data, "rain", "#191970");                         index++;
       createLineChart("Voltage", "chart5", data, "input_voltage", "#2F4F4F");             index++;
-      createLineChart("Wind speed", "chart6", data, "wind_speed", "#2F4F4F");             index++; // waiting for non-zero values
+      createLineChart("Wind speed", "chart6", data, "wind_speed", "#2F4F4F");             index++; 
       createLineChart("Wind gust", "chart7", data, "wind_gust", "#2F4F4F");               index++;
       createLineChart("Wind speed count", "chart8", data, "wind_speed_count", "#2F4F4F"); index++;
       createLineChart("Wind direction", "chart4", data, "wind_direction", "#2F4F4F");     index++;
@@ -64,15 +63,14 @@ function createCharts() {
       drawScatterPlot(data, "humidity");
 
       index = 0;
-      printLog("All charts are created.");
+      console.log("All charts are created.");
     },
     error: function (data) {
-      printLog("GET failed. Failed to retrieve data therefore graphs not created.");
-      printLog(data);
+      console.log("GET failed. Failed to retrieve data therefore graphs not created.");
+      console.log(data);
     }
   });
 }
-
 
 function updateCharts(parsedInterval, isRefreshAllowed) {
   refreshAllowed = isRefreshAllowed;
@@ -383,7 +381,7 @@ $(document).ready(function(){
       updateCharts(interval, true);
     }
     else{
-      printLog("Refresh not allowed. Press on any preset interval to enable chart refresh.")
+      console.log("Refresh not allowed. Press on any preset interval to enable chart refresh.")
     }
   }, 1000 * 60); //60 seconds
 });

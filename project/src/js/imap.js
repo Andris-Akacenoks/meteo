@@ -8,7 +8,7 @@ function getLatestStatus(){
             document.getElementById('popup').innerHTML =utcDate+"<strong> Latest status message: </strong> "+data+" <br />";
         },
         error: function (data) {
-            console.log("ERROR");
+            console.log("An error occured while retreiving status.");
         }
     });
 }
