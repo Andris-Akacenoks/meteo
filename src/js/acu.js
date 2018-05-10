@@ -38,7 +38,9 @@ function setAzElValues(data){
     
     displayFsError(data);
     displayAcuError(data);
-    displayRxcStatus(data);
+
+    displayRxcStatus(data);        
+
 }
 
 function setElStowed(div, data){

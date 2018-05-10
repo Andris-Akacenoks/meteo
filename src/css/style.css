@@ -223,7 +223,7 @@ th{
 
 #alarm-container{
   margin: auto;
-  width: 570px;
+  width: 650px;
   padding: 20px;
   /* border: 1px solid grey; */
 }
@@ -231,6 +231,7 @@ th{
 .alarm-text-ind{
   display: inline-block;
   text-align: center;
+  vertical-align:top;
   width: 120px;
   height: 110px;
   /* border: 1px solid green; */
@@ -279,18 +280,18 @@ th{
 .tooltiptext {
   visibility: visible;
   width: 120px;
+  height: 60px;
   /* background-color: black; */
   color: black;
   font-weight: 400;
   text-align: center;
   border-radius: 6px;
   /* padding: 5px 0; */
+  position: relative;
 
   /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-  margin-top: 60px;
-  margin-left: -60px;
+  margin-top: 50px;
+  margin-left: -38px;
 
 
 
@@ -304,8 +305,8 @@ th{
 .alarm-indicator{
     margin: auto;
     visibility: hidden;
-    height: 55px;
-    width: 55px;
+    height: 50px;
+    width: 50px;
     background-color: #bbb;
     border-radius: 50%;
     border: 1px solid grey;

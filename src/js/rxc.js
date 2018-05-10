@@ -1,7 +1,6 @@
 function displayRxcStatus(data){
     if(data.hasOwnProperty('rxc_status')){
         // call all seperate functions
-
         displaySystemStatus(data);
         displayTemperatureForA(data);
         displayTemperatureForB(data);

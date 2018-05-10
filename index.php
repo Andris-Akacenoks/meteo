@@ -177,7 +177,7 @@
                             for($i=1; $i<$alarmCount+1; $i++){
                                 echo "<div class='alarm-text-ind' id='alarm-text-ind-{$i}'>";
                                 echo "  <div class='alarm-indicator' id='rxc-alarm-{$i}'>";
-                                echo "      <span class='tooltiptext' id='rxc-alarm-text-{$i}'></span>";
+                                echo "      <div class='tooltiptext' id='rxc-alarm-text-{$i}'></div>";
                                 echo "  </div>";
                                 echo "</div>";
                             }
