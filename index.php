@@ -166,103 +166,23 @@
             <section class="acu-data" id="rxc-data" style="overflow-y:auto;height:100vh;">
                 <br><br><br>
                 <h3 id="rxc-heading">RXC receiver status</h3>
+                <input type='button' id='hideshow' value='Toogle alarms'>
                     <div id="alarm-container">
-                        <div id="alert-label">
-                            <p>Alarms</p>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-1">
-                                <span class="tooltiptext" id="rxc-alarm-text-1">Tooltip text</span>
+                        <div id="alarm-contents">
+                            <div id="alert-label">
+                                <p>Active alarms</p>
                             </div>
+                        <?php
+                            $alarmCount = 18;
+                            for($i=1; $i<$alarmCount+1; $i++){
+                                echo "<div class='alarm-text-ind' id='alarm-text-ind-{$i}'>";
+                                echo "  <div class='alarm-indicator' id='rxc-alarm-{$i}'>";
+                                echo "      <span class='tooltiptext' id='rxc-alarm-text-{$i}'></span>";
+                                echo "  </div>";
+                                echo "</div>";
+                            }
+                        ?>
                         </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-2">
-                                <span class="tooltiptext" id="rxc-alarm-text-2">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-3">
-                                 <span class="tooltiptext" id="rxc-alarm-text-3">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-4">
-                                <span class="tooltiptext" id="rxc-alarm-text-4">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-5">
-                                <span class="tooltiptext" id="rxc-alarm-text-5">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-6">
-                                <span class="tooltiptext" id="rxc-alarm-text-6">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-7">
-                                <span class="tooltiptext" id="rxc-alarm-text-7">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-8">
-                                <span class="tooltiptext" id="rxc-alarm-text-8">Tooltip text</span>
-                            </div>
-                        </div>
-                        
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-9">
-                                <span class="tooltiptext" id="rxc-alarm-text-9">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-10">
-                                <span class="tooltiptext" id="rxc-alarm-text-10">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-11">
-                                <span class="tooltiptext" id="rxc-alarm-text-11">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-12">
-                                <span class="tooltiptext" id="rxc-alarm-text-12">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-13">
-                                <span class="tooltiptext" id="rxc-alarm-text-13">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-14">
-                                <span class="tooltiptext" id="rxc-alarm-text-14">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-15">
-                                <span class="tooltiptext" id="rxc-alarm-text-15">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-16">
-                                <span class="tooltiptext" id="rxc-alarm-text-16">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-17">
-                                <span class="tooltiptext" id="rxc-alarm-text-17">Tooltip text</span>
-                            </div>
-                        </div>
-                        <div class="alarm-text-ind">
-                            <div class="alarm-indicator" id="rxc-alarm-18">
-                                <span class="tooltiptext" id="rxc-alarm-text-18">Tooltip text</span>
-                            </div>
-                        </div>
-                    </div>
                     </div>
                     <div id="rxc-container">
                         <div>
@@ -327,42 +247,17 @@
                         </table>
                     </div>
                     <div id="onoff-container">
-                        <div class="onoff-btn">
-                            <p id="onoff-name-1"></p>
-                            <div class="btn" id="btn-1">?</div>
-                        </div>
-                        <div class="onoff-btn">
-                            <p id="onoff-name-2"></p>
-                            <div class="btn" id="btn-2">?</div>
-                        </div>
-                        <div class="onoff-btn">
-                            <p id="onoff-name-3"></p>
-                            <div class="btn" id="btn-3">ON</div>
-                        </div>                        
-                        <div class="onoff-btn">
-                            <p id="onoff-name-4"></p>
-                            <div class="btn" id="btn-4">ON</div>
-                        </div>                        
-                        <div class="onoff-btn">
-                            <p id="onoff-name-5"></p>
-                            <div class="btn" id="btn-5">ON</div>
-                        </div>
-                        <div class="onoff-btn">
-                            <p id="onoff-name-6"></p>
-                            <div class="btn" id="btn-6">ON</div>
-                        </div>
-                        <div class="onoff-btn">
-                            <p id="onoff-name-7"></p>
-                            <div class="btn" id="btn-7">ON</div>
-                        </div>
-                        <div class="onoff-btn">
-                            <p id="onoff-name-8"></p>
-                            <div class="btn" id="btn-8">ON</div>
-                        </div>
-                        <div class="onoff-btn">
-                            <p id="onoff-name-9"></p>
-                            <div class="btn" id="btn-9">ON</div>
-                        </div>              
+                        <?php   
+                            $onOffCount = 9;
+
+                            for($i=1; $i<$onOffCount+1; $i++){
+                                echo "<div class='onoff-btn'>";
+                                echo "  <p id='onoff-name-{$i}'></p>";
+                                echo "  <div class='btn' id='btn-{$i}'>?";
+                                echo "  </div>";
+                                echo "</div>";
+                            }
+                        ?>
                     </div>
             </section>
             <section class="page-wrappe" id="page-wrappe">

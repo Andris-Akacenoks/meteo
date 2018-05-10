@@ -1,6 +1,7 @@
 body{
   font-size: 13px;
   position: relative;
+  font-weight: 200;
 }
 
 th, td {
@@ -193,9 +194,10 @@ table, th, td{
 }
 #alert-label{
   background-color:	#F5F5F5;
+  font-size: 14px;
   border-radius: 10px;
   text-align: center;
-  width: 60px;
+  width: 100px;
   margin: auto;
 
 }
@@ -213,6 +215,12 @@ th{
   display: inline-block;
 }
 
+#alarm-contents{
+  display:none;
+
+}
+
+
 #alarm-container{
   margin: auto;
   width: 570px;
@@ -223,10 +231,16 @@ th{
 .alarm-text-ind{
   display: inline-block;
   text-align: center;
-
+  width: 120px;
+  height: 110px;
   /* border: 1px solid green; */
 
 
+}
+#hideshow{
+  float:right;
+  border-radius: 20px;
+ 
 }
 
 .onoff-btn{
@@ -263,13 +277,14 @@ th{
 
 
 .tooltiptext {
-  visibility: hidden;
+  visibility: visible;
   width: 120px;
-  background-color: black;
-  color: #fff;
+  /* background-color: black; */
+  color: black;
+  font-weight: 400;
   text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
+  /* padding: 5px 0; */
 
   /* Position the tooltip */
   position: absolute;
@@ -287,6 +302,8 @@ th{
 
 
 .alarm-indicator{
+    margin: auto;
+    visibility: hidden;
     height: 55px;
     width: 55px;
     background-color: #bbb;

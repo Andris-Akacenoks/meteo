@@ -47,6 +47,13 @@ function closeErrorPopup(){
 }
 
 
+jQuery(document).ready(function(){
+    jQuery('#hideshow').on('click', function(event) {        
+         jQuery('#alarm-contents').toggle('show');
+    });
+});
+
+
 
 
 

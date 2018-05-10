@@ -9,10 +9,13 @@ function displayRxcStatus(data){
         displayGeneratorFrequency(data);
         displayVacuumLevel(data);
         displayOnOff(data);
-        displayAlarmRegistry(data);
+        if ( $('#alarm-contents').css('display') != 'none' ){
+            displayAlarmRegistry(data);
+        }
         displayHornPos(data);
 
     }
+    
 
  }
 
@@ -235,7 +238,6 @@ function displayAlarmRegistry(data){
     ];
 
     for(var i=1; i< errors.length; i++){
-        //document.getElementById("rxc-alarms").innerHTML +=errors[i].message + "<br />";
         setAlarmState(((errors[i].code > currentStatus)), i, errors[i].message);
     }
 }
@@ -251,12 +253,16 @@ function setAlarmState(isRed, alarmID, msg){
     document.getElementById("rxc-alarm-text-"+alarmID).innerHTML = msg;
 
     if(isRed){
+        document.getElementById("rxc-alarm-"+alarmID).style.visibility = "visible";
         document.getElementById("rxc-alarm-"+alarmID).style.background = "red";
         document.getElementById("rxc-alarm-"+alarmID).style.background = "linear-gradient(to bottom right, grey, red)";
     }
     else{
-        document.getElementById("rxc-alarm-"+alarmID).style.background = "grey";
-        document.getElementById("rxc-alarm-"+alarmID).style.background = "linear-gradient(to bottom right, grey, white)"; 
+        document.getElementById("alarm-text-ind-"+alarmID).remove();
+        // document.getElementById("rxc-alarm-"+alarmID).remove();
+        // document.getElementById("rxc-alarm-"+alarmID).style.visibility = "visible";
+        // document.getElementById("rxc-alarm-"+alarmID).style.background = "grey";
+        // document.getElementById("rxc-alarm-"+alarmID).style.background = "linear-gradient(to bottom right, grey, white)"; 
         
     }
 }
