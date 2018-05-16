@@ -63,9 +63,9 @@ function displayTemperatureForA(data){
     }
     else{
         if(temperature > 20){
-            document.getElementById("rxc-temperature-a").style.color = red;
+            document.getElementById("rxc-temperature-a").style.color = "red";
         }
-        document.getElementById("rxc-temperature-a").innerHTML = temperature;
+        document.getElementById("rxc-temperature-a").innerHTML = temperature + " K";;
     }
 }
 
@@ -79,9 +79,9 @@ function displayTemperatureForB(data){
     }
     else{
         if(temperature > 20){
-            document.getElementById("rxc-temperature-b").style.color = red;
+            document.getElementById("rxc-temperature-b").style.color = "red";
         }
-        document.getElementById("rxc-temperature-b").innerHTML = temperature;
+        document.getElementById("rxc-temperature-b").innerHTML = temperature + " K";
     }
 } 
 
