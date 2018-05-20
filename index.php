@@ -6,12 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="Andris Akacenoks">
+        <!-- Cache -->
+        <meta http-equiv="cache-control" content="max-age=0" />
+        <meta http-equiv="cache-control" content="no-cache" />
+        <!--  -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
         <script src="src/js/external_lib/moment.js"></script>
         <link href="src/js/external_lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <!-- <audio id="audio" src="css/sounds/toast.mp3" autostart="false" ></audio> -->
         <link href="src/css/style.css" rel="stylesheet">
         <link href="src/css/toast.css" rel="stylesheet">
@@ -166,7 +172,7 @@
             <section class="acu-data" id="rxc-data" style="overflow-y:auto;height:100vh;">
                 <br><br><br>
                 <h3 id="rxc-heading">RXC receiver status</h3>
-                <input type='button' id='hideshow' value='Toogle alarms'>
+                <button id='hideshow' value='Toogle alarms'>Toogle alarms</button>
                     <div id="alarm-container">
                         <div id="alarm-contents">
                             <div id="alert-label">
@@ -246,6 +252,8 @@
                             </tr>
                         </table>
                     </div>
+                    <div id="rxc-chart" style="height: 400px; width: 500px; margin: 0 auto; float: right;"></div>
+
                     <div id="onoff-container">
                         <?php   
                             $onOffCount = 9;
@@ -259,6 +267,7 @@
                             }
                         ?>
                     </div>
+
             </section>
             <section class="page-wrappe" id="page-wrappe">
                 <br><br><br>
@@ -453,6 +462,8 @@
         <script src="src/js/rxc.js"></script>
         <script src="src/js/acu.js"></script>
         <script src="src/js/event_stream_client.js"></script>
+        <script src="src/js/rxc_scatter.js" charset="utf-8"></script>
+
 
     </body>
 </html>

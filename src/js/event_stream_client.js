@@ -47,6 +47,7 @@ function createNewStream(desiredTelescope){
 };
 
 function showRT16(){
+    document.getElementById("hideshow").disabled = false; 
     $('#acu-heading').text('ACU data for RT16');
     document.getElementById("acu-error").innerHTML = "";
     document.getElementById('rt16button').style.opacity=1;
@@ -62,6 +63,9 @@ function showRT16(){
 }
 
 function showRT32(){
+    document.getElementById("hideshow").disabled = true; 
+    $("#hideshow").toggleClass('disable');
+    document.getElementById('rt32button').style.opacity=1;
     $('#acu-heading').text('ACU data for RT32');
     document.getElementById("acu-error").innerHTML = "";
     document.getElementById('rt32button').style.opacity=1;

@@ -1,5 +1,5 @@
 
-function drawScatterPlot(data,metricType){
+function drawScatterPlot(div, data,metricType, color){
   var measurementTime = [];
   var metric = [];
 
@@ -60,19 +60,14 @@ function drawScatterPlot(data,metricType){
       textfont: {
         family:  'Raleway, sans-serif'
       },
-      marker: { size: 12 }
+      marker: {
+         size: 6, 
+         color: color}
+         
   };
 
-  var trace2 = {
-    x: measurementTime,
-    y: metric,
-    mode: 'lines+markers',
-    type: 'scatter',
-    line: {shape: 'spline'},
-  };
     
   var data = [ trace1 ];
-  //var data = [ trace1 , trace2];
     
   var layout = {
     legend: {
@@ -80,14 +75,14 @@ function drawScatterPlot(data,metricType){
       yref: 'paper',
       font: {
         family: 'Arial, sans-serif',
-        size: 20,
+        size: 5,
         color: 'grey',
       }
     },
     title: metricType
   };
     
-  return Plotly.newPlot('ct-chart', data, layout);
+  return Plotly.newPlot(div, data, layout);
 }
 
 function changeTypeForScatter(selectedType) {
@@ -99,7 +94,9 @@ function changeTypeForScatter(selectedType) {
     dataType: "json",
     success: function (data) {
       printLog("GET success. Data retrieved scatter will be updated. Maybe.");  
-      drawScatterPlot(data, value);
+            drawScatterPlot('ct-chart', data, value, "blue");
+            drawScatterPlot('rxc-chart', data, value, "red");
+
       printLog("Scatter updated.");
     },
     error: function (data) {
