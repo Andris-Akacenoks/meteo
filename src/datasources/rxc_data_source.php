@@ -36,12 +36,14 @@
 	foreach ($result as $row) {
 		$data[] = $row;
 	}
+    print json_encode("after loop");
 
 	// //free memory associated with result
 	$result->close();
 
 	// //close connection
 	$mysqli->close();
+    print json_encode("after close");
 
 	//now print the data
     print json_encode($data);
