@@ -16,7 +16,7 @@
 
 	if(isset($_GET['interval'])){
 		if(($_GET['interval'] === '24h') || ($_GET['interval'] === 'undefined') ){
-			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime("-7 day 4 hour"));
+			$yesterdayDateSQL = date('Y-m-d H:i:s', strtotime("-7 day"));
             $todayDateSQL = date('Y-m-d H:i:s', strtotime("-3 hour"));
             print json_encode("hey");
         }
