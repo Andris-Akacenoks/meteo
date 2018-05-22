@@ -26,7 +26,7 @@
 
     print json_encode("before query");
 
-	$query = "SELECT Data FROM rt16 WHERE (measurement_time >= '{$yesterdayDateSQL}' AND measurement_time <= '{$todayDateSQL}')";
+	$query = "SELECT Data FROM rt16";
 
 	// //execute query
 	$result = $mysqli->query($query);
