@@ -43,6 +43,9 @@
                         <a class="nav-link scroll" href="#page-wrappe">Meteo station data</a>
                     </li>
                     <li class="nav-item active">
+                        <a class="nav-link scroll" href="#ln-data">LN data</a>
+                    </li>
+                    <li class="nav-item active">
                         <a class="nav-link scroll" href="#rxc-data">RXC data</a>
                     </li>
                     <li class="nav-item active">
@@ -147,6 +150,7 @@
                         <div id="acu-indicator-container-4">
                             <p id="trTable_index"></p>
                             <p id="offTable_index"></p>
+                            <p id="tracking_source"></p>
                         </div>
                     </div>
                 </div>
@@ -267,6 +271,36 @@
                             }
                         ?>
                     </div>
+
+            </section>
+            <section class="acu-data" id="ln-data" style="overflow-y:auto;height:100vh;">
+                <br><br><br>
+                <h3 id="rxc-heading">LN status</h3>
+
+
+                <?php
+                    $levels = array(
+                        'Vd11','Id11','Vg11','Vd21',
+                        'Id12', 'Vg12', 'Vd13','Id13',
+                        'Vg13', 'Vd21', 'Id21', 'Vg21',
+                        'Vd22', 'Id22', 'Vg22', 'Vd23',
+                        'Id23', 'Vg23'
+                    );
+
+                    $temp = "";
+
+                    for($i=0; $i<sizeof($levels); $i++){
+                        $temp = $levels[$i];
+
+                        echo "<table class='rxc-status-table'>";
+                        echo "  <tr><th id='{$temp}-label'>Title</th> </tr>";
+                        echo "  <tr><td id='{$temp}-value'>Value";
+                        echo "  </td></tr>";
+                        echo "</table>";
+                    }
+                ?>
+                    <th id="rxc-temperature-a-label" ></th>
+                    <td id="rxc-temperature-a" ></td>
 
             </section>
             <section class="page-wrappe" id="page-wrappe">
@@ -454,13 +488,12 @@
                 });
                 // more functions welcome here
 
-
-                // end
             });
+                // end
         </script>
-        
-        <script src="src/js/rxc.js"></script>
         <script src="src/js/acu.js"></script>
+        <script src="src/js/rxc.js"></script>
+        <script src="src/js/ln.js"></script>
         <script src="src/js/event_stream_client.js"></script>
         <script src="src/js/rxc_scatter.js" charset="utf-8"></script>
 

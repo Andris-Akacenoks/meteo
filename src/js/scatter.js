@@ -1,11 +1,48 @@
 
-function drawScatterPlot(div, data,metricType, color){
+function drawScatterPlot(identifier, div, data,metricType, name, color){
   var measurementTime = [];
   var metric = [];
+  var metric2 = [];
 
+  var label1 = "";
+  var label2 = "";
+
+  var traceArray = [];
+
+  if(identifier == 'temperatures'){
+    label1 = "Sensor A";
+    label2 = "Sensor B";
+
+
+    
+    var trace2 = {
+      x: measurementTime,
+      y: metric2,
+      name: label2,
+      mode: 'markers+text',
+      type: 'scatter',
+      textposition: 'top center',
+      textfont: {
+        family:  'Raleway, sans-serif'
+      },
+      marker: {
+        size: 7, 
+        color: color}
+        
+  };
+
+  traceArray.push(trace2);
+
+  }
+  else{
+    label1 = metricType;
+  }
+  
   if(data.length > 0){
     for (var i in data) {
-      measurementTime.push((data[i].measurement_time).substr(0, 16)); // nonemtas sekundes
+      measurementTime.push(data[i].measurement_time); // nonemtas sekundes
+      metric2.push(data[i].humidity - 5);
+
       switch (metricType) {
         case "temperature":
           if((data[i].temperature < 35) && (data[i].temperature > (-35))){
@@ -52,22 +89,26 @@ function drawScatterPlot(div, data,metricType, color){
   }
 
   var trace1 = {
-    x: measurementTime,
+      x: measurementTime,
       y: metric,
       mode: 'markers+text',
       type: 'scatter',
+      name: label1,
       textposition: 'top center',
       textfont: {
         family:  'Raleway, sans-serif'
       },
       marker: {
-         size: 6, 
-         color: color}
+         size: 7, 
+         color: 'red'}
          
   };
 
+  traceArray.push(trace1);
+
+
     
-  var data = [ trace1 ];
+  var data = traceArray;
     
   var layout = {
     legend: {
@@ -75,15 +116,18 @@ function drawScatterPlot(div, data,metricType, color){
       yref: 'paper',
       font: {
         family: 'Arial, sans-serif',
-        size: 5,
+        size: 15,
         color: 'grey',
       }
     },
-    title: metricType
+    title: name
   };
     
   return Plotly.newPlot(div, data, layout);
 }
+
+
+// function drawPlotlyChart()a
 
 function changeTypeForScatter(selectedType) {
   var value = selectedType.value;  
@@ -94,8 +138,11 @@ function changeTypeForScatter(selectedType) {
     dataType: "json",
     success: function (data) {
       printLog("GET success. Data retrieved scatter will be updated. Maybe.");  
-            drawScatterPlot('ct-chart', data, value, "blue");
-            drawScatterPlot('rxc-chart', data, value, "red");
+            var title = value.charAt(0).toUpperCase() + value.slice(1);
+            title = title.replace(/\_/g,' ');
+
+            drawScatterPlot('meteoScatter','ct-chart', data,  value,title, 'blue');
+
 
       printLog("Scatter updated.");
     },

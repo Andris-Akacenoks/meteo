@@ -60,8 +60,8 @@ function createCharts() {
       createLineChart("Wind speed count", "chart8", data, "wind_speed_count", "#2F4F4F"); index++;
       createLineChart("Wind direction", "chart4", data, "wind_direction", "#2F4F4F");     index++;
       createLineChart("Solar radiation", "chart10", data, "solar_radiation", "#0000FF");
-      drawScatterPlot('ct-chart', data, "humidity", 'blue');
-      drawScatterPlot('rxc-chart', data,  "humidity", 'blue');
+      drawScatterPlot('temperatures','rxc-chart', data, "humidity","Sensor temperature", 'blue');
+      drawScatterPlot('meteoScatter','ct-chart', data,  "humidity","Humidity", 'blue');
 
 
       index = 0;
@@ -151,7 +151,8 @@ function updateCharts(parsedInterval, isRefreshAllowed) {
         showToast("<strong>Temperature</strong>  has reached boundaries in the selected period!");
       }
       
-      drawScatterPlot(data,"humidity");
+      drawScatterPlot('meteoScatter','ct-chart', data,  "humidity","Humidity", 'blue');
+
       printLog("All charts updated.");
       printLog("Points drawn: "+ pointsDrawn);
     },

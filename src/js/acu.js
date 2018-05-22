@@ -34,12 +34,14 @@ function setAzElValues(data){
     setElStowedPin2('El_stowPin2-indicator', data)
     setAzAxisState(data);
     setElAxisState(data);
+    displayTrackingObject(data);
     setCurrentScheduledObs(data);
     
     displayFsError(data);
     displayAcuError(data);
 
-    displayRxcStatus(data);        
+    displayRxcStatus(data);   
+    displayLNstatus(data);     
 
 }
 
@@ -232,3 +234,7 @@ function displayAcuError(data){
     }
 }
 
+function displayTrackingObject(data){
+    var objectName = (data.lsorna == '          ') ?"none" : data.lsorna;
+    document.getElementById("tracking_source").innerHTML ="<strong>Tracking object:</strong> "+ objectName;
+}

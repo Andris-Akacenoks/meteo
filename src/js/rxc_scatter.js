@@ -1,134 +1,100 @@
-// function createNewRxcChart(data, timeArray){
-//     Highcharts.chart('rxc-chart', {
-//         chart: {
-//             type: 'scatter',
-//             zoomType: 'xy'
-//         },
-//         title: {
-//             text: 'Sensor temperature'
-//         },
-//         xAxis: {
-//             categories: timeArray,
-//             // startOnTick: true,
-//             // endOnTick: true,
-//             // showLastLabel: true
-//         },
-//         yAxis: {
-//             title: {
-//                 text: 'Degrees (K)'
-//             },
-
-//         },
-//         legend: {
-//             layout: 'vertical',
-//             align: 'left',
-//             verticalAlign: 'top',
-//             x: 100,
-//             y: 70,
-//             floating: true,
-//             backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
-//             borderWidth: 1
-//         },
-//         plotOptions: {
-//             scatter: {
-//                 marker: {
-//                     radius: 5,
-//                     states: {
-//                         hover: {
-//                             enabled: true,
-//                             lineColor: 'rgb(100,100,100)'
-//                         }
-//                     }
-//                 },
-//                 states: {
-//                     hover: {
-//                         marker: {
-//                             enabled: false
-//                         }
-//                     }
-//                 },
-//                 tooltip: {
-//                     headerFormat: '<b>{series.name}</b><br>',
-//                     pointFormat: '{point.x}, {point.y} K'
-//                 }
-//             }
-//         },
-//         series: [{
-//             name: 'Sensor A',
-//             color: 'red',
-//             data: data
-//         }
-//         // }, {
-//         //     name: 'Male',
-//         //     color: 'rgba(119, 152, 191, .5)',
-//         //     data: [1,2,3,4,5]
-//         // }
-//         ]
-//     });
-
-// }
 
 
-// function createRxcCharts() {
-//     var data = {};
-//     $.ajax({
-//         url: "http://35.195.233.207/src/datasources/meteo_data_source.php",
-//         type: "GET",
-//         dataType: "json",
-//         success: function (data) {
-//             var values = [];
-//             var times = [];
-//             var both = [];
+// function drawRcxTemp(div, yData1, yData2, xData,name){
 
-//             for (var j=0; j<data.length; j++) {
-//                 values.push(parseFloat(data[j].temperature.replace(",", ".")));
-//                 var parts =data[j].measurement_time.split('-');
-//                 // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
-//                 // January - 0, February - 1, etc.
-//                 var mydate = new Date(parts[0], parts[1] - 1, parts[2]); 
+//   var trace1 = {
+//       x: xData,
+//       y: yData1,
+//       mode: 'markers+text',
+//       type: 'scatter',
+//       name: 'Sensor A',
+//       textposition: 'top center',
+//       textfont: {
+//         family:  'Raleway, sans-serif'
+//       },
+//       marker: {
+//          size: 7, 
+//          color: 'red'}
+//   };
 
-//                 var dateString = data[j].measurement_time;
-//                 var reggie = /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/;
-//                 var dateArray = reggie.exec(dateString); 
-//                 var dateObject = new Date(
-//                     (+dateArray[1]),
-//                     (+dateArray[2])-1, // Careful, month starts at 0!
-//                     (+dateArray[3]),
-//                     (+dateArray[4]),
-//                     (+dateArray[5]),
-//                     (+dateArray[6])
-//                 );
-//                 times.push(dateObject);
-//             }
-//             both.push(times, values);
-//             createNewRxcChart(times, both);
-
-//         }
-//     });
-// }
-// //createRxcCharts();
-
-
-
-function drawRxcChart(time, values){
-    var canvas = document.getElementById("rxc-chart");
-    var ctx = canvas.getContext('2d');
+//   var trace2 = {
+//       x: xData,
+//       y: yData2,
+//       name: 'Temperature',
+//       mode: 'markers+text',
+//       type: 'scatter',
+//       name: 'Sensor B',
+//       textposition: 'top center',
+//       textfont: {
+//         family:  'Raleway, sans-serif'
+//       },
+//       marker: {
+//          size: 7, 
+//          color: 'blue'}
+//   };
     
-    var chart = {
-        type: 'scatter',
-        data: {
-            datasets: [{
-                label: 'Scatter Dataset',
-                data: values
-            }]
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    type: 'linear',
-                    position: 'bottom'
-                }]
-            }
-        }
-    }
-}
+//   var data = [ trace1 , trace2];
+    
+//   var layout = {
+//     legend: {
+//       y: 0.5,
+//       yref: 'paper',
+//       font: {
+//         family: 'Arial, sans-serif',
+//         size: 13,
+//         color: 'grey',
+//       }
+//     },
+//     title: name
+//   };
+    
+//   return Plotly.newPlot(div, data, layout);
+// }
+
+
+// // function drawPlotlyChart()a
+
+// function drawSysTempChart() {
+
+//   $.ajax({
+//     url: "http://35.195.233.207/src/datasources/rxc_data_source.php?interval=24h",
+//     type: "GET",
+//     dataType: "json",
+//     success: function (data) {    
+    
+//         var measurementTime = [];
+//         var temp1 = [];
+//         var temp2 = [];
+
+//         console.log(data);
+//         var data = JSON.stringify(data);
+//         console.log(data);
+//         var rawData = data;
+//         var str = rawData.substring(0, rawData.length - 2);
+//         str = str.substring(10);
+//         console.log(str);
+//         str = str.replace(/\\r/g,'');
+//         str = str.replace(/\\n/g, '<br/>');
+//         str = str.replace(/\\/g, '');
+//         var obj = JSON.parse(str);	
+//         console.log(obj);
+    
+//         // for (var j=0; j<data.length; j++) {
+//         //     measurementTime.push((data[j].measurement_time).substr(0, 16)); // nonemtas sekundes
+//         //     bar_pressure.push(data[j].bar_pressure);
+
+
+//         // }
+
+
+//         // drawRcxTemp('rxc-chart', temp1, temp2, measurementTime,"Sensor temperature");
+//         // printLog("rxc-chart updated.");
+//     },
+//     error: function (data) {
+//         printLog("GET failed. Failed to retrieve data therefore scatter not updated.");
+//         printLog(data);
+//     }
+//   });
+// }
+
+

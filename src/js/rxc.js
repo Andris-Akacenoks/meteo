@@ -147,11 +147,8 @@ function displayOnOff(data){
 
     yourNumber = parseInt("0x00000100", 16);
 
-
     var dryAir =            0x00000001;
-
     var cryostatHeating =   0x00000002;
-
     var noiseSource =       0x00000004;
     var phaseCal =          0x00000008;
     var compressor =        0x00000010;

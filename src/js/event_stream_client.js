@@ -45,8 +45,8 @@ function createNewStream(desiredTelescope){
         console.log("Sorry, your browser does not support server-sent events...");
     }
 };
-
 function showRT16(){
+    $("#tracking_source").show();
     document.getElementById("hideshow").disabled = false; 
     $('#acu-heading').text('ACU data for RT16');
     document.getElementById("acu-error").innerHTML = "";
@@ -63,6 +63,7 @@ function showRT16(){
 }
 
 function showRT32(){
+    $("#tracking_source").hide();
     document.getElementById("hideshow").disabled = true; 
     $("#hideshow").toggleClass('disable');
     document.getElementById('rt32button').style.opacity=1;
