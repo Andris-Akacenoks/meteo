@@ -276,31 +276,38 @@
             <section class="acu-data" id="ln-data" style="overflow-y:auto;height:100vh;">
                 <br><br><br>
                 <h3 id="rxc-heading">LN status</h3>
+                    <div id="ln-amplifier-temps">
+                    <?php
+                        $levels = array(
+                            'Vd11','Id11','Vg11','Vd12',
+                            'Id12', 'Vg12', 'Vd13','Id13',
+                            'Vg13', 'Vd21', 'Id21', 'Vg21',
+                            'Vd22', 'Id22', 'Vg22', 'Vd23',
+                            'Id23', 'Vg23'
+                        );
 
+                        $temp = "";
 
-                <?php
-                    $levels = array(
-                        'Vd11','Id11','Vg11','Vd21',
-                        'Id12', 'Vg12', 'Vd13','Id13',
-                        'Vg13', 'Vd21', 'Id21', 'Vg21',
-                        'Vd22', 'Id22', 'Vg22', 'Vd23',
-                        'Id23', 'Vg23'
-                    );
+                        for($i=0; $i<sizeof($levels); $i++){
+                            $temp = $levels[$i];
 
-                    $temp = "";
+                            echo "<table class='ln-status-table'>";
+                            echo "  <tr><th id='{$temp}-label'></th> </tr>";
+                            echo "  <tr><td id='{$temp}-value'>0";
+                            echo "  </td></tr>";
+                            echo "</table>";
+                        }
+                    ?>
+                    </div>
+                    <div id="ln-sys-temps">
+                        <div id="header">
+                            <button id='toggle-temp-btn' value='Show all temperatures'>Show all temperatures</button>
+                        </div>
+                        <div id="ln-sys-temp-content">
 
-                    for($i=0; $i<sizeof($levels); $i++){
-                        $temp = $levels[$i];
-
-                        echo "<table class='rxc-status-table'>";
-                        echo "  <tr><th id='{$temp}-label'>Title</th> </tr>";
-                        echo "  <tr><td id='{$temp}-value'>Value";
-                        echo "  </td></tr>";
-                        echo "</table>";
-                    }
-                ?>
-                    <th id="rxc-temperature-a-label" ></th>
-                    <td id="rxc-temperature-a" ></td>
+                        </div>
+                        
+                    </div>
 
             </section>
             <section class="page-wrappe" id="page-wrappe">

@@ -17,6 +17,45 @@ th, td {
   display: inline-block;
 }
 
+.rxc-status-table td{
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+                      .ln-status-table{
+                        width: 120px;
+                        height:70px;
+                        display: inline-block;
+                        margin-right: 15px;
+                        margin-bottom: 10px;
+                      }
+                      .ln-status-table td{
+                        font-size: 20px;
+                        font-weight: bold;
+                        text-align: center;
+                      }
+                      .ln-status-table th{
+                        font-size: 16px;
+                        }
+#ln-amplifier-temps{
+  float: left;
+  width: 500px;
+  margin: 30px 0 0 0;
+}
+
+#ln-sys-temps{
+  float: left;
+  width: 450px;
+  height: 500px;
+  margin: 30px 0 0 0;
+  border: 1px solid black;
+  word-wrap: break-word;
+  overflow-y: scroll;
+
+
+}
+
 tr:hover {background-color:#f5f5f5;}
 
 .topbar{
@@ -30,11 +69,6 @@ tr:hover {background-color:#f5f5f5;}
   width: 100%;
 }
 
-.rxc-status-table td{
-  font-size: 22px;
-  font-weight: bold;
-  text-align: center;
-}
 #OnOff-table{
   display: none;
 }
@@ -240,10 +274,10 @@ th{
 
 
 }
-#hideshow{
+#hideshow,
+#toggle-temp-btn{
   float:right;
   border-radius: 20px;
- 
 }
 
 .onoff-btn{
