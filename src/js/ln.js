@@ -1,7 +1,9 @@
+var showNonZerolTemperaturesPressed = true;
+
 
 function displayLNstatus(data){
     displayLNLevelStatus(data);
-    displaySystemTemperature(data);
+    displaySystemTemperature(showNonZerolTemperaturesPressed, data);
 }
 
 function displayLNLevelStatus(data){
@@ -27,41 +29,37 @@ function displayLNLevelStatus(data){
     }
 }
 
-function displaySystemTemperature(data){
+function displaySystemTemperature(onlyNonZeroValues, data){
     document.getElementById('ln-sys-temp-content').innerHTML = "";
 
     for(var i=0;i<data.systmp.length; i++){
-        document.getElementById('ln-sys-temp-content').innerHTML += "<strong> Nr. "+(i+1)+"</strong>: "+ data.systmp[i]+"<br />";
+        if(onlyNonZeroValues){
+            if(data.systmp[i] != 0){
+                document.getElementById('ln-sys-temp-content').innerHTML += "<strong> Detector #"+(i+1)+"</strong>: "+ data.systmp[i].toFixed(6)+" K <br />";
+            }  
+        }
+        else{
+            if(data.systmp[i] != 0){
+                document.getElementById('ln-sys-temp-content').innerHTML += "<strong> Detector #"+(i+1)+"</strong>: "+ data.systmp[i].toFixed(6)+" K <br />";
+            }
+            else{
+                document.getElementById('ln-sys-temp-content').innerHTML += "<strong> Detector #"+(i+1)+"</strong>: "+ data.systmp[i]+"   K <br />";
+            }
+        }
     }
 
-
 }
 
+jQuery(document).ready(function(){
+    $('#toggle-temp-btn').click(function(){
+        if(showNonZerolTemperaturesPressed){
+            document.getElementById("toggle-temp-btn").innerHTML = 'Show non-zero temperatures';
+            showNonZerolTemperaturesPressed = false;
+        }
+        else{
+            document.getElementById("toggle-temp-btn").innerHTML = 'Show all temperatures';
+            showNonZerolTemperaturesPressed = true;
+        }
+    });
 
-
-
-/*
-    2. Systpm ir masīvs ar uztverošās sistēmas temperatūru kelvinos. 
-            * Masīvā ir ap ~30 (laikam, varbūt ir mazāk) temp. vērtību, katra savam frekvenču kanālam jeb detektoram. 
-            * Praksē tik daudzus neizmantojam, tipiski 4,  cietiem eksp. vairāk. 
-            * Šo var vizualizēt grafiski jaunā tabā, attēlojot pēdejo aktuālo vērtību arī tekstā. 
-
-Lai nebūtu par daudz, var uztaisīt, lai pēc default rāda tos kanālus, kuri tiek visbiežāk izmantot (resp. kuriem masīvā tagad nav 0 vērtība), 
-pārējos retāk izmantotos kanālus - pēc lietotāja pieprasījuma.
-
-
-{//RT16
-    "systmp": [0.0, 24.48740005493164, 
-        0.0, 0.0, 0.0, 0.0, 
-        0.0, 0.0, 0.0, 25.02713966369629, 
-        0.0, 0.0, 0.0, 0.0, 
-        0.0, 0.0, 24.873186111450195, 
-        0.0, 0.0, 0.0, 0.0, 
-        0.0, 0.0, 0.0, 24.842100143432617, 
-        0.0, 0.0, 0.0, 0.0,
-        0.0, 0.0, 0.0, 28.007978439331055, 
-        0.0, 21.467815399169922, 
-        0.0]
-}
-
-*/
+});

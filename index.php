@@ -43,7 +43,7 @@
                         <a class="nav-link scroll" href="#page-wrappe">Meteo station data</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link scroll" href="#ln-data">LN data</a>
+                        <a class="nav-link scroll" href="#ln-data">System status</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link scroll" href="#rxc-data">RXC data</a>
@@ -256,7 +256,7 @@
                             </tr>
                         </table>
                     </div>
-                    <div id="rxc-chart" style="height: 400px; width: 500px; margin: 0 auto; float: right;"></div>
+                    <!-- <div id="rxc-chart" style="height: 400px; width: 500px; margin: 0 auto; float: right;"></div> -->
 
                     <div id="onoff-container">
                         <?php   
@@ -275,39 +275,63 @@
             </section>
             <section class="acu-data" id="ln-data" style="overflow-y:auto;height:100vh;">
                 <br><br><br>
-                <h3 id="rxc-heading">LN status</h3>
-                    <div id="ln-amplifier-temps">
-                    <?php
-                        $levels = array(
-                            'Vd11','Id11','Vg11','Vd12',
-                            'Id12', 'Vg12', 'Vd13','Id13',
-                            'Vg13', 'Vd21', 'Id21', 'Vg21',
-                            'Vd22', 'Id22', 'Vg22', 'Vd23',
-                            'Id23', 'Vg23'
-                        );
+                <!-- <h3 id="rxc-heading">LN status</h3> -->
+                    <div style="width:720px">
+                    <h5 style="text-align: center;">Low Noise Amplifier status</h5>
+                        <div class="amplifier" id="ln-amplifier-temps-1">
+                        <?php
+                            $levels = array(
+                                'Vd11','Id11','Vg11','Vd12',
+                                'Id12', 'Vg12', 'Vd13','Id13',
+                                'Vg13', 'Vd21', 'Id21', 'Vg21',
+                                'Vd22', 'Id22', 'Vg22', 'Vd23',
+                                'Id23', 'Vg23'
+                            );
 
-                        $temp = "";
+                            $temp = "";
 
-                        for($i=0; $i<sizeof($levels); $i++){
-                            $temp = $levels[$i];
+                            for($i=0; $i<(sizeof($levels)/2); $i++){
+                                $temp = $levels[$i];
 
-                            echo "<table class='ln-status-table'>";
-                            echo "  <tr><th id='{$temp}-label'></th> </tr>";
-                            echo "  <tr><td id='{$temp}-value'>0";
-                            echo "  </td></tr>";
-                            echo "</table>";
-                        }
-                    ?>
-                    </div>
-                    <div id="ln-sys-temps">
-                        <div id="header">
-                            <button id='toggle-temp-btn' value='Show all temperatures'>Show all temperatures</button>
+                                echo "<table class='ln-status-table'>";
+                                echo "  <tr><th id='{$temp}-label'></th> </tr>";
+                                echo "  <tr><td id='{$temp}-value'>0";
+                                echo "  </td></tr>";
+                                echo "</table>";
+                            }
+                        ?>
                         </div>
-                        <div id="ln-sys-temp-content">
+                        <div class="amplifier" id="ln-amplifier-temps-2">
+                        <?php
 
+                        for($i=(sizeof($levels)/2); $i<sizeof($levels); $i++){
+                                $temp = $levels[$i];
+
+                                echo "<table class='ln-status-table'>";
+                                echo "  <tr><th id='{$temp}-label'></th> </tr>";
+                                echo "  <tr><td id='{$temp}-value'>0";
+                                echo "  </td></tr>";
+                                echo "</table>";
+                            }
+
+                        ?>
                         </div>
-                        
                     </div>
+                    <div  id="ln-sys-temps-container">
+                    <h5 style="text-align: center;">Field System temperature</h5>
+                    <br>
+
+                        <div id="ln-sys-temps">
+                            <div id="header">
+                                <button id='toggle-temp-btn' value='Show all temperatures'>Show all temperatures</button>
+                            </div>
+                            <div id="ln-sys-temp-content">
+
+                            </div>
+                            
+                        </div>
+                    </div>
+
 
             </section>
             <section class="page-wrappe" id="page-wrappe">
@@ -500,9 +524,10 @@
         </script>
         <script src="src/js/acu.js"></script>
         <script src="src/js/rxc.js"></script>
-        <script src="src/js/ln.js"></script>
         <script src="src/js/event_stream_client.js"></script>
         <script src="src/js/rxc_scatter.js" charset="utf-8"></script>
+        <script src="src/js/ln.js"></script>
+
 
 
     </body>

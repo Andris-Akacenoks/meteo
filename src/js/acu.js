@@ -144,7 +144,7 @@ function setAzAxisState(data){
         document.getElementById("Az-state-status").innerHTML = " <p><strong>Inactive</strong></p>";
     }
     else if(data.AzEl_state[0] == 1){
-        $('#Az-state-indicator').css('background-color', 'orange');
+        $('#Az-state-indicator').css('background', 'linear-gradient(to right, #ffd633 0%, #ff9933 51%,  #ffd633 100%)');
         document.getElementById("Az-state-status").innerHTML = " <p><strong>Deactivating</strong></p>";
     }
     else if(data.AzEl_state[0] == 2){
@@ -169,7 +169,7 @@ function setElAxisState(data){
         document.getElementById("El-state-status").innerHTML = " <p><strong>Inactive</strong></p>";
     }
     else if(data.AzEl_state[1] == 1){
-        $('#El-state-indicator').css('background-color', 'orange');
+        $('#El-state-indicator').css('background', 'linear-gradient(to right, #ffd633 0%, #ff9933 51%,  #ffd633 100%)');
         document.getElementById("El-state-status").innerHTML = " <p><strong>Deactivating</strong></p>";
     }
     else if(data.AzEl_state[1] == 2){

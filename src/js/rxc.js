@@ -140,8 +140,6 @@ function getStatus(first, second){
 }
 
 function displayOnOff(data){
-
-
     setOnOffDeviceNames();
     var currentStatus = dec2hex(data.rxc_status[6]);
 
@@ -157,15 +155,15 @@ function displayOnOff(data){
     var signalGenerator =   0x00000080;
     var motor =             0x00000100;
 
-    setOnOffState((currentStatus && dryAir), 1);
-    setOnOffState((currentStatus && cryostatHeating), 2);
+    setOnOffState((currentStatus < dryAir), 1);
+    setOnOffState((currentStatus < cryostatHeating), 2);
     setOnOffState((currentStatus < noiseSource), 3);
-    setOnOffState((currentStatus && phaseCal), 4);
-    setOnOffState((currentStatus > compressor), 5);
+    setOnOffState((currentStatus < phaseCal), 4);
+    setOnOffState((currentStatus < compressor), 5);
     setOnOffState((currentStatus < vacuumPump), 6);
-    setOnOffState((currentStatus && vacuumValve), 7);
-    setOnOffState((currentStatus && signalGenerator), 8);
-    setOnOffState((currentStatus && motor), 9);
+    setOnOffState((currentStatus < vacuumValve), 7);
+    setOnOffState((currentStatus < signalGenerator), 8);
+    setOnOffState((currentStatus < motor), 9);
 }
 
 // 7th element
@@ -234,7 +232,7 @@ function displayAlarmRegistry(data){
     ];
 
     for(var i=1; i< errors.length; i++){
-        setAlarmState(((errors[i].code > currentStatus)), i, errors[i].message);
+        setAlarmState(((errors[i].code < currentStatus)), i, errors[i].message);
     }
 }
 

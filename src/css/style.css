@@ -24,36 +24,47 @@ th, td {
 }
 
                       .ln-status-table{
-                        width: 120px;
-                        height:70px;
+                        width: 100px;
+                        height:60px;
                         display: inline-block;
-                        margin-right: 15px;
-                        margin-bottom: 10px;
+                        margin-right: 10px;
+                        margin-bottom: 5px;
                       }
                       .ln-status-table td{
-                        font-size: 20px;
+                        font-size: 16px;
                         font-weight: bold;
                         text-align: center;
                       }
                       .ln-status-table th{
-                        font-size: 16px;
+                        font-size: 14 px;
                         }
-#ln-amplifier-temps{
+/* #ln-amplifier-temps{
   float: left;
   width: 500px;
+  margin: 30px 0 0 0;
+} */
+
+.amplifier{
+  float: left;
+  width: 360px;
   margin: 30px 0 0 0;
 }
 
 #ln-sys-temps{
-  float: left;
-  width: 450px;
-  height: 500px;
-  margin: 30px 0 0 0;
-  border: 1px solid black;
   word-wrap: break-word;
   overflow-y: scroll;
-
-
+  display: block;
+  height: 250px;
+}
+#ln-sys-temps-container{
+  float: left;
+  width: 680px;
+  /* height: 500px; */
+  margin: 30px 0 0 0;
+  /* border: 1px solid black; */
+  word-wrap: break-word;
+  display: block;
+  height: 250px;
 }
 
 tr:hover {background-color:#f5f5f5;}

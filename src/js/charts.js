@@ -60,7 +60,7 @@ function createCharts() {
       createLineChart("Wind speed count", "chart8", data, "wind_speed_count", "#2F4F4F"); index++;
       createLineChart("Wind direction", "chart4", data, "wind_direction", "#2F4F4F");     index++;
       createLineChart("Solar radiation", "chart10", data, "solar_radiation", "#0000FF");
-      drawScatterPlot('temperatures','rxc-chart', data, "humidity","Sensor temperature", 'blue');
+      // drawScatterPlot('temperatures','rxc-chart', data, "humidity","Sensor temperature", 'blue');
       drawScatterPlot('meteoScatter','ct-chart', data,  "humidity","Humidity", 'blue');
 
 

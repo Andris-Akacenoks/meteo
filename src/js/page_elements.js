@@ -1,4 +1,5 @@
 
+
 function showToast(message) {
     var x = document.getElementById("snackbar")
     x.className = "show";
@@ -51,5 +52,6 @@ jQuery(document).ready(function(){
     jQuery('#hideshow').on('click', function(event) {        
          jQuery('#alarm-contents').toggle('show');
     });
+
 });
 
