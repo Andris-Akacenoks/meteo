@@ -1,2 +1,2 @@
 # Meteo
-This is supposed to visualise weather data
+This is supposed to visualise weather data.
